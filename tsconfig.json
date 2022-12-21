@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "module": "esnext",
+    "target": "ES2017",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "test-utils": ["./jest/test-utils.tsx"],
+      "src": ["./src/"]
+    },
+    "types": ["@types/node"]
+  }
+}
