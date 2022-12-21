@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input Component renders without crashing 1`] = `
+<input
+  autocomplete="off"
+  class="input"
+  placeholder="test"
+  type="text"
+  value=""
+/>
+`;

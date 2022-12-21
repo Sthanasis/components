@@ -1,0 +1,77 @@
+@import '~/src/css/variables.scss';
+@import '~/src/css/mixins.scss';
+
+.loader {
+  &.spinner {
+    height: $main-font;
+    width: $main-font;
+    border: calc($main-font/4) solid #b3e5fc;
+    border-top: calc($main-font/4) solid #03a9f4;
+
+    border-radius: 50%;
+    animation: spin 2s infinite linear;
+  }
+  &.linear {
+    overflow: hidden;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 5px;
+    @include themify('background-color', 'primary-m');
+    div {
+      position: relative;
+      width: 100%;
+      height: 100%;
+
+      .before {
+        content: '';
+        position: absolute;
+        height: 100%;
+        animation: indeterminate_first 1.5s infinite ease-out;
+
+        @include themify('background-color', 'primary');
+      }
+
+      .after {
+        content: '';
+        position: absolute;
+        height: 100%;
+        animation: indeterminate_second 1.5s infinite ease-in;
+
+        @include themify('background-color', 'primary-d');
+      }
+    }
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes indeterminate_first {
+  0% {
+    left: -100%;
+    width: 100%;
+  }
+  100% {
+    left: 100%;
+    width: 10%;
+  }
+}
+
+@keyframes indeterminate_second {
+  0% {
+    left: -150%;
+    width: 100%;
+  }
+  100% {
+    left: 100%;
+    width: 10%;
+  }
+}
