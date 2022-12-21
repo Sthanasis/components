@@ -1,8 +1,9 @@
-import { useState, useLayoutEffect, MouseEvent } from "react";
-import { RippleContainer } from "./StyledRipple";
+import { useState, useLayoutEffect, MouseEvent } from 'react';
+import { RippleContainer } from './StyledRipple';
 interface IRippleProps {
   duration?: number;
   color?: string;
+  disabled?: boolean;
 }
 
 type RippleType = {
@@ -30,7 +31,11 @@ const useDebouncedRippleCleanUp = (
   }, [rippleCount, duration, cleanUpFunction]);
 };
 
-const Ripple = ({ duration = 600, color = "#fff" }: IRippleProps) => {
+const Ripple = ({
+  duration = 600,
+  color = '#fff',
+  disabled = false,
+}: IRippleProps) => {
   const [rippleArray, setRippleArray] = useState<RippleType[]>([]);
 
   useDebouncedRippleCleanUp(rippleArray.length, duration, () => {
@@ -38,6 +43,9 @@ const Ripple = ({ duration = 600, color = "#fff" }: IRippleProps) => {
   });
 
   const addRipple = (event: MouseEvent<HTMLDivElement>) => {
+    if (disabled) {
+      return;
+    }
     const rippleContainer = event.currentTarget.getBoundingClientRect();
     const size =
       rippleContainer.width > rippleContainer.height
@@ -60,7 +68,7 @@ const Ripple = ({ duration = 600, color = "#fff" }: IRippleProps) => {
         rippleArray.map((ripple, index) => {
           return (
             <span
-              key={"span" + index}
+              key={'span' + index}
               style={{
                 top: ripple.y,
                 left: ripple.x,

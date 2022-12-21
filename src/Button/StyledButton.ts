@@ -1,13 +1,13 @@
-import styled from "styled-components";
-import type { VariantType } from "../../types/types";
-import type { ThemeType } from "../../theme";
-import opacity from "../assets/opacityHexPrefix";
+import styled from 'styled-components';
+import type { VariantType } from '../../types/types';
+import type { ThemeType } from '../../theme';
+import opacity from '../assets/opacityHexPrefix';
 
 interface IProps {
   theme: ThemeType;
   variant: VariantType;
   elevated: boolean;
-  color: "primary" | "secondary" | "common";
+  color: 'primary' | 'secondary' | 'common';
 }
 
 export const ButtonContainer = styled.button`
@@ -27,25 +27,36 @@ export const ButtonContainer = styled.button`
   border-radius: ${({ theme }: IProps) => theme.borderRadius};
   ${({ theme, variant, elevated, color }: IProps) => {
     const mainColor = theme.palette[color].main;
-
     switch (variant) {
-      case "contained":
+      case 'contained':
         return `
             background-color: ${mainColor};
             color: #fff;
             &:hover {
                 background-color: ${mainColor}${opacity[80]};
             }
-            box-shadow: ${elevated ? "0px 2px 4px rgba(0, 0, 0, 0.4)" : "none"};
+            &:disabled {
+                background-color: gray;
+                color: lightgray;
+                cursor: not-allowed;
+            }
+            box-shadow: ${elevated ? '0px 2px 4px rgba(0, 0, 0, 0.4)' : 'none'};
         `;
-      case "outlined":
+      case 'outlined':
         return `
+          color:${mainColor};
           border-width: 1.5px;
           border-style: solid;
           border-color: ${mainColor}${opacity[50]};
           &:hover {
             border-color: ${mainColor};
             background-color: ${mainColor}${opacity[5]};
+          }
+          &:disabled {
+            color: lightgray;
+            border-color: lightgray;
+            cursor: not-allowed;
+            background-color: initial;
           }  
         `;
       default:
@@ -53,6 +64,11 @@ export const ButtonContainer = styled.button`
             color:${mainColor};
             &:hover {
                 background-color: ${mainColor}${opacity[5]};
+            }
+            &:disabled {
+                color: lightgray;
+                cursor: not-allowed;
+                background-color: initial;
             }
         `;
     }

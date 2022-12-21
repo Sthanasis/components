@@ -1,15 +1,15 @@
-import { MouseEvent, ReactNode, memo } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { useTheme } from "styled-components";
-import { IBaseProps } from "../../types/props";
-import { ButtonContainer } from "./StyledButton";
-import Ripple from "../Rippler/Ripple";
-import type { VariantType } from "../../types/types";
+import { MouseEvent, ReactNode, memo } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { useTheme } from 'styled-components';
+import { IBaseProps } from '../../types/props';
+import { ButtonContainer } from './StyledButton';
+import Ripple from '../Rippler/Ripple';
+import type { VariantType } from '../../types/types';
 
 export interface IButtonProps extends IBaseProps {
   children?: React.ReactNode | React.ReactNode[];
-  color?: "primary";
+  color?: 'primary' | 'secondary';
   variant?: VariantType;
   elevated?: boolean;
   onClick?: (...args: unknown[]) => unknown;
@@ -19,7 +19,7 @@ export interface IButtonProps extends IBaseProps {
   iconStart?: IconProp;
   iconEnd?: IconProp;
   icon?: IconProp;
-  type?: "submit";
+  type?: 'submit';
   showOnlyIcons?: boolean;
   disableTheme?: boolean;
 }
@@ -28,8 +28,8 @@ const Button = ({
   style,
   className,
   children,
-  color = "primary",
-  variant = "outlined",
+  color = 'primary',
+  variant = 'outlined',
   elevated = true,
   onClick,
   fullwidth = false,
@@ -88,7 +88,7 @@ const Button = ({
       color={color}
     >
       <div className="content">{childNodes}</div>
-      <Ripple />
+      <Ripple disabled={disabled} />
     </ButtonContainer>
   );
 };
