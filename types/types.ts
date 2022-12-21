@@ -1,1 +1,2 @@
-export type VariantType = "contained" | "outlined" | "text";
+export type ButtonType = 'contained' | 'outlined' | 'text';
+export type VariantType = 'primary' | 'secondary';

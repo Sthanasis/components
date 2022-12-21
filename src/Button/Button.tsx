@@ -5,11 +5,10 @@ import { useTheme } from 'styled-components';
 import { IBaseProps } from '../../types/props';
 import { ButtonContainer } from './StyledButton';
 import Ripple from '../Rippler/Ripple';
-import type { VariantType } from '../../types/types';
-
+import type { VariantType, ButtonType } from '../../types/types';
 export interface IButtonProps extends IBaseProps {
   children?: React.ReactNode | React.ReactNode[];
-  color?: 'primary' | 'secondary';
+  buttonType?: ButtonType;
   variant?: VariantType;
   elevated?: boolean;
   onClick?: (...args: unknown[]) => unknown;
@@ -19,7 +18,6 @@ export interface IButtonProps extends IBaseProps {
   iconStart?: IconProp;
   iconEnd?: IconProp;
   icon?: IconProp;
-  type?: 'submit';
   showOnlyIcons?: boolean;
   disableTheme?: boolean;
 }
@@ -28,8 +26,8 @@ const Button = ({
   style,
   className,
   children,
-  color = 'primary',
-  variant = 'outlined',
+  variant = 'primary',
+  buttonType = 'text',
   elevated = true,
   onClick,
   fullwidth = false,
@@ -38,7 +36,6 @@ const Button = ({
   iconStart,
   iconEnd,
   testId,
-  type,
   icon,
   showOnlyIcons,
 }: IButtonProps): JSX.Element => {
@@ -81,11 +78,10 @@ const Button = ({
       onClick={click}
       disabled={disabled}
       data-testid={testId}
-      type={type}
+      buttonType={buttonType}
       theme={theme}
       variant={variant}
       elevated={elevated}
-      color={color}
     >
       <div className="content">{childNodes}</div>
       <Ripple disabled={disabled} />

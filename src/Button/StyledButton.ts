@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import type { VariantType } from '../../types/types';
+import type { VariantType, ButtonType } from '../../types/types';
 import type { ThemeType } from '../../theme';
 import opacity from '../assets/opacityHexPrefix';
 
@@ -7,7 +7,7 @@ interface IProps {
   theme: ThemeType;
   variant: VariantType;
   elevated: boolean;
-  color: 'primary' | 'secondary' | 'common';
+  buttonType: ButtonType;
 }
 
 export const ButtonContainer = styled.button`
@@ -25,9 +25,9 @@ export const ButtonContainer = styled.button`
   outline: none;
   background-color: transparent;
   border-radius: ${({ theme }: IProps) => theme.borderRadius};
-  ${({ theme, variant, elevated, color }: IProps) => {
-    const mainColor = theme.palette[color].main;
-    switch (variant) {
+  ${({ theme, variant, elevated, buttonType }: IProps) => {
+    const mainColor = theme.palette[variant].main;
+    switch (buttonType) {
       case 'contained':
         return `
             background-color: ${mainColor};

@@ -10,38 +10,46 @@ export default {
   component: Button,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
-    disabled: { control: 'boolean' },
-    elevated: { control: 'boolean' },
+    disabled: { control: 'boolean', defaultValue: false },
+    elevated: { control: 'boolean', defaultValue: true },
+    variant: {
+      options: ['primary', 'secondary'],
+      control: { type: 'radio' },
+    },
+    buttonType: {
+      options: ['text', 'outlined', 'contained'],
+      control: { type: 'radio' },
+    },
   },
 } as ComponentMeta<typeof Button>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof Button> = (args) => (
   <ThemeProvider theme={defaultTheme}>
-    <Button {...args}>TEXT</Button>
-    <hr />
+    <Button {...args}>{args.buttonType?.toUpperCase()}</Button>
+    {/* <hr />
     <Button {...args} variant="contained">
       CONTAINED
     </Button>
     <hr />
     <Button {...args} variant="outlined">
       OUTLINED
-    </Button>
+    </Button> */}
   </ThemeProvider>
 );
 
-export const Primary = Template.bind({});
+export const Basic = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-Primary.args = {
-  color: 'primary',
-  variant: 'text',
+Basic.args = {
+  variant: 'primary',
+  buttonType: 'text',
 };
 
-export const Secondary = Template.bind({});
-Secondary.args = {
-  color: 'secondary',
-  variant: 'text',
-};
+// export const Secondary = Template.bind({});
+// Secondary.args = {
+//   color: 'secondary',
+//   variant: 'text',
+// };
 
 // export const Large = Template.bind({});
 // Large.args = {};
