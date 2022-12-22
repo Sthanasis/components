@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ThemeProvider } from 'styled-components';
-import { defaultTheme } from '../src/assets/theme';
-import Button from '../src/components/Button';
+import { defaultTheme } from 'src/assets/theme';
+import Button from 'src/components/Button';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -29,14 +29,6 @@ export default {
 const Template: ComponentStory<typeof Button> = (args) => (
   <ThemeProvider theme={defaultTheme}>
     <Button {...args}>{args.buttonType?.toUpperCase()}</Button>
-    {/* <hr />
-    <Button {...args} variant="contained">
-      CONTAINED
-    </Button>
-    <hr />
-    <Button {...args} variant="outlined">
-      OUTLINED
-    </Button> */}
   </ThemeProvider>
 );
 
@@ -46,15 +38,3 @@ Basic.args = {
   variant: 'primary',
   buttonType: 'text',
 };
-
-// export const Secondary = Template.bind({});
-// Secondary.args = {
-//   color: 'secondary',
-//   variant: 'text',
-// };
-
-// export const Large = Template.bind({});
-// Large.args = {};
-
-// export const Small = Template.bind({});
-// Small.args = {};

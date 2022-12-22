@@ -1,9 +1,9 @@
 import { IInputStaticProps } from './StyledInput';
 import { StyledInput } from './StyledInput';
 export interface IInputProps extends IInputStaticProps {
-  onChange?: (...args: unknown[]) => unknown | typeof jest;
-  onBlur?: (...args: unknown[]) => unknown | typeof jest;
-  onFocus?: (...args: unknown[]) => unknown | typeof jest;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void | typeof jest;
+  onBlur?: (e: React.ChangeEvent<HTMLInputElement>) => void | typeof jest;
+  onFocus?: (e: React.ChangeEvent<HTMLInputElement>) => void | typeof jest;
 }
 
 const Input = ({

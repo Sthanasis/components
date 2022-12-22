@@ -1,18 +1,19 @@
-import { memo } from 'react';
+import { useTheme } from 'styled-components';
+import { StyledLabelContainer } from './StyledLabel';
 
-const Label = ({
-  labelText,
-  labelClassList,
-  textClassList,
-}: {
+interface ILabelProps {
   labelText?: string;
-  labelClassList: string;
-  textClassList: string;
-}) =>
-  labelText && (
-    <div className={labelClassList}>
-      <label className={textClassList}>{labelText}</label>
-    </div>
-  );
+  hasValue: boolean;
+  hasFocus: boolean;
+}
 
-export default memo(Label);
+const Label = ({ labelText, ...rest }: ILabelProps) => {
+  const theme = useTheme();
+  return labelText ? (
+    <StyledLabelContainer theme={theme} {...rest}>
+      <label>{labelText}</label>
+    </StyledLabelContainer>
+  ) : null;
+};
+
+export default Label;

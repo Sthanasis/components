@@ -1,19 +1,21 @@
-import Flexbox from '../../ui/Flexbox';
-import Input from '../../ui/Input';
-import { IInputProps } from '../../ui/Input/Input';
-import './textField.scss';
-import { useTheme } from '../../../context/theme';
 import React, { useState, memo, ReactNode, useEffect } from 'react';
-import { isEmpty } from 'src/utilities/utils';
-import Button from 'src/components/ui/Button';
-import { IBaseProps } from '../../../types/props';
-import { FlexAlignmentType } from 'src/components/ui/Flexbox/Flexbox';
+import { useTheme } from 'styled-components';
+import Flexbox from 'src/components/Flexbox';
+import Label from '../Label';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import Input from 'src/components/Input';
+import { IInputProps } from 'src/components/Input/Input';
+import { isEmpty } from 'src/utilities/utils';
+import Button from 'src/components/Button';
+import { IBaseProps } from 'src/types/props';
+import { FlexAlignmentType } from 'src/components/Flexbox/Flexbox';
+
+type TextfieldVariant = 'outlined' | 'filled' | 'default';
 
 export interface ITextFieldProps extends IInputProps {
   label?: string;
-  variant?: 'outlined' | 'filled' | 'default';
+  variant?: TextfieldVariant;
   contrast?: boolean;
   color?: 'primary';
   validate?: (value: unknown) => boolean;
@@ -42,21 +44,6 @@ const Wrapper = ({
   </Flexbox>
 );
 
-const Label = ({
-  labelText,
-  labelClassList,
-  textClassList,
-}: {
-  labelText?: string;
-  labelClassList: string;
-  textClassList: string;
-}) =>
-  labelText && (
-    <div className={labelClassList}>
-      <label className={textClassList}>{labelText}</label>
-    </div>
-  );
-
 const TextField = ({
   label,
   placeholder,
@@ -74,38 +61,31 @@ const TextField = ({
   'aria-label': ariaLabel,
   ...props
 }: ITextFieldProps): JSX.Element => {
-  const { theme } = useTheme();
-  const classList = ['textfield', theme, variant, color];
+  const theme = useTheme();
   const labelText = label || placeholder;
-  const textClassList: string[] = [theme];
-  const labelClassList: string[] = ['label'];
+
   const styles = { ...style };
 
-  const [currentValue, setCurrentValue] = useState<string | number | undefined>(
-    value
-  );
+  const [currentValue, setCurrentValue] =
+    useState<string | number | undefined>(value);
   const [hasError, setHasError] = useState(false);
-
+  const [hasFocus, setHasFocus] = useState(false);
   const hasValue = currentValue && currentValue.toString().trim() !== '';
 
-  if (hasValue) {
-    labelClassList.push('hasValue');
-  }
+  // if (fullwidth) {
+  //   classList.push('fullwidth');
+  // }
 
-  if (fullwidth) {
-    classList.push('fullwidth');
-  }
+  // if (className) {
+  //   classList.push(className);
+  // }
 
-  if (className) {
-    classList.push(className);
-  }
-
-  if (contrast) {
-    classList.push('contrast');
-  }
-  if (hasError) {
-    classList.push('error');
-  }
+  // if (contrast) {
+  //   classList.push('contrast');
+  // }
+  // if (hasError) {
+  //   classList.push('error');
+  // }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCurrentValue(e.target.value);
@@ -121,6 +101,7 @@ const TextField = ({
         else setHasError(false);
       }
     }
+    setHasFocus(false);
   };
 
   useEffect(() => {
@@ -132,39 +113,35 @@ const TextField = ({
     }
   }, []);
 
-  if (props.type === 'submit') {
-    return (
-      <Wrapper style={styles} alignment="flex-start" ariaLabel={ariaLabel}>
-        <Button
-          type={props.type}
-          fullwidth
-          className={labelClassList.join(' ')}
-          contrast
-          testId={props.testId}
-        >
-          {label}
-        </Button>
-      </Wrapper>
-    );
-  }
+  // if (props.type === 'submit') {
+  //   return (
+  //     <Wrapper style={styles} alignment="flex-start" ariaLabel={ariaLabel}>
+  //       <Button
+  //         type={props.type}
+  //         fullwidth
+  //         contrast
+  //         testId={props.testId}
+  //       >
+  //         {label}
+  //       </Button>
+  //     </Wrapper>
+  //   );
+  // }
 
   return (
     <Wrapper
       style={styles}
-      className={classList.join(' ')}
+      className={className}
       ariaLabel={ariaLabel}
       alignment="flex-start"
     >
-      <Label
-        labelText={labelText}
-        labelClassList={labelClassList.join(' ')}
-        textClassList={textClassList.join(' ')}
-      />
+      <Label labelText={labelText} hasValue={!!hasValue} hasFocus={hasFocus} />
       <Input
         {...props}
         value={currentValue}
         onChange={handleChange}
         onBlur={handleBlur}
+        onFocus={() => setHasFocus(true)}
         fullwidth
         required={required}
       />

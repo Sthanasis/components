@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import type { VariantType, ButtonType } from '../../types/types';
 import type { ThemeType } from '../../assets/theme';
-import opacity from '../../assets/opacityHexPrefix';
+import { opacityHexPrefix } from '../../assets/opacityHexPrefix';
 
 interface IProps {
   theme: ThemeType;
@@ -33,7 +33,7 @@ export const ButtonContainer = styled.button`
             background-color: ${mainColor};
             color: #fff;
             &:hover {
-                background-color: ${mainColor}${opacity[80]};
+                background-color: ${mainColor}${opacityHexPrefix[80]};
             }
             &:disabled {
                 background-color: gray;
@@ -47,10 +47,10 @@ export const ButtonContainer = styled.button`
           color:${mainColor};
           border-width: 1.5px;
           border-style: solid;
-          border-color: ${mainColor}${opacity[50]};
+          border-color: ${mainColor}${opacityHexPrefix[50]};
           &:hover {
             border-color: ${mainColor};
-            background-color: ${mainColor}${opacity[5]};
+            background-color: ${mainColor}${opacityHexPrefix[5]};
           }
           &:disabled {
             color: lightgray;
@@ -63,7 +63,7 @@ export const ButtonContainer = styled.button`
         return `
             color:${mainColor};
             &:hover {
-                background-color: ${mainColor}${opacity[5]};
+                background-color: ${mainColor}${opacityHexPrefix[5]};
             }
             &:disabled {
                 color: lightgray;

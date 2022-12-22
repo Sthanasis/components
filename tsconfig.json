@@ -11,6 +11,6 @@
       "test-utils": ["./jest/test-utils.tsx"],
       "src": ["./src/"]
     },
-    "types": ["@types/node"]
+    "types": ["node"]
   }
 }

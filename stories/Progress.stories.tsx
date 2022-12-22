@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ThemeProvider } from 'styled-components';
-import { defaultTheme } from '../src/assets/theme';
-import Progress from '../src/components/Progress';
+import { defaultTheme } from 'src/assets/theme';
+import Progress from 'src/components/Progress';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {

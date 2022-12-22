@@ -1,9 +1,0 @@
-@import '~/src/css/mixins.scss';
-
-.input {
-  @include interactive-element;
-  padding-right: 25px;
-  &.fullwidth {
-    width: -webkit-fill-available;
-  }
-}

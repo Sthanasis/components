@@ -1,11 +1,11 @@
+import styled, { css } from 'styled-components';
 import {
   indeterminate_first,
   indeterminate_second,
 } from './../../../styled/animations';
 import { ThemeType } from 'src/assets/theme';
-import styled, { css } from 'styled-components';
+import { opacityHexPrefix } from '../../assets/opacityHexPrefix';
 import { spin } from '../../../styled/animations';
-import opacityHexPrefix from '../../assets/opacityHexPrefix';
 
 interface IProps {
   theme: ThemeType;

@@ -4,7 +4,7 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { useTheme } from 'styled-components';
 import { IBaseProps } from 'src/types/props';
 import { ButtonContainer } from './StyledButton';
-import Ripple from '../Rippler/Ripple';
+import Ripple from 'src/components/Ripple';
 import type { VariantType, ButtonType } from 'src/types/types';
 
 export interface IButtonProps extends IBaseProps {
