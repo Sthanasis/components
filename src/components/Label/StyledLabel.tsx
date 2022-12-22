@@ -54,7 +54,7 @@ export const StyledLabelContainer = styled.div(
           color: ${hasError
             ? `${theme.basicPalette.error}!important`
             : undefined};
-          color: ${hasFocus ? theme.palette.primary.main : undefined};
+          color: ${hasFocus ? theme.palette[color].main : undefined};
         }
       `;
     }

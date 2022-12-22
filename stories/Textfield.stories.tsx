@@ -13,13 +13,17 @@ export default {
       options: ['outlined', 'filled'],
       control: { type: 'radio' },
     },
+    color: {
+      options: ['primary', 'secondary'],
+      control: { type: 'radio' },
+    },
   },
 } as ComponentMeta<typeof TextField>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof TextField> = (args) => (
   <ThemeProvider theme={defaultTheme}>
-    <TextField {...args} label={args.variant?.toUpperCase()} />
+    <TextField {...args} label={args.variant} />
   </ThemeProvider>
 );
 
