@@ -3,14 +3,8 @@ import styled, { CSSObject } from 'styled-components';
 import { ThemeType } from 'src/assets/theme';
 
 export interface IInputStaticProps extends IBaseProps {
-  type?: InputElementType;
-  placeholder?: string;
-  fullwidth?: boolean;
-  value?: string | number;
-  defaultValue?: string | number;
-  name?: string;
   theme: ThemeType;
-  required?: boolean;
+  fullwidth: boolean;
 }
 
 export const StyledInput = styled.input(

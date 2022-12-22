@@ -25,6 +25,7 @@ export const StyledLabelContainer = styled.div(
       padding: ${hasFocus || hasValue ? '0' : undefined};
       & > label {
         font-weight: 400;
+        transition: 0.2s;
         letter-spacing: 0.5px;
         position: absolute;
         margin: 0;
@@ -42,6 +43,18 @@ export const StyledLabelContainer = styled.div(
             ? theme.basicPalette.bg
             : undefined};
           color: ${hasFocus ? theme.palette[color].main : undefined};
+        }
+      `;
+    }
+    if (variant === 'filled') {
+      style = css`
+        ${style}
+        top: ${hasFocus || hasValue ? '0px' : '12px'};
+        & > label {
+          color: ${hasError
+            ? `${theme.basicPalette.error}!important`
+            : undefined};
+          color: ${hasFocus ? theme.palette.primary.main : undefined};
         }
       `;
     }

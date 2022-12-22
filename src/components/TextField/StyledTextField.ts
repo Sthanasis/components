@@ -28,6 +28,7 @@ export const StyledTextField = styled.div(
         border-radius: ${theme.borderRadius};
         border-style: solid;
         line-height: 1.4em;
+        transition: .2s;
         padding: 5px;
         margin: 10px 0;
         width: ${fullwidth ? '-webkit-fill-available' : undefined};
@@ -49,6 +50,20 @@ export const StyledTextField = styled.div(
               hasFocus ? `${theme.palette[color].main}!important` : undefined
             };
 
+        `;
+    }
+    if (variant === 'filled') {
+      style = `
+            ${style}
+            border: none;
+            padding: 10px 5px 0px 5px;
+            border-bottom: ${
+              hasError ? `2px solid ${theme.basicPalette.error}` : undefined
+            };
+            background-color: rgba(0,0,0,.06);
+            &:hover {
+              background-color: rgba(0,0,0,.09);
+            }
         `;
     }
     return style;

@@ -1,6 +1,13 @@
-import { IInputStaticProps } from './StyledInput';
+import { IBaseProps, InputElementType } from 'src/types/props';
 import { StyledInput } from './StyledInput';
-export interface IInputProps extends IInputStaticProps {
+export interface IInputProps extends IBaseProps {
+  type?: InputElementType;
+  placeholder?: string;
+  value?: string | number;
+  defaultValue?: string | number;
+  fullwidth?: boolean;
+  name?: string;
+  required?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void | typeof jest;
   onBlur?: (e: React.ChangeEvent<HTMLInputElement>) => void | typeof jest;
   onFocus?: (e: React.ChangeEvent<HTMLInputElement>) => void | typeof jest;
@@ -25,6 +32,7 @@ const Input = ({
     style={style}
     className={className}
     onChange={onChange}
+    fullwidth={fullwidth}
     onBlur={onBlur}
     placeholder={placeholder}
     value={value}
