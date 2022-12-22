@@ -1,21 +1,17 @@
 import { useTheme } from 'styled-components';
+import { StyledProgress } from './StyledProgress';
 
-interface ILoaderProps {
+export interface IProgressProps {
   type?: 'spinner' | 'linear';
 }
-const Loader = ({ type = 'spinner' }: ILoaderProps): JSX.Element => {
+const Progress = ({ type = 'spinner' }: IProgressProps): JSX.Element => {
   const theme = useTheme();
 
   return (
-    <div aria-label={type}>
-      {type === 'linear' && (
-        <div>
-          <div />
-          <div />
-        </div>
-      )}
-    </div>
+    <StyledProgress aria-label={type} theme={theme} type={type}>
+      {type === 'linear' && <div />}
+    </StyledProgress>
   );
 };
 
-export default Loader;
+export default Progress;

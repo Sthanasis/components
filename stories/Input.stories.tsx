@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ThemeProvider } from 'styled-components';
-import { defaultTheme } from '../theme';
+import { defaultTheme } from '../src/assets/theme';
 import Input from '../src/components/Input';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
