@@ -13,6 +13,10 @@ export default {
       options: ['spinner', 'linear'],
       control: { type: 'radio' },
     },
+    color: {
+      options: ['primary', 'secondary'],
+      control: { type: 'radio' },
+    },
   },
 } as ComponentMeta<typeof Progress>;
 

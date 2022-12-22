@@ -8,13 +8,18 @@ export default {
   title: 'Example/TextField',
   component: TextField,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
-  argTypes: {},
+  argTypes: {
+    variant: {
+      options: ['outlined', 'filled'],
+      control: { type: 'radio' },
+    },
+  },
 } as ComponentMeta<typeof TextField>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof TextField> = (args) => (
   <ThemeProvider theme={defaultTheme}>
-    <TextField {...args} />
+    <TextField {...args} label={args.variant?.toUpperCase()} />
   </ThemeProvider>
 );
 

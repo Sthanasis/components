@@ -6,20 +6,22 @@ import {
 import { ThemeType } from 'src/assets/theme';
 import { opacityHexPrefix } from '../../assets/opacityHexPrefix';
 import { spin } from '../../../styled/animations';
+import { ThemeVariantType } from 'src/types/types';
 
 interface IProps {
   theme: ThemeType;
   type: 'spinner' | 'linear';
+  color: ThemeVariantType;
 }
 
 export const StyledProgress = styled.div(
-  ({ type = 'spinner', theme }: IProps) => {
+  ({ type = 'spinner', theme, color }: IProps) => {
     if (type === 'spinner') {
       return css`
         height: ${theme.fontSize};
         width: ${theme.fontSize};
-        border: 0.25rem solid ${theme.palette.primary.main}${opacityHexPrefix[50]};
-        border-top: 0.25rem solid ${theme.palette.primary.main};
+        border: 0.25rem solid ${theme.palette[color].main}${opacityHexPrefix[50]};
+        border-top: 0.25rem solid ${theme.palette[color].main};
         border-radius: 50%;
         animation: ${spin} 2s infinite linear;
       `;
@@ -31,7 +33,7 @@ export const StyledProgress = styled.div(
       top: 0;
       left: 0;
       height: 5px;
-      background-color: ${theme.palette.primary.main}${opacityHexPrefix[50]};
+      background-color: ${theme.palette[color].main}${opacityHexPrefix[50]};
       & div {
         position: relative;
         width: 100%;
@@ -41,14 +43,14 @@ export const StyledProgress = styled.div(
           position: absolute;
           height: 100%;
           animation: ${indeterminate_first} 1.5s infinite ease-out;
-          background-color: ${theme.palette.primary.main};
+          background-color: ${theme.palette[color].main};
         }
         &:after {
           content: '';
           position: absolute;
           height: 100%;
           animation: ${indeterminate_second} 1.5s infinite ease-in;
-          background-color: ${theme.palette.primary.main}${opacityHexPrefix[80]};
+          background-color: ${theme.palette[color].main}${opacityHexPrefix[80]};
         }
       }
     `;
