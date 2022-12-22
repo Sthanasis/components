@@ -2,10 +2,11 @@ import { MouseEvent, ReactNode, memo } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { useTheme } from 'styled-components';
-import { IBaseProps } from '../../types/props';
+import { IBaseProps } from 'src/types/props';
 import { ButtonContainer } from './StyledButton';
 import Ripple from '../Rippler/Ripple';
-import type { VariantType, ButtonType } from '../../types/types';
+import type { VariantType, ButtonType } from 'src/types/types';
+
 export interface IButtonProps extends IBaseProps {
   children?: React.ReactNode | React.ReactNode[];
   buttonType?: ButtonType;
@@ -18,12 +19,9 @@ export interface IButtonProps extends IBaseProps {
   iconStart?: IconProp;
   iconEnd?: IconProp;
   icon?: IconProp;
-  showOnlyIcons?: boolean;
-  disableTheme?: boolean;
 }
 
 const Button = ({
-  style,
   className,
   children,
   variant = 'primary',
@@ -37,7 +35,6 @@ const Button = ({
   iconEnd,
   testId,
   icon,
-  showOnlyIcons,
 }: IButtonProps): JSX.Element => {
   const theme = useTheme();
 
@@ -59,17 +56,6 @@ const Button = ({
 
   if (icon) {
     childNodes = <FontAwesomeIcon icon={icon} />;
-  } else if (showOnlyIcons) {
-    childNodes = (
-      <>
-        {iconStart && (
-          <FontAwesomeIcon className="icon icon-start" icon={iconStart} />
-        )}
-        {iconEnd && (
-          <FontAwesomeIcon className="icon icon-end" icon={iconEnd} />
-        )}
-      </>
-    );
   }
 
   return (

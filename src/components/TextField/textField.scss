@@ -1,0 +1,140 @@
+@import '~/src/css/mixins.scss';
+@import '~/src/css/colors.scss';
+@import '~/src/css/variables.scss';
+
+.textfield {
+  position: relative;
+  width: fit-content;
+  border-radius: $border-radius;
+  border-style: solid;
+  line-height: 1.4em;
+  padding: 5px;
+  margin: 10px 0;
+  &.fullwidth {
+    width: -webkit-fill-available;
+  }
+  .label {
+    position: absolute;
+    top: 12px;
+    white-space: nowrap;
+    transition: 0.2s;
+  }
+  label {
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    position: absolute;
+    margin: 0;
+    line-height: 1.4em;
+    padding: 0px 10px;
+    color: $label-text;
+  }
+  &:focus-within > .label {
+    animation: slide-top;
+    left: 0;
+    padding: 0;
+    transform: scale(0.75);
+  }
+  .hasValue {
+    left: 0;
+    padding: 0;
+  }
+  .icon {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    right: 0;
+  }
+  &.outlined {
+    border-width: 1px;
+    border-color: $unfocused-element;
+    .hasValue {
+      top: -12px;
+      transform: scale(0.75);
+    }
+    &.error {
+      border: 2px solid $error;
+      label {
+        color: $error !important;
+      }
+    }
+    &:focus-within {
+      .label {
+        top: -12px;
+      }
+    }
+
+    &.primary {
+      &:hover {
+        border-color: $focused-element;
+      }
+      .hasValue {
+        background-color: $body-bg;
+      }
+      &:focus-within {
+        @include themify('border-color', 'primary-d');
+        label {
+          @include themify('color', 'primary');
+          background-color: $body-bg;
+        }
+      }
+    }
+  }
+
+  &.filled {
+    border: none;
+    padding: 10px 5px 0px 5px;
+
+    .hasValue {
+      top: 0px;
+      transform: scale(0.75);
+    }
+    &.error {
+      border-bottom: 2px solid $error;
+      label {
+        color: $error !important;
+      }
+    }
+    &:focus-within > .label {
+      top: 0px;
+    }
+
+    &.primary {
+      background-color: $input-grey-bg;
+      &:hover {
+        background-color: $input-grey-hovered-bg;
+      }
+      &:focus-within {
+        label {
+          @include themify('color', 'primary');
+        }
+      }
+      &.contrast {
+        background-color: rgba(255, 255, 255, 0.2);
+        label {
+          color: white;
+          opacity: 0.8;
+        }
+        color: $contrast-text;
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.4);
+        }
+        &:focus-within {
+          label {
+            color: white;
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes slide-top {
+  from {
+    top: 10px;
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0.75);
+    top: -12px;
+  }
+}

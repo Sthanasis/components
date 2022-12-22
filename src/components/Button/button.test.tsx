@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import Button from '../Button';
+import Button from '.';
 import { fa0 } from '@fortawesome/free-solid-svg-icons';
 
 describe('Button Component', () => {

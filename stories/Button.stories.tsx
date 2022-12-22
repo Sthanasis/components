@@ -1,8 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ThemeProvider } from 'styled-components';
 import { defaultTheme } from '../theme';
-
-import Button from '../src/Button';
+import Button from '../src/components/Button';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -11,7 +10,10 @@ export default {
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
     disabled: { control: 'boolean', defaultValue: false },
-    elevated: { control: 'boolean', defaultValue: true },
+    elevated: {
+      control: 'boolean',
+      defaultValue: true,
+    },
     variant: {
       options: ['primary', 'secondary'],
       control: { type: 'radio' },
