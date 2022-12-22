@@ -1,2 +1,2 @@
 export type ButtonType = 'contained' | 'outlined' | 'text';
-export type VariantType = 'primary' | 'secondary';
+export type ThemeVariantType = 'primary' | 'secondary';

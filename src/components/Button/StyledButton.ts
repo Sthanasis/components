@@ -1,11 +1,11 @@
 import styled from 'styled-components';
-import type { VariantType, ButtonType } from '../../types/types';
+import type { ThemeVariantType, ButtonType } from '../../types/types';
 import type { ThemeType } from '../../assets/theme';
 import { opacityHexPrefix } from '../../assets/opacityHexPrefix';
 
 interface IProps {
   theme: ThemeType;
-  variant: VariantType;
+  variant: ThemeVariantType;
   elevated: boolean;
   buttonType: ButtonType;
 }

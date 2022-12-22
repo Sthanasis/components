@@ -40,7 +40,7 @@ export const indeterminate_second = keyframes({
 
 export const slideTop = keyframes({
   from: {
-    top: '10px',
+    top: '12px',
     transform: ' scale(1)',
   },
   to: {

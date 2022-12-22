@@ -5,12 +5,12 @@ import { useTheme } from 'styled-components';
 import { IBaseProps } from 'src/types/props';
 import { ButtonContainer } from './StyledButton';
 import Ripple from 'src/components/Ripple';
-import type { VariantType, ButtonType } from 'src/types/types';
+import type { ThemeVariantType, ButtonType } from 'src/types/types';
 
 export interface IButtonProps extends IBaseProps {
   children?: React.ReactNode | React.ReactNode[];
   buttonType?: ButtonType;
-  variant?: VariantType;
+  variant?: ThemeVariantType;
   elevated?: boolean;
   onClick?: (...args: unknown[]) => unknown;
   fullwidth?: boolean;

@@ -1,20 +1,25 @@
 export const defaultTheme = {
-  borderRadius: "4px",
+  borderRadius: '4px',
   palette: {
     common: {
-      main: "#ffffff",
-      contrast: "#222831",
+      main: '#ffffff',
+      contrast: '#222831',
     },
     primary: {
-      main: "#726a95",
-      contrastText: "#ffffff",
+      main: '#4d148c',
+      contrastText: '#ffffff',
     },
     secondary: {
-      main: "#709fb0",
-      contrastText: "#ffffff",
+      main: '#e06934',
+      contrastText: '#ffffff',
     },
   },
-  fontSize: "1rem",
-  padding: "10px 16px",
+  basicPalette: {
+    error: '#c73e1d',
+    bg: '#fff',
+    text: '#616161',
+  },
+  fontSize: '1rem',
+  padding: '10px 16px',
 };
 export type ThemeType = typeof defaultTheme;

@@ -1,6 +1,5 @@
 import React, { useState, memo, ReactNode, useEffect } from 'react';
 import { useTheme } from 'styled-components';
-import Flexbox from 'src/components/Flexbox';
 import Label from '../Label';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
@@ -10,8 +9,8 @@ import { isEmpty } from 'src/utilities/utils';
 import Button from 'src/components/Button';
 import { IBaseProps } from 'src/types/props';
 import { FlexAlignmentType } from 'src/components/Flexbox/Flexbox';
-
-type TextfieldVariant = 'outlined' | 'filled' | 'default';
+import { StyledTextField } from './StyledTextField';
+export type TextfieldVariant = 'outlined' | 'filled' | 'default';
 
 export interface ITextFieldProps extends IInputProps {
   label?: string;
@@ -27,22 +26,6 @@ interface IWrapperProps extends IBaseProps {
   children: ReactNode;
   ariaLabel?: string;
 }
-const Wrapper = ({
-  className,
-  children,
-  alignment,
-  style,
-  ariaLabel,
-}: IWrapperProps): JSX.Element => (
-  <Flexbox
-    aria-label={ariaLabel}
-    alignment={alignment}
-    className={className}
-    style={style}
-  >
-    {children}
-  </Flexbox>
-);
 
 const TextField = ({
   label,
@@ -129,13 +112,26 @@ const TextField = ({
   // }
 
   return (
-    <Wrapper
+    <StyledTextField
       style={styles}
       className={className}
-      ariaLabel={ariaLabel}
-      alignment="flex-start"
+      aria-label={ariaLabel}
+      fullwidth={fullwidth}
+      contrast={contrast}
+      variant={variant}
+      theme={theme}
+      hasError={hasError}
+      color={color}
+      hasFocus={hasFocus}
     >
-      <Label labelText={labelText} hasValue={!!hasValue} hasFocus={hasFocus} />
+      <Label
+        labelText={labelText}
+        hasValue={!!hasValue}
+        hasFocus={hasFocus}
+        hasError={hasError}
+        variant={variant}
+        color={color}
+      />
       <Input
         {...props}
         value={currentValue}
@@ -146,7 +142,7 @@ const TextField = ({
         required={required}
       />
       {icon && <FontAwesomeIcon icon={icon} className="icon" />}
-    </Wrapper>
+    </StyledTextField>
   );
 };
 
