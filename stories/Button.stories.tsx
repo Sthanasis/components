@@ -12,7 +12,6 @@ export default {
     disabled: { control: 'boolean', defaultValue: false },
     elevated: {
       control: 'boolean',
-      defaultValue: true,
     },
     variant: {
       options: ['primary', 'secondary'],
@@ -36,5 +35,6 @@ export const Basic = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Basic.args = {
   variant: 'primary',
-  buttonType: 'text',
+  buttonType: 'contained',
+  elevated: true,
 };

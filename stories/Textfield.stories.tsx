@@ -29,4 +29,7 @@ const Template: ComponentStory<typeof TextField> = (args) => (
 
 export const Basic = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-Basic.args = {};
+Basic.args = {
+  variant: 'outlined',
+  color: 'primary',
+};
