@@ -2,15 +2,23 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "module": "esnext",
-    "target": "ES2017",
+    "target": "ESNext",
     "moduleResolution": "node",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "strict": true,
     "baseUrl": ".",
+    "declaration": true,
+    "skipLibCheck": true,
     "paths": {
       "test-utils": ["./jest/test-utils.tsx"],
-      "src": ["./src/"]
+      "src": ["./src/"],
+      "mylib": ["src/components/*"]
     },
+    "typeRoots": ["node_modules/@types", "src/components/index.d.ts"],
     "types": ["node"]
-  }
+  },
+  "include": ["src"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

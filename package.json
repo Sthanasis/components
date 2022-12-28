@@ -1,13 +1,21 @@
 {
-  "name": "components",
+  "name": "mylib",
   "version": "0.0.1",
   "description": "React Component Library",
   "keywords": [
     "react",
     "library",
-    "components",
+    "component",
     "material"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sthanasis/components"
+  },
+  "bugs": {
+    "url": "https://github.com/sthanasis/components/issues"
+  },
+  "homepage": "https://github.com/sthanasis/components#readme",
   "scripts": {
     "test": "jest --coverage",
     "build": "tsc && vite build",
@@ -16,7 +24,7 @@
     "build-storybook": "build-storybook"
   },
   "author": "sthanasis",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.20.5",
     "@storybook/addon-actions": "^6.5.15",
@@ -41,7 +49,13 @@
     "jest": "^28.1.3",
     "jest-environment-jsdom": "^28.1.3",
     "typescript": "^4.9.4",
-    "vite": "^4.0.2"
+    "vite": "^4.0.2",
+    "vite-plugin-dts": "^1.7.1",
+    "vite-tsconfig-paths": "^4.0.3"
+  },
+  "peerDependencies": {
+    "react": "16.8.0 || >=17.x || >= 18.x",
+    "react-dom": "16.8.0 || >=17.x || >= 18.x"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.2.1",
