@@ -1,4 +1,5 @@
-import Button, { IButtonProps } from '../components/Button/Button';
+import Button from '../../components/Button';
+import { IButtonProps } from '../Button/Button';
 import './menuItem.scss';
 interface IMenuItemProps extends IButtonProps {
   selected?: boolean;
@@ -15,7 +16,7 @@ const MenuItem = ({
   }
   return (
     <div className={classList.join(' ')}>
-      <Button variant="contained" elevated={false} {...props}>
+      <Button buttonType="contained" elevated={false} {...props}>
         {children}
       </Button>
     </div>

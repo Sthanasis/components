@@ -1,40 +1,40 @@
 import styled from 'styled-components';
+import type { TextTagType } from './Text';
 
-export type TextVariantType =
-  | 'h1'
-  | 'h2'
-  | 'h3'
-  | 'h4'
-  | 'h5'
-  | 'h6'
-  | 'p'
-  | 'span';
-
-interface IStyledTextProps {
-  variant: TextVariantType;
-}
-
-export const StyledSpan = styled.span`
+const StyledSpan = styled.span`
   font-size: 18px;
 `;
-export const StyledParagraph = styled.p`
+const StyledParagraph = styled.p`
   font-size: 15px;
 `;
-export const StyledH1 = styled.h1`
+const StyledH1 = styled.h1`
   font-weight: inherit;
 `;
-export const StyledH2 = styled.h2`
+const StyledH2 = styled.h2`
   font-weight: inherit;
 `;
-export const StyledH3 = styled.h3`
+const StyledH3 = styled.h3`
   font-weight: inherit;
 `;
-export const StyledH4 = styled.h4`
+const StyledH4 = styled.h4`
   font-weight: inherit;
 `;
-export const StyledH5 = styled.h5`
+const StyledH5 = styled.h5`
   font-weight: inherit;
 `;
-export const StyledH6 = styled.h6`
+const StyledH6 = styled.h6`
   font-weight: inherit;
 `;
+export const getStyledText = (tag: TextTagType) => {
+  const componentMap = {
+    span: StyledSpan,
+    p: StyledParagraph,
+    h1: StyledH1,
+    h2: StyledH2,
+    h3: StyledH3,
+    h4: StyledH4,
+    h5: StyledH5,
+    h6: StyledH6,
+  };
+  return componentMap[tag];
+};
