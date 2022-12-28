@@ -22,7 +22,7 @@ describe('TextField component', () => {
 
   it('gives the parent of the label element the hasValue class when value is provided', () => {
     const { utils } = setup();
-    expect(utils.queryByText('Test').parentNode).toHaveClass('hasValue');
+    expect(utils.queryByText('Test')?.parentNode).toHaveClass('hasValue');
   });
 
   it('changes the value via the change event and triggers the onChange prop', () => {
@@ -109,7 +109,7 @@ describe('TextField component', () => {
     );
 
     const input = queryByRole('textbox');
-    fireEvent.blur(input, { target: { value: 'wrong' } });
+    if (input) fireEvent.blur(input, { target: { value: 'wrong' } });
     expect(container.getElementsByClassName('error')).toHaveLength(1);
   });
   it('does not pass the error class on validate success after blur', () => {
@@ -123,7 +123,7 @@ describe('TextField component', () => {
     );
 
     const input = queryByRole('textbox');
-    fireEvent.blur(input, { target: { value: 'tests' } });
+    if (input) fireEvent.blur(input, { target: { value: 'tests' } });
     expect(container.getElementsByClassName('error')).toHaveLength(0);
   });
 });
