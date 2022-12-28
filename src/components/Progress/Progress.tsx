@@ -4,7 +4,7 @@ import { StyledProgress } from './StyledProgress';
 
 export interface IProgressProps {
   type?: 'spinner' | 'linear';
-  color: ThemeVariantType;
+  color?: ThemeVariantType;
 }
 const Progress = ({
   type = 'spinner',

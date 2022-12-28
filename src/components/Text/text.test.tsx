@@ -7,8 +7,8 @@ describe('Text component', () => {
     expect(getByText('TEST')).toMatchSnapshot();
   });
   it('renders an element based on the variant prop', () => {
-    const { container } = render(<Text variant="h1">TEST</Text>);
-    expect(container.firstChild.nodeName.toLowerCase()).toBe('h1');
+    const { container } = render(<Text tag="h1">TEST</Text>);
+    expect(container.firstChild?.nodeName.toLowerCase()).toBe('h1');
   });
   it('renders passes the className prop to element classes', () => {
     const { getByText } = render(<Text className="test test1">TEST</Text>);

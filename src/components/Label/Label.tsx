@@ -7,16 +7,30 @@ interface ILabelProps {
   labelText?: string;
   hasValue: boolean;
   hasFocus: boolean;
-  hasError: boolean;
-  variant: TextfieldVariant;
-  color: ThemeVariantType;
-  withIcon: boolean;
+  hasError?: boolean;
+  variant?: TextfieldVariant;
+  color?: ThemeVariantType;
+  withIcon?: boolean;
 }
 
-const Label = ({ labelText, ...rest }: ILabelProps) => {
+const Label = ({
+  labelText,
+  withIcon = false,
+  hasError = false,
+  variant = 'filled',
+  color = 'primary',
+  ...rest
+}: ILabelProps) => {
   const theme = useTheme();
   return labelText ? (
-    <StyledLabelContainer theme={theme} {...rest}>
+    <StyledLabelContainer
+      withIcon={withIcon}
+      hasError={hasError}
+      variant={variant}
+      color={color}
+      theme={theme}
+      {...rest}
+    >
       <label>{labelText}</label>
     </StyledLabelContainer>
   ) : null;
