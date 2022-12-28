@@ -10,6 +10,7 @@ export default defineConfig({
   mode: 'development',
   esbuild: {
     include: './src/**.(ts | tsx)',
+    exclude: './src/**/**.(test | spec).(ts | tsx)',
   },
   server: { open: './public/index.html' },
   resolve: {
@@ -19,13 +20,9 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: path.resolve('./dist'),
+      entry: path.resolve(__dirname, './src/index.ts'),
       name: 'mylib',
-      formats: ['es', 'umd'],
-      fileName: (format) => `mylib.${format}.js`,
-    },
-    rollupOptions: {
-      external: [...Object.keys(packageJson.peerDependencies)],
+      fileName: 'mylib',
     },
   },
 });
