@@ -14,6 +14,7 @@ interface IStyledButtonProps {
 }
 
 export const StyledButton = styled.button`
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   font-size: ${({ theme }: IStyledButtonProps) => theme.fontSize};
   padding: ${({ theme, icon }: IStyledButtonProps) =>
     icon ? '10px' : theme.padding};

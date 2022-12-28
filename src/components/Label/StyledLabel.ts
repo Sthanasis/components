@@ -1,8 +1,9 @@
 import styled, { css } from 'styled-components';
 import { ThemeType } from 'src/assets/theme';
-import { slideTop } from '../../assets/animations';
+import { slideTop } from '../../../styled/animations';
 import { TextfieldVariant } from '../TextField/TextField';
 import { ThemeVariantType } from 'src/types/types';
+import { opacityHexPrefix } from 'src/assets/opacityHexPrefix';
 
 interface ILabelProps {
   theme: ThemeType;
@@ -49,26 +50,34 @@ export const StyledLabelContainer = styled.div(
         margin: 0;
         line-height: 1.4em;
         padding: 0px 5px;
-        color: ${theme.basicPalette.text};
+        color: ${theme.basicPalette.text}${opacityHexPrefix[80]};
       }
     `;
     if (variant === 'outlined') {
       style = css`
         ${style}
-        top: ${hasFocus || hasValue ? '-10px' : '12px'};
+        top: ${hasFocus || hasValue ? '-10px' : '14px'};
 
         & > label {
           background-color: ${hasValue || hasFocus
             ? theme.basicPalette.bg
             : undefined};
-          color: ${hasFocus ? theme.palette[color].main : undefined};
+          color: ${() => {
+            if (hasError) {
+              return theme.basicPalette.error;
+            }
+            if (hasFocus) {
+              return theme.palette[color].main;
+            }
+            return;
+          }};
         }
       `;
     }
     if (variant === 'filled') {
       style = css`
         ${style}
-        top: ${hasFocus || hasValue ? '0px' : '12px'};
+        top: ${hasFocus || hasValue ? '0px' : '14px'};
 
         & > label {
           color: ${hasError

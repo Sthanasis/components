@@ -55,23 +55,25 @@ export const StyledTextField = styled.div(
                 hasFocus ? theme.palette[color].main : 'rgba(0,0,0,1)'
               };
             }
-            border: ${
-              hasError ? `2px solid ${theme.basicPalette.error}` : undefined
-            };
+            
             border-color: ${
               hasFocus ? `${theme.palette[color].main}!important` : undefined
             };
-
+            border: ${
+              hasError
+                ? `2px solid ${theme.basicPalette.error}!important`
+                : undefined
+            };
         `;
     }
     if (variant === 'filled') {
       style = `
             ${style}
             border: none;
-            padding: 10px 5px 0px 5px;
             border-bottom: ${
               hasError ? `2px solid ${theme.basicPalette.error}` : undefined
             };
+            border-bottom-radius: ${hasError ? '0px' : 'initial'};
             background-color: rgba(0,0,0,.06);
             &:hover {
               background-color: rgba(0,0,0,.09);

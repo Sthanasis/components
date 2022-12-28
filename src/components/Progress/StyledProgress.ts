@@ -2,10 +2,10 @@ import styled, { css } from 'styled-components';
 import {
   indeterminate_first,
   indeterminate_second,
-} from '../../assets/animations';
+} from './../../../styled/animations';
 import { ThemeType } from 'src/assets/theme';
 import { opacityHexPrefix } from '../../assets/opacityHexPrefix';
-import { spin } from '../../assets/animations';
+import { spin } from '../../../styled/animations';
 import { ThemeVariantType } from 'src/types/types';
 
 interface IProps {

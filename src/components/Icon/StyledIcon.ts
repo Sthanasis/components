@@ -11,6 +11,6 @@ export const StyledIcon = styled.span(({ align }: IStyledIconProps) => {
   } else if (align === 'end') {
     return { marginLeft: '10px' };
   } else {
-    return { margin: '5px' };
+    return { margin: '5px', display: 'flex' };
   }
 });

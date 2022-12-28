@@ -25,7 +25,7 @@ const Search = ({
     }
     const debounceValue = setTimeout(() => {
       onSearch(e.target.value);
-    }, 300);
+    }, 500);
     setDebounce(debounceValue);
   };
 
