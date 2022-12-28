@@ -1,3 +1,4 @@
+import { opacityHexPrefix } from 'src/assets/opacityHexPrefix';
 import { ThemeType } from 'src/assets/theme';
 import { ThemeVariantType } from 'src/types/types';
 import styled from 'styled-components';
@@ -23,6 +24,8 @@ export const StyledTextField = styled.div(
     color,
   }: IStyledTextFieldProps) => {
     let style = `
+        display: flex;
+        align-items: center;
         position: relative;
         width: fit-content;
         border-radius: ${theme.borderRadius};
@@ -32,6 +35,15 @@ export const StyledTextField = styled.div(
         padding: 5px;
         margin: 10px 0;
         width: ${fullwidth ? '-webkit-fill-available' : undefined};
+        span {
+          color: ${
+            hasFocus
+              ? theme.palette[color].main
+              : `${theme.basicPalette.text}${opacityHexPrefix[50]}`
+          };
+          transition: .2s;
+        }
+        
    `;
     if (variant === 'outlined') {
       style = `

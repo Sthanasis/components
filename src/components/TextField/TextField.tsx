@@ -7,6 +7,8 @@ import Input from 'src/components/Input';
 import { IInputProps } from 'src/components/Input/Input';
 import { isEmpty } from 'src/utilities/utils';
 import { StyledTextField } from './StyledTextField';
+import Icon from '../Icon';
+import { ThemeVariantType } from 'src/types/types';
 
 export type TextfieldVariant = 'outlined' | 'filled';
 
@@ -14,9 +16,10 @@ export interface ITextFieldProps extends IInputProps {
   label?: string;
   variant?: TextfieldVariant;
   contrast?: boolean;
-  color?: 'primary';
+  color?: ThemeVariantType;
   validate?: (value: unknown) => boolean;
-  icon?: IconProp;
+  iconStart?: IconProp;
+  iconEnd?: IconProp;
 }
 
 const TextField = ({
@@ -32,7 +35,8 @@ const TextField = ({
   className,
   required,
   validate,
-  icon,
+  iconStart,
+  iconEnd,
   onBlur,
   onFocus,
   'aria-label': ariaLabel,
@@ -94,6 +98,7 @@ const TextField = ({
       test-id={testId}
     >
       <Label
+        withIcon={!!iconStart}
         labelText={labelText}
         hasValue={!!hasValue}
         hasFocus={hasFocus}
@@ -101,6 +106,7 @@ const TextField = ({
         variant={variant}
         color={color}
       />
+      {iconStart && <Icon icon={iconStart} />}
       <Input
         {...props}
         value={currentValue}
@@ -110,7 +116,7 @@ const TextField = ({
         fullwidth
         required={required}
       />
-      {icon && <FontAwesomeIcon icon={icon} className="icon" />}
+      {iconEnd && <Icon icon={iconEnd} />}
     </StyledTextField>
   );
 };

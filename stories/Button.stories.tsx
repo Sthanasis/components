@@ -1,4 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { ThemeProvider } from 'styled-components';
 import { defaultTheme } from 'src/assets/theme';
 import Button from 'src/components/Button';
@@ -27,7 +28,7 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof Button> = (args) => (
   <ThemeProvider theme={defaultTheme}>
-    <Button {...args}>{args.buttonType?.toUpperCase()}</Button>
+    <Button {...args}>I am a Button</Button>
   </ThemeProvider>
 );
 
@@ -36,5 +37,31 @@ export const Basic = Template.bind({});
 Basic.args = {
   variant: 'primary',
   buttonType: 'contained',
+  elevated: true,
+};
+
+export const WithIconStart = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+WithIconStart.args = {
+  variant: 'primary',
+  buttonType: 'contained',
+  iconStart: faCoffee,
+  elevated: true,
+};
+export const WithIconEnd = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+WithIconEnd.args = {
+  variant: 'primary',
+  buttonType: 'contained',
+  iconEnd: faCoffee,
+  elevated: true,
+};
+
+export const WithIcon = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+WithIcon.args = {
+  variant: 'primary',
+  buttonType: 'contained',
+  icon: faCoffee,
   elevated: true,
 };

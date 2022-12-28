@@ -11,17 +11,35 @@ interface ILabelProps {
   hasError: boolean;
   variant: TextfieldVariant;
   color: ThemeVariantType;
+  withIcon: boolean;
 }
 
 export const StyledLabelContainer = styled.div(
-  ({ theme, hasValue, hasFocus, hasError, variant, color }: ILabelProps) => {
+  ({
+    theme,
+    hasValue,
+    hasFocus,
+    hasError,
+    variant,
+    color,
+    withIcon,
+  }: ILabelProps) => {
     let style = css`
       position: absolute;
       white-space: nowrap;
       transition: 0.2s;
       animation: ${hasFocus ? slideTop : undefined};
       transform: ${hasFocus || hasValue ? 'scale(0.75)' : undefined};
-      left: ${hasFocus || hasValue ? '5px' : undefined};
+      left: ${() => {
+        if (hasFocus || hasValue) {
+          return '5px';
+        } else {
+          if (withIcon) {
+            return '30px';
+          }
+          return undefined;
+        }
+      }};
       padding: ${hasFocus || hasValue ? '0' : undefined};
       & > label {
         font-weight: 400;
@@ -31,13 +49,14 @@ export const StyledLabelContainer = styled.div(
         margin: 0;
         line-height: 1.4em;
         padding: 0px 5px;
-        color: #959595;
+        color: ${theme.basicPalette.text};
       }
     `;
     if (variant === 'outlined') {
       style = css`
         ${style}
         top: ${hasFocus || hasValue ? '-10px' : '12px'};
+
         & > label {
           background-color: ${hasValue || hasFocus
             ? theme.basicPalette.bg
@@ -50,6 +69,7 @@ export const StyledLabelContainer = styled.div(
       style = css`
         ${style}
         top: ${hasFocus || hasValue ? '0px' : '12px'};
+
         & > label {
           color: ${hasError
             ? `${theme.basicPalette.error}!important`

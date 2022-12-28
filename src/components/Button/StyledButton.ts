@@ -8,11 +8,13 @@ interface IProps {
   variant: ThemeVariantType;
   elevated: boolean;
   buttonType: ButtonType;
+  fullwidth: boolean;
+  icon: boolean;
 }
 
 export const ButtonContainer = styled.button`
   font-size: ${({ theme }: IProps) => theme.fontSize};
-  padding: ${({ theme }: IProps) => theme.padding};
+  padding: ${({ theme, icon }: IProps) => (icon ? '10px' : theme.padding)};
   overflow: hidden;
   cursor: pointer;
   display: flex;
@@ -24,7 +26,8 @@ export const ButtonContainer = styled.button`
   border: none;
   outline: none;
   background-color: transparent;
-  border-radius: ${({ theme }: IProps) => theme.borderRadius};
+  border-radius: ${({ theme, icon }: IProps) =>
+    icon ? '50%' : theme.borderRadius};
   ${({ theme, variant, elevated, buttonType }: IProps) => {
     const mainColor = theme.palette[variant].main;
     switch (buttonType) {

@@ -1,11 +1,11 @@
 import { MouseEvent, ReactNode, memo } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { useTheme } from 'styled-components';
 import { IBaseProps } from 'src/types/props';
 import { ButtonContainer } from './StyledButton';
 import Ripple from 'src/components/Ripple';
 import type { ThemeVariantType, ButtonType } from 'src/types/types';
+import Icon from '../Icon';
 
 export interface IButtonProps extends IBaseProps {
   children?: React.ReactNode | React.ReactNode[];
@@ -46,16 +46,14 @@ const Button = ({
 
   let childNodes: ReactNode = (
     <>
-      {iconStart && (
-        <FontAwesomeIcon className="icon icon-start" icon={iconStart} />
-      )}
+      {iconStart && <Icon icon={iconStart} align="start" />}
       {children}
-      {iconEnd && <FontAwesomeIcon className="icon icon-end" icon={iconEnd} />}
+      {iconEnd && <Icon icon={iconEnd} align="end" />}
     </>
   );
 
   if (icon) {
-    childNodes = <FontAwesomeIcon icon={icon} />;
+    childNodes = <Icon icon={icon} />;
   }
 
   return (
@@ -65,11 +63,13 @@ const Button = ({
       disabled={disabled}
       data-testid={testId}
       buttonType={buttonType}
+      fullwidth={fullwidth}
       theme={theme}
       variant={variant}
+      icon={!!icon}
       elevated={elevated}
     >
-      <div className="content">{childNodes}</div>
+      <div>{childNodes}</div>
       <Ripple disabled={disabled} />
     </ButtonContainer>
   );

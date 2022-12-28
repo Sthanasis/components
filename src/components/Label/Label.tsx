@@ -10,6 +10,7 @@ interface ILabelProps {
   hasError: boolean;
   variant: TextfieldVariant;
   color: ThemeVariantType;
+  withIcon: boolean;
 }
 
 const Label = ({ labelText, ...rest }: ILabelProps) => {

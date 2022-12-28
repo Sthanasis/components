@@ -1,16 +1,16 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ThemeProvider } from 'styled-components';
 import { defaultTheme } from 'src/assets/theme';
-import Progress from 'src/components/Progress';
+import Search from 'src/components/Search';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'Example/Progress',
-  component: Progress,
+  title: 'Example/Search',
+  component: Search,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
-    type: {
-      options: ['spinner', 'linear'],
+    variant: {
+      options: ['outlined', 'filled'],
       control: { type: 'radio' },
     },
     color: {
@@ -18,18 +18,18 @@ export default {
       control: { type: 'radio' },
     },
   },
-} as ComponentMeta<typeof Progress>;
+} as ComponentMeta<typeof Search>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Progress> = (args) => (
+const Template: ComponentStory<typeof Search> = (args) => (
   <ThemeProvider theme={defaultTheme}>
-    <Progress {...args} />
+    <Search {...args} />
   </ThemeProvider>
 );
 
 export const Basic = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Basic.args = {
-  type: 'spinner',
+  variant: 'outlined',
   color: 'primary',
 };
