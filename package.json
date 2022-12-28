@@ -10,7 +10,6 @@
   ],
   "scripts": {
     "test": "jest --coverage",
-    "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "storybook": "start-storybook -p 6006",
