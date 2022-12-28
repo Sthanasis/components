@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "outDir": "./dist",
     "jsx": "react-jsx",
     "module": "esnext",
     "target": "ESNext",
@@ -14,7 +15,7 @@
     "paths": {
       "test-utils": ["./jest/test-utils.tsx"],
       "src": ["./src/"],
-      "mylib": ["src/components/*"]
+      "mylib": ["./dist/*"]
     },
     "typeRoots": ["node_modules/@types", "src/components/index.d.ts"],
     "types": ["node", "jest", "@testing-library/jest-dom"]

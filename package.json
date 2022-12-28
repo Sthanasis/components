@@ -19,7 +19,7 @@
   "homepage": "https://github.com/sthanasis/components#readme",
   "scripts": {
     "test": "jest --coverage",
-    "build": "tsc && vite build",
+    "build": "vite build && tsc",
     "preview": "vite preview",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"

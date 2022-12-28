@@ -19,7 +19,7 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: path.resolve('./src'),
+      entry: path.resolve('./dist'),
       name: 'mylib',
       formats: ['es', 'umd'],
       fileName: (format) => `mylib.${format}.js`,
