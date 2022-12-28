@@ -10,12 +10,11 @@
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "baseUrl": ".",
-    "declaration": true,
     "skipLibCheck": true,
     "paths": {
       "test-utils": ["./jest/test-utils.tsx"],
       "src": ["./src/"],
-      "mylib": ["./src/components"]
+      "mylib": ["./src/components/index.ts"]
     },
     "typeRoots": ["node_modules/@types", "src/components/index.d.ts"],
     "types": ["node", "jest", "@testing-library/jest-dom"]

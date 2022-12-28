@@ -1,6 +1,5 @@
 import Button from '../../components/Button';
 import { IButtonProps } from '../Button/Button';
-import './menuItem.scss';
 interface IMenuItemProps extends IButtonProps {
   selected?: boolean;
 }

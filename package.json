@@ -17,13 +17,13 @@
     "url": "https://github.com/sthanasis/components/issues"
   },
   "homepage": "https://github.com/sthanasis/components#readme",
-  "main": "./dist/mylib.umd.cjs",
-  "module": "./dist/mylib.js",
+  "main": "./dist/mylib.umd.js",
+  "module": "./dist/mylib.es.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/mylib.js",
-      "require": "./dist/mylib.umd.cjs"
+      "import": "./dist/mylib.es.js",
+      "require": "./dist/mylib.umd.js"
     }
   },
   "files": [
@@ -31,7 +31,7 @@
   ],
   "scripts": {
     "test": "jest --coverage",
-    "build": "tsc && vite build",
+    "build": "vite build && tsc",
     "preview": "vite preview",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"

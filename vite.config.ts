@@ -6,13 +6,7 @@ import tsConfigPaths from 'vite-tsconfig-paths';
 import * as packageJson from './package.json';
 
 export default defineConfig({
-  plugins: [react(), tsConfigPaths(), dts({ include: ['src'] })],
-  mode: 'development',
-  esbuild: {
-    include: './src/**.(ts | tsx)',
-    exclude: './src/**/**.(test | spec).(ts | tsx)',
-  },
-  server: { open: './public/index.html' },
+  plugins: [react(), tsConfigPaths(), dts()],
   resolve: {
     alias: {
       src: path.resolve(__dirname, './src'),
@@ -22,7 +16,11 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, './src/index.ts'),
       name: 'mylib',
-      fileName: 'mylib',
+      formats: ['es', 'umd'],
+      fileName: (format) => `mylib.${format}.js`,
+    },
+    rollupOptions: {
+      external: [...Object.keys(packageJson.peerDependencies)],
     },
   },
 });
