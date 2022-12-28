@@ -2,7 +2,7 @@ import { MouseEvent, ReactNode, memo } from 'react';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { useTheme } from 'styled-components';
 import { IBaseProps } from 'src/types/props';
-import { ButtonContainer } from './StyledButton';
+import { StyledButton } from './StyledButton';
 import Ripple from 'src/components/Ripple';
 import type { ThemeVariantType, ButtonType } from 'src/types/types';
 import Icon from '../Icon';
@@ -57,7 +57,7 @@ const Button = ({
   }
 
   return (
-    <ButtonContainer
+    <StyledButton
       className={className}
       onClick={click}
       disabled={disabled}
@@ -71,7 +71,7 @@ const Button = ({
     >
       <div>{childNodes}</div>
       <Ripple disabled={disabled} />
-    </ButtonContainer>
+    </StyledButton>
   );
 };
 

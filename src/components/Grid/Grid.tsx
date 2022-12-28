@@ -1,6 +1,5 @@
 import { CSSProperties } from 'react';
-import { IBaseProps } from '../../../types/props';
-import './grid.scss';
+import { IBaseProps } from '../../types/props';
 
 interface IGridProps extends IBaseProps {
   children: React.ReactNode;
@@ -36,7 +35,7 @@ const Grid = ({
   };
 
   return (
-    <div style={styles} className={classes.join(' ')}>
+    <div style={styles} className={className}>
       {children}
     </div>
   );

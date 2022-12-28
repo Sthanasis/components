@@ -1,9 +1,10 @@
+import { IBaseProps } from 'src/types/props';
 import styled from 'styled-components';
 import type { ThemeVariantType, ButtonType } from '../../types/types';
 import type { ThemeType } from '../../assets/theme';
 import { opacityHexPrefix } from '../../assets/opacityHexPrefix';
 
-interface IProps {
+interface IStyledButtonProps {
   theme: ThemeType;
   variant: ThemeVariantType;
   elevated: boolean;
@@ -12,9 +13,10 @@ interface IProps {
   icon: boolean;
 }
 
-export const ButtonContainer = styled.button`
-  font-size: ${({ theme }: IProps) => theme.fontSize};
-  padding: ${({ theme, icon }: IProps) => (icon ? '10px' : theme.padding)};
+export const StyledButton = styled.button`
+  font-size: ${({ theme }: IStyledButtonProps) => theme.fontSize};
+  padding: ${({ theme, icon }: IStyledButtonProps) =>
+    icon ? '10px' : theme.padding};
   overflow: hidden;
   cursor: pointer;
   display: flex;
@@ -26,9 +28,9 @@ export const ButtonContainer = styled.button`
   border: none;
   outline: none;
   background-color: transparent;
-  border-radius: ${({ theme, icon }: IProps) =>
+  border-radius: ${({ theme, icon }: IStyledButtonProps) =>
     icon ? '50%' : theme.borderRadius};
-  ${({ theme, variant, elevated, buttonType }: IProps) => {
+  ${({ theme, variant, elevated, buttonType }: IStyledButtonProps) => {
     const mainColor = theme.palette[variant].main;
     switch (buttonType) {
       case 'contained':
