@@ -2,14 +2,13 @@ name: Release
 
 on:
   push:
-    branches: [main]
 
 jobs:
   test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [18.12.0]
+        node-version: [18.12.1]
 
     steps:
       - uses: actions/checkout@v3
@@ -52,41 +51,41 @@ jobs:
   #       run: docker push ${{ secrets.DOCKERHUB_REPO }}:latest
 
   # deploy:
-    needs: dockerize
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
+  #   needs: dockerize
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
 
-      - name: Use tag
-        uses: nowactions/envsubst@v1
-        with:
-          input: ./.k8s/deployment.yaml
-          output: ./.k8s/deploy-dev.yaml
-        env:
-          IMAGE: ${{ secrets.DOCKERHUB_REPO }}:${{ github.sha }}
-          IP: ${{ secrets.DEV_IP }}
+  #     - name: Use tag
+  #       uses: nowactions/envsubst@v1
+  #       with:
+  #         input: ./.k8s/deployment.yaml
+  #         output: ./.k8s/deploy-dev.yaml
+  #       env:
+  #         IMAGE: ${{ secrets.DOCKERHUB_REPO }}:${{ github.sha }}
+  #         IP: ${{ secrets.DEV_IP }}
 
-      - uses: tale/kubectl-action@v1
-        with:
-          base64-kube-config: ${{ secrets.KUB_CONFIG }}
-      - run: kubectl apply -f=./.k8s/deploy-dev.yaml
+  #     - uses: tale/kubectl-action@v1
+  #       with:
+  #         base64-kube-config: ${{ secrets.KUB_CONFIG }}
+  #     - run: kubectl apply -f=./.k8s/deploy-dev.yaml
 
-      - name: Notify slack success
-        if: success()
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_NOTIFICATIONS_BOT_TOKEN }}
-        uses: voxmedia/github-action-slack-notify-build@v1
-        with:
-          channel: notifications
-          status: SUCCESS
-          color: good
+  #     - name: Notify slack success
+  #       if: success()
+  #       env:
+  #         SLACK_BOT_TOKEN: ${{ secrets.SLACK_NOTIFICATIONS_BOT_TOKEN }}
+  #       uses: voxmedia/github-action-slack-notify-build@v1
+  #       with:
+  #         channel: notifications
+  #         status: SUCCESS
+  #         color: good
 
-      - name: Notify slack fail
-        if: failure()
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_NOTIFICATIONS_BOT_TOKEN }}
-        uses: voxmedia/github-action-slack-notify-build@v1
-        with:
-          channel: notifications
-          status: FAILED
-          color: danger
+  #     - name: Notify slack fail
+  #       if: failure()
+  #       env:
+  #         SLACK_BOT_TOKEN: ${{ secrets.SLACK_NOTIFICATIONS_BOT_TOKEN }}
+  #       uses: voxmedia/github-action-slack-notify-build@v1
+  #       with:
+  #         channel: notifications
+  #         status: FAILED
+  #         color: danger
