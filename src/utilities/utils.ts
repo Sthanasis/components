@@ -1,4 +1,4 @@
-export const isEmpty = (item?: string | any[] | object | number) => {
+export const isEmpty = (item?: string | unknown[] | object | number) => {
   if (typeof item === 'string') {
     return item.trim().length === 0;
   }

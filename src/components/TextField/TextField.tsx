@@ -1,7 +1,6 @@
 import React, { useState, memo, useEffect } from 'react';
 import { useTheme } from 'styled-components';
 import Label from '../Label';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import Input from 'src/components/Input';
 import { IInputProps } from 'src/components/Input/Input';

@@ -1,6 +1,5 @@
 import { render } from '@testing-library/react';
 import Button from '.';
-import { fa0 } from '@fortawesome/free-solid-svg-icons';
 
 describe('Button Component', () => {
   it('renders an empty button', () => {
