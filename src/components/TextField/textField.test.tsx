@@ -1,4 +1,4 @@
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent } from 'test-utils';
 import TextField from '../TextField';
 
 const mockChange = jest.fn();

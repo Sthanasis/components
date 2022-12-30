@@ -1,5 +1,5 @@
 import Flexbox from '../Flexbox';
-import { render } from '@testing-library/react';
+import { render } from 'test-utils';
 
 describe('Flexbox component', () => {
   it('renders a flexbox with children', () => {
