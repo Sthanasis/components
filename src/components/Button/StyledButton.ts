@@ -1,4 +1,3 @@
-import { IBaseProps } from 'src/types/props';
 import styled from 'styled-components';
 import type { ThemeVariantType, ButtonType } from '../../types/types';
 import type { ThemeType } from '../../assets/theme';
@@ -11,6 +10,7 @@ interface IStyledButtonProps {
   buttonType: ButtonType;
   fullwidth: boolean;
   icon: boolean;
+  contrast: boolean;
 }
 
 export const StyledButton = styled.button`

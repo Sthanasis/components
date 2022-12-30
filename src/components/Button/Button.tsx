@@ -65,6 +65,7 @@ const Button = ({
       buttonType={buttonType}
       fullwidth={fullwidth}
       theme={theme}
+      contrast={contrast}
       variant={variant}
       icon={!!icon}
       elevated={elevated}
