@@ -17,7 +17,7 @@ const Search = ({
   searchValue = '',
   onSearch,
   placeholder = 'Search',
-  ...rest
+  ...props
 }: ISearchProps): JSX.Element => {
   const [debounce, setDebounce] = useState<NodeJS.Timeout>();
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,7 +32,7 @@ const Search = ({
 
   return (
     <TextField
-      {...rest}
+      {...props}
       placeholder={placeholder}
       value={searchValue}
       onChange={handleSearch}
