@@ -21,5 +21,6 @@ export const StyledInput = styled.input(
       borderRadius: theme.borderRadius,
       display: 'inline-block',
       position: 'relative',
+      color: theme.basicPalette.inputText || theme.basicPalette.text,
     } as CSSObject)
 );

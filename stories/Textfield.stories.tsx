@@ -27,9 +27,19 @@ const Template: ComponentStory<typeof TextField> = (args) => (
   </ThemeProvider>
 );
 
-export const Basic = Template.bind({});
+export const Text = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-Basic.args = {
+Text.args = {
   variant: 'outlined',
   color: 'primary',
+  value: 'Some Text',
+};
+
+export const Password = Template.bind({});
+
+Password.args = {
+  variant: 'outlined',
+  color: 'primary',
+  type: 'password',
+  value: 'test',
 };

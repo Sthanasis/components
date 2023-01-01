@@ -18,6 +18,7 @@ export const defaultTheme = {
     error: '#c73e1d',
     bg: '#fff',
     text: '#616161',
+    inputText: 'black',
   },
   fontSize: '1rem',
   padding: '10px 16px',
