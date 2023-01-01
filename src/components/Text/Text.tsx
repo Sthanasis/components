@@ -11,20 +11,23 @@ export type TextTagType =
   | 'p'
   | 'span';
 
+export type TextVariantType = 'primary' | 'secondary' | 'default';
 interface ITextProps extends IBaseProps {
   children: React.ReactNode;
   tag?: TextTagType;
+  variant?: TextVariantType;
 }
 
 const Text = ({
   children,
   tag = 'span',
   className,
+  variant = 'default',
   style,
 }: ITextProps): JSX.Element => {
   const Component = getStyledText(tag);
   return (
-    <Component className={className} style={style}>
+    <Component variant={variant} className={className} style={style}>
       {children}
     </Component>
   );

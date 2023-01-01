@@ -1,28 +1,48 @@
+import { ThemeType } from 'src/assets/theme';
 import styled from 'styled-components';
-import type { TextTagType } from './Text';
+import type { TextTagType, TextVariantType } from './Text';
+
+interface IStyledTextProps {
+  theme: ThemeType;
+  variant: TextVariantType;
+}
+
+const getTextColor = ({ theme, variant }: IStyledTextProps) => {
+  if (variant === 'primary') return theme.palette.primary.main;
+  if (variant === 'secondary') return theme.palette.secondary.main;
+  return theme.basicPalette.text;
+};
 
 const StyledSpan = styled.span`
+  color: ${getTextColor};
   font-size: 18px;
 `;
 const StyledParagraph = styled.p`
+  color: ${getTextColor};
   font-size: 15px;
 `;
 const StyledH1 = styled.h1`
+  color: ${getTextColor};
   font-weight: inherit;
 `;
 const StyledH2 = styled.h2`
+  color: ${getTextColor};
   font-weight: inherit;
 `;
 const StyledH3 = styled.h3`
+  color: ${getTextColor};
   font-weight: inherit;
 `;
 const StyledH4 = styled.h4`
+  color: ${getTextColor};
   font-weight: inherit;
 `;
 const StyledH5 = styled.h5`
+  color: ${getTextColor};
   font-weight: inherit;
 `;
 const StyledH6 = styled.h6`
+  color: ${getTextColor};
   font-weight: inherit;
 `;
 export const getStyledText = (tag: TextTagType) => {
