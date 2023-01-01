@@ -1,5 +1,5 @@
 import Grid from '../Grid';
-import { render } from '@testing-library/react';
+import { render } from 'test-utils';
 
 describe('Grid component', () => {
   it('renders a grid container', () => {
