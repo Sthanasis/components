@@ -1,4 +1,4 @@
-import { render as tlRender, fireEvent, waitFor } from '@testing-library/react';
+import { render as tlRender } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ReactNode } from 'react';
 import { ThemeProvider } from 'styled-components';
