@@ -2,7 +2,7 @@
 
 exports[`Text component renders the inside text 1`] = `
 <span
-  class="text base-text"
+  class="sc-bcXHqe jyJnfJ"
 >
   TEST
 </span>

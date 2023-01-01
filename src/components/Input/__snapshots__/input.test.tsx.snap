@@ -3,7 +3,7 @@
 exports[`Input Component renders without crashing 1`] = `
 <input
   autocomplete="off"
-  class="input"
+  class="sc-bcXHqe kQWMzn"
   placeholder="test"
   type="text"
   value=""

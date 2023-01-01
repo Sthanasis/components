@@ -13,11 +13,4 @@ describe('Input Component', () => {
     );
     expect(getByPlaceholderText('test')).toHaveClass('test');
   });
-
-  it('takes the fullwidth prop correctly', () => {
-    const { getByPlaceholderText } = render(
-      <Input placeholder="test" fullwidth />
-    );
-    expect(getByPlaceholderText('test')).toHaveClass('fullwidth');
-  });
 });

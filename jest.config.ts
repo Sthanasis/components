@@ -3,9 +3,6 @@ import type { Config } from 'jest';
 const config: Config = {
   preset: 'ts-jest',
   verbose: true,
-  moduleNameMapper: {
-    '\\.(css|scss|less|sass)$': '<rootDir>/jest/__mocks__/styleMock.ts',
-  },
   testEnvironment: 'jsdom',
   collectCoverageFrom: [
     'src/**/*.{ts,tsx}',

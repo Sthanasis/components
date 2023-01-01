@@ -1,4 +1,4 @@
-import { render as tlRender, fireEvent } from '@testing-library/react';
+import { render as tlRender, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ReactNode } from 'react';
 import { ThemeProvider } from 'styled-components';
@@ -12,5 +12,5 @@ const render = (ui: ReactNode, { route = '/' } = {}) => {
     ...tlRender(<ThemeProvider theme={defaultTheme}>{ui}</ThemeProvider>),
   };
 };
-
-export { render, fireEvent };
+export * from '@testing-library/react';
+export { render };
