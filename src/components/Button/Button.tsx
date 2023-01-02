@@ -12,7 +12,7 @@ export interface IButtonProps extends IBaseProps {
   buttonType?: ButtonType;
   variant?: ThemeVariantType;
   elevated?: boolean;
-  onClick?: (...args: unknown[]) => unknown;
+  onClick?: (e: MouseEvent<HTMLButtonElement>) => void | Promise<void>;
   fullwidth?: boolean;
   contrast?: boolean;
   disabled?: boolean;
