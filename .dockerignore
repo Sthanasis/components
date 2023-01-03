@@ -4,3 +4,4 @@ Dockerfile
 .gitignore
 /coverage
 .prettierrc
+package-lock.json
