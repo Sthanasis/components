@@ -7,21 +7,27 @@ const Popover = (): JSX.Element => {
   const [coords, setCoords] = useState({ x: 0, y: 0 });
   const click = (e: MouseEvent<HTMLButtonElement>) => {
     setVisible(true);
-    const { x, y, height, width, bottom, top } =
-      e.currentTarget.getBoundingClientRect();
+    const btnDims = e.currentTarget.getBoundingClientRect();
     if (popoverRef.current) {
-      const {
-        x: pX,
-        y: pY,
-        height: pHeight,
-      } = popoverRef.current.getBoundingClientRect();
-      if (pHeight < height + top) {
-        setCoords({ x: x, y: height + top });
+      console.log(window.innerWidth);
+      console.log(window.innerHeight);
+      console.log(btnDims);
+      const popDims = popoverRef.current.getBoundingClientRect();
+      console.log(popDims.height + btnDims.bottom); // the distanse from top top bottom
+      console.log(popDims.width + btnDims.left); // the distanse from left to right
+      if (popDims.height + btnDims.bottom > window.innerHeight) {
+        setCoords({ x: btnDims.x, y: btnDims.height + btnDims.top });
       } else {
-        // position below button
-        setCoords({ x: x, y: height + top });
+        // top position below anchor element
+        if (popDims.width + btnDims.left > window.innerWidth) {
+          setCoords({
+            x: btnDims.right - popDims.width,
+            y: btnDims.height + btnDims.top,
+          }); // if position is to the top right
+        } else {
+          setCoords({ x: btnDims.x, y: btnDims.height + btnDims.top }); // if position is to the top left
+        }
       }
-      console.log(pX, pY, x, y);
     }
   };
 
