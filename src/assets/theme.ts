@@ -1,3 +1,23 @@
+import roboto from './fonts/Roboto-Regular.ttf';
+import { createGlobalStyle } from 'styled-components';
+
+const GlobalStyle = createGlobalStyle`
+  @font-face {
+    font-family: roboto;
+    src: url(${({ theme }: { theme: ThemeType }) =>
+      theme.fontFace}) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  :root {
+    font-family: roboto;
+    color: ${({ theme }: { theme: ThemeType }) => theme.basicPalette.text};
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+  }
+`;
+
 export const defaultTheme = {
   borderRadius: '4px',
   palette: {
@@ -14,6 +34,7 @@ export const defaultTheme = {
       contrastText: '#ffffff',
     },
   },
+  fontFace: roboto,
   basicPalette: {
     error: '#c73e1d',
     bg: '#fff',
@@ -25,4 +46,6 @@ export const defaultTheme = {
   fontSize: '1rem',
   padding: '10px 16px',
 };
+
 export type ThemeType = typeof defaultTheme;
+export default GlobalStyle;

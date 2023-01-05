@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
-import { ThemeProvider } from 'styled-components';
+import { ThemeProvider } from 'src/context/theme';
 import { defaultTheme } from '../src/assets/theme';
 import Button from '../src/components/Button';
 

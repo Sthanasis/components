@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { ThemeProvider } from 'styled-components';
+import { ThemeProvider } from 'src/context/theme';
 import { defaultTheme } from 'src/assets/theme';
 import Progress from 'src/components/Progress';
 

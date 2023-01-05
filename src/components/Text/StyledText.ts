@@ -10,7 +10,7 @@ interface IStyledTextProps {
 const getTextColor = ({ theme, variant }: IStyledTextProps) => {
   if (variant === 'primary') return theme.palette.primary.main;
   if (variant === 'secondary') return theme.palette.secondary.main;
-  return theme.basicPalette.text;
+  return 'inherit';
 };
 
 const StyledSpan = styled.span`

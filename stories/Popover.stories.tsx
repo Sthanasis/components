@@ -1,6 +1,6 @@
 import { useState, MouseEvent } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { ThemeProvider } from 'styled-components';
+import { ThemeProvider } from 'src/context/theme';
 import { defaultTheme } from 'src/assets/theme';
 import Popover from 'src/components/Popover';
 import Button from 'src/components/Button';
