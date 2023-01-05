@@ -5,9 +5,9 @@ import { opacityHexPrefix } from '../../assets/opacityHexPrefix';
 
 interface IStyledButtonProps {
   theme: ThemeType;
-  variant: ThemeVariantType;
+  color: ThemeVariantType;
   elevated: boolean;
-  buttonType: ButtonType;
+  variant: ButtonType;
   fullwidth: boolean;
   icon: boolean;
   contrast: boolean;
@@ -31,9 +31,9 @@ export const StyledButton = styled.button`
   background-color: transparent;
   border-radius: ${({ theme, icon }: IStyledButtonProps) =>
     icon ? '50%' : theme.borderRadius};
-  ${({ theme, variant, elevated, buttonType }: IStyledButtonProps) => {
-    const mainColor = theme.palette[variant].main;
-    switch (buttonType) {
+  ${({ theme, color, elevated, variant }: IStyledButtonProps) => {
+    const mainColor = theme.palette[color].main;
+    switch (variant) {
       case 'contained':
         return `
             background-color: ${mainColor};

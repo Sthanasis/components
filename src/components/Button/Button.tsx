@@ -9,8 +9,8 @@ import Icon from '../Icon';
 
 export interface IButtonProps extends IBaseProps {
   children?: React.ReactNode | React.ReactNode[];
-  buttonType?: ButtonType;
-  variant?: ThemeVariantType;
+  variant?: ButtonType;
+  color?: ThemeVariantType;
   elevated?: boolean;
   onClick?: (e: MouseEvent<HTMLButtonElement>) => void | Promise<void>;
   fullwidth?: boolean;
@@ -24,8 +24,8 @@ export interface IButtonProps extends IBaseProps {
 const Button = ({
   className,
   children,
-  variant = 'primary',
-  buttonType = 'text',
+  color = 'primary',
+  variant = 'text',
   elevated = true,
   onClick,
   fullwidth = false,
@@ -63,12 +63,11 @@ const Button = ({
       className={className}
       onClick={click}
       disabled={disabled}
-      data-testid={testId}
-      buttonType={buttonType}
+      variant={variant}
       fullwidth={fullwidth}
       theme={theme}
       contrast={contrast}
-      variant={variant}
+      color={color}
       icon={!!icon}
       elevated={elevated}
     >
