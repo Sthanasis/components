@@ -48,3 +48,12 @@ export const slideTop = keyframes({
     top: '-12px',
   },
 });
+
+export const fadeIn = keyframes({
+  from: {
+    opacity: 0,
+  },
+  to: {
+    opacity: 1,
+  },
+});

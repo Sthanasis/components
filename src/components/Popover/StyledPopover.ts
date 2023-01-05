@@ -1,3 +1,4 @@
+import { fadeIn } from 'src/assets/animations';
 import { ThemeType } from 'src/assets/theme';
 import styled from 'styled-components';
 
@@ -21,4 +22,5 @@ export const StyledPopover = styled.div`
       'linear-gradient(rgba(255,255,255,.12),rgba(255,255,255,.12))',
     borderRadius: theme.borderRadius,
   })}
+  animation: ${fadeIn} .2s linear;
 `;
