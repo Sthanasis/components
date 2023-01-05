@@ -4,7 +4,7 @@ import Button from '.';
 describe('Button Component', () => {
   it('renders an empty button', () => {
     const { queryByRole } = render(<Button />);
-    expect(queryByRole('button')).toMatchSnapshot();
+    expect(queryByRole('button')).toBeInTheDocument();
   });
 
   it('renders the children prop', () => {

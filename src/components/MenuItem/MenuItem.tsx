@@ -15,7 +15,7 @@ const MenuItem = ({
   }
   return (
     <div className={classList.join(' ')}>
-      <Button buttonType="contained" elevated={false} {...props}>
+      <Button variant="contained" elevated={false} {...props}>
         {children}
       </Button>
     </div>

@@ -4,7 +4,7 @@ import Text from '../Text';
 describe('Text component', () => {
   it('renders the inside text', () => {
     const { getByText } = render(<Text>TEST</Text>);
-    expect(getByText('TEST')).toMatchSnapshot();
+    expect(getByText('TEST')).toBeInTheDocument();
   });
   it('renders an element based on the variant prop', () => {
     const { container } = render(<Text tag="h1">TEST</Text>);

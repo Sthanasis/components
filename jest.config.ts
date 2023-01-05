@@ -4,12 +4,10 @@ const config: Config = {
   preset: 'ts-jest',
   verbose: true,
   testEnvironment: 'jsdom',
-  collectCoverageFrom: [
-    'src/**/*.{ts,tsx}',
-    '!src/index.tsx',
-    '!src/assets/data/*',
-    '!src/utilities/api/*',
-  ],
+  moduleNameMapper: {
+    '\\.(ttf)$': '<rootDir>/jest/fileMocks.ts',
+  },
+  collectCoverageFrom: ['src/**/*.{ts,tsx}', '!src/index.ts', '!src/assets/*'],
   setupFilesAfterEnv: ['<rootDir>/setupTests.ts'],
   moduleDirectories: ['node_modules', 'jest'],
   modulePaths: ['<rootDir>', 'src/*'],
