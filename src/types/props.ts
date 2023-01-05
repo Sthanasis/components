@@ -1,14 +1,14 @@
 export interface IBaseProps {
-  testId?: string;
+  'test-id'?: string;
   className?: string;
   style?: React.CSSProperties;
-  "aria-label"?: string;
+  'aria-label'?: string;
 }
 
 export type InputElementType =
-  | "text"
-  | "email"
-  | "radio"
-  | "number"
-  | "password"
-  | "submit";
+  | 'text'
+  | 'email'
+  | 'radio'
+  | 'number'
+  | 'password'
+  | 'submit';

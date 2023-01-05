@@ -12,6 +12,8 @@ const GlobalStyle = createGlobalStyle`
   :root {
     font-family: roboto;
     color: ${({ theme }: { theme: ThemeType }) => theme.basicPalette.text};
+  }
+  body {
     margin: 0;
     box-sizing: border-box;
     padding: 0;

@@ -1,8 +1,16 @@
 import { createPortal } from 'react-dom';
-import { MouseEvent, ReactNode, useEffect, useRef, useState } from 'react';
+import {
+  MouseEvent,
+  ReactNode,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 import { StyledPopover } from './StyledPopover';
 import { IBaseProps } from 'src/types/props';
 import Backdrop from '../Backdrop';
+import useWindowResize from 'src/utilities/hooks/useWindowResize';
 
 interface IPopoverProps extends IBaseProps {
   onClose?: () => void | Promise<void>;
@@ -43,10 +51,13 @@ const Popover = ({
   children,
   anchorEl,
   visible,
+  ...rest
 }: IPopoverProps): JSX.Element | null => {
   const popoverRef = useRef<HTMLDivElement>(null);
   const [coords, setCoords] = useState<{ x: number; y: number } | null>(null);
   const [show, setShow] = useState(false);
+
+  const windowIsResized = useWindowResize();
 
   const anchorToElement = () => {
     if (anchorEl && popoverRef.current) {
@@ -75,31 +86,37 @@ const Popover = ({
     }
   };
 
-  const handleClose = (e: MouseEvent<HTMLDivElement>) => {
-    if (popoverRef.current?.contains(e.target as Node)) return;
-    if (onClose) onClose();
+  const handleClose = (e?: MouseEvent<HTMLDivElement>) => {
+    if (e) {
+      if (popoverRef.current?.contains(e.target as Node)) return;
+    }
     setCoords(null);
     document.body.style.overflow = '';
     setShow(false);
+    if (onClose) onClose();
   };
 
   useEffect(() => {
-    if (show) anchorToElement();
+    if (show) anchorToElement(); // this avoids flickering on render
   }, [show]);
 
   useEffect(() => {
-    if (visible) setShow(true);
+    if (visible) setShow(true); // this avoids flickering on render
   }, [visible]);
+
+  useLayoutEffect(() => {
+    if (!windowIsResized) anchorToElement();
+  }, [windowIsResized]);
 
   if (show)
     return createPortal(
-      <Backdrop onClick={handleClose}>
+      <Backdrop onClose={handleClose}>
         <StyledPopover
+          {...rest}
           x={coords?.x}
           y={coords?.y}
           visible={show}
           ref={popoverRef}
-          onKeyDown={(e) => console.log(e)}
         >
           {children}
         </StyledPopover>

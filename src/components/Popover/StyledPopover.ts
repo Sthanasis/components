@@ -21,6 +21,7 @@ export const StyledPopover = styled.div`
     backgroundImage:
       'linear-gradient(rgba(255,255,255,.12),rgba(255,255,255,.12))',
     borderRadius: theme.borderRadius,
+    width: 'max-content',
   })}
   animation: ${fadeIn} .2s linear;
 `;
