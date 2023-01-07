@@ -39,8 +39,10 @@ const TextField = ({
   onBlur,
   onFocus,
   'aria-label': ariaLabel,
-  testId,
-  ...props
+  type,
+  name,
+  defaultValue,
+  ...rest
 }: ITextFieldProps): JSX.Element => {
   const theme = useTheme();
   const labelText = label || placeholder;
@@ -56,6 +58,7 @@ const TextField = ({
     setCurrentValue(e.target.value);
     if (onChange) onChange(e);
   };
+
   const handleBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (validate) {
       if (!validate(value)) setHasError(true);
@@ -69,10 +72,12 @@ const TextField = ({
     if (onBlur) onBlur(e);
     setHasFocus(false);
   };
+
   const handleFocus = (e: React.ChangeEvent<HTMLInputElement>) => {
     setHasFocus(true);
     if (onFocus) onFocus(e);
   };
+
   useEffect(() => {
     if (validate) {
       if (!isEmpty(currentValue)) {
@@ -94,7 +99,7 @@ const TextField = ({
       hasError={hasError}
       color={color}
       hasFocus={hasFocus}
-      test-id={testId}
+      {...rest}
     >
       <Label
         withIcon={!!iconStart}
@@ -107,7 +112,9 @@ const TextField = ({
       />
       {iconStart && <Icon icon={iconStart} />}
       <Input
-        {...props}
+        type={type}
+        name={name}
+        defaultValue={defaultValue}
         value={currentValue}
         onChange={handleChange}
         onBlur={handleBlur}

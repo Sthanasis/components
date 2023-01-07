@@ -33,9 +33,9 @@ const Button = ({
   disabled = false,
   iconStart,
   iconEnd,
-  testId,
   icon,
   style,
+  ...rest
 }: IButtonProps): JSX.Element => {
   const theme = useTheme();
 
@@ -59,6 +59,7 @@ const Button = ({
 
   return (
     <StyledButton
+      {...rest}
       style={style}
       className={className}
       onClick={click}
