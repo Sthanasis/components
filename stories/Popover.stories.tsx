@@ -1,7 +1,7 @@
 import { useState, MouseEvent } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ThemeProvider } from 'src/context/theme';
-import { defaultTheme } from 'src/assets/theme';
+import { defaultTheme } from 'src/utilities/theme';
 import Popover from 'src/components/Popover';
 import Button from 'src/components/Button';
 
@@ -32,7 +32,7 @@ const Template: ComponentStory<typeof Popover> = () => {
           style={{
             marginRight: 'auto',
           }}
-          buttonType={'contained'}
+          variant={'contained'}
           onClick={(e) => showPopover(e, 'right')}
         >
           LEFT
@@ -41,7 +41,7 @@ const Template: ComponentStory<typeof Popover> = () => {
           style={{
             margin: 'auto',
           }}
-          buttonType={'contained'}
+          variant={'contained'}
           onClick={(e) => showPopover(e, 'middle')}
         >
           MIDDLE
@@ -50,7 +50,7 @@ const Template: ComponentStory<typeof Popover> = () => {
           style={{
             marginLeft: 'auto',
           }}
-          buttonType={'contained'}
+          variant={'contained'}
           onClick={(e) => showPopover(e, 'left')}
         >
           RIGHT

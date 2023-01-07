@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import type { ThemeVariantType, ButtonType } from '../../types/types';
-import type { ThemeType } from '../../assets/theme';
-import { opacityHexPrefix } from '../../assets/opacityHexPrefix';
+import type { ThemeType } from '../../utilities/theme';
+import { opacityHexPrefix } from '../../utilities/opacityHexPrefix';
 
 interface IStyledButtonProps {
   theme: ThemeType;

@@ -1,5 +1,5 @@
-import { fadeIn } from 'src/assets/animations';
-import { ThemeType } from 'src/assets/theme';
+import { fadeIn } from 'src/utilities/animations';
+import { ThemeType } from 'src/utilities/theme';
 import styled from 'styled-components';
 
 export interface IStyledPopover {

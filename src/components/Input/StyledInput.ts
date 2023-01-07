@@ -1,6 +1,6 @@
 import { IBaseProps } from 'src/types/props';
 import styled, { CSSObject } from 'styled-components';
-import { ThemeType } from 'src/assets/theme';
+import { ThemeType } from 'src/utilities/theme';
 
 export interface IInputStaticProps extends IBaseProps {
   theme: ThemeType;

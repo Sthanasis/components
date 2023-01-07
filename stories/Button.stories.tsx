@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { ThemeProvider } from 'src/context/theme';
-import { defaultTheme } from '../src/assets/theme';
+import { defaultTheme } from '../src/utilities/theme';
 import Button from '../src/components/Button';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -14,11 +14,11 @@ export default {
     elevated: {
       control: 'boolean',
     },
-    variant: {
+    color: {
       options: ['primary', 'secondary'],
       control: { type: 'radio' },
     },
-    buttonType: {
+    variant: {
       options: ['text', 'outlined', 'contained'],
       control: { type: 'radio' },
     },
@@ -35,24 +35,24 @@ const Template: ComponentStory<typeof Button> = (args) => (
 export const Basic = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Basic.args = {
-  variant: 'primary',
-  buttonType: 'contained',
+  color: 'primary',
+  variant: 'contained',
   elevated: true,
 };
 
 export const WithIconStart = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 WithIconStart.args = {
-  variant: 'primary',
-  buttonType: 'contained',
+  color: 'primary',
+  variant: 'contained',
   iconStart: faCoffee,
   elevated: true,
 };
 export const WithIconEnd = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 WithIconEnd.args = {
-  variant: 'primary',
-  buttonType: 'contained',
+  color: 'primary',
+  variant: 'contained',
   iconEnd: faCoffee,
   elevated: true,
 };
@@ -60,8 +60,8 @@ WithIconEnd.args = {
 export const WithIcon = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 WithIcon.args = {
-  variant: 'primary',
-  buttonType: 'contained',
+  color: 'primary',
+  variant: 'contained',
   icon: faCoffee,
   elevated: true,
 };

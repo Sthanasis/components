@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ThemeProvider } from 'src/context/theme';
-import { defaultTheme } from 'src/assets/theme';
+import { defaultTheme } from 'src/utilities/theme';
 import IconList from './IconList/IconList';
 
 export default {

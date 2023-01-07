@@ -1,5 +1,5 @@
-import { opacityHexPrefix } from 'src/assets/opacityHexPrefix';
-import { ThemeType } from 'src/assets/theme';
+import { opacityHexPrefix } from 'src/utilities/opacityHexPrefix';
+import { ThemeType } from 'src/utilities/theme';
 import { ThemeVariantType } from 'src/types/types';
 import styled from 'styled-components';
 import { TextfieldVariant } from './TextField';

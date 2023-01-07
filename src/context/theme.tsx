@@ -1,6 +1,6 @@
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 import { createContext, ReactNode, useContext } from 'react';
-import GlobalStyle, { defaultTheme, ThemeType } from 'src/assets/theme';
+import GlobalStyle, { defaultTheme, ThemeType } from 'src/utilities/theme';
 
 interface IThemeContext {
   theme: ThemeType;

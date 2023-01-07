@@ -1,4 +1,4 @@
-import { ThemeType } from 'src/assets/theme';
+import { ThemeType } from 'src/utilities/theme';
 import styled from 'styled-components';
 import type { TextTagType, TextVariantType } from './Text';
 
