@@ -1,8 +1,8 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { ThemeProvider } from 'src/context/theme';
-import { defaultTheme } from '../src/utilities/theme';
-import Button from '../src/components/Button';
+import { defaultTheme } from 'src/utilities/theme';
+import Button from 'src/components/Button';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
