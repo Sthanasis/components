@@ -1,5 +1,5 @@
 import { render } from 'test-utils';
-import Button from '.';
+import Button from '../../src/components/Button';
 
 describe('Button Component', () => {
   it('renders an empty button', () => {

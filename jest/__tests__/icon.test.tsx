@@ -1,5 +1,5 @@
 import { render } from 'test-utils';
-import Icon from '.';
+import Icon from '../../src/components/Icon';
 import { faAdd } from '@fortawesome/free-solid-svg-icons';
 
 describe('Icon component', () => {

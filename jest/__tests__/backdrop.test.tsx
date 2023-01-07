@@ -1,5 +1,5 @@
 import { render, fireEvent } from 'test-utils';
-import Backdrop from '.';
+import Backdrop from '../../src/components/Backdrop';
 
 const mockClose = jest.fn();
 

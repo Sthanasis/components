@@ -1,5 +1,5 @@
 import { fireEvent, render, waitFor } from 'test-utils';
-import Search from '.';
+import Search from '../../src/components/Search';
 
 const mockOnSearch = jest.fn();
 const searchLabel = 'test search';

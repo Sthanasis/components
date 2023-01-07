@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Flexbox component renders a flexbox with children 1`] = `
-<div
-  style="display: flex; flex-direction: column; flex-wrap: nowrap; justify-content: center; align-items: center; box-sizing: border-box; text-align: center;"
->
-  TEST
-</div>
-`;

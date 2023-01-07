@@ -1,4 +1,4 @@
-import Grid from '.';
+import Grid from '../../src/components/Grid';
 import { render } from 'test-utils';
 
 describe('Grid component', () => {

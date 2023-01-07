@@ -1,5 +1,5 @@
 import { render } from 'test-utils';
-import Text from '../Text';
+import Text from '../../src/components/Text';
 
 describe('Text component', () => {
   it('renders the inside text', () => {

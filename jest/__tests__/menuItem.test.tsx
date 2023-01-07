@@ -1,5 +1,5 @@
 import { render } from 'test-utils';
-import MenuItem from './MenuItem';
+import MenuItem from '../../src/components/MenuItem/MenuItem';
 
 describe('MenuItem component', () => {
   it('takes the selected class', () => {

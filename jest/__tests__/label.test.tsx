@@ -1,5 +1,5 @@
 import { render } from 'test-utils';
-import Label from '../Label';
+import Label from '../../src/components/Label';
 
 describe('Label Component', () => {
   it('renders the label', () => {

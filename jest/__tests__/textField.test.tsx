@@ -1,5 +1,5 @@
 import { render, fireEvent } from 'test-utils';
-import TextField from '../TextField';
+import TextField from '../../src/components/TextField';
 
 const mockChange = jest.fn();
 

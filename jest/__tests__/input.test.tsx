@@ -1,5 +1,5 @@
 import { render } from 'test-utils';
-import Input from '../Input';
+import Input from '../../src/components/Input';
 
 describe('Input Component', () => {
   it('renders without crashing', () => {

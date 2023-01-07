@@ -1,4 +1,4 @@
-import Flexbox from '../Flexbox';
+import Flexbox from '../../src/components/Flexbox';
 import { render } from 'test-utils';
 
 describe('Flexbox component', () => {

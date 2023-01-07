@@ -1,5 +1,5 @@
 import { render } from 'test-utils';
-import Progress from '../Progress';
+import Progress from '../../src/components/Progress';
 describe('Progress component', () => {
   it('renders a spinner Progress', () => {
     const { getByLabelText } = render(<Progress />);

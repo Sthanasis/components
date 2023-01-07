@@ -1,5 +1,5 @@
 import { render } from 'test-utils';
-import Popover from '.';
+import Popover from '../../src/components/Popover';
 
 const setup = () => {
   const utils = render(
