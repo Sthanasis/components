@@ -46,7 +46,7 @@ jobs:
         run: |
           echo $JSON
         env:
-          JSON: ${{ toJSON(github.event) }}
+          JSON: ${{ toJSON(github.event.commits) }}
       - name: print
         run: echo "${{ steps.messages.outputs.arr }}"
       # - run: echo ${{  }}
