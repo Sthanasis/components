@@ -5,5 +5,5 @@ for i in range(1, len(sys.argv)):
         print('arg: '+ sys.argv[i])
         arr = sys.argv[i]
         for m in arr:
-            print(m)
+            print(m.message)
             
