@@ -44,11 +44,11 @@ jobs:
       - name: Messages check
         id: messages
         run: |
-          echo $JSON
+          echo "python3 ./scripts/check_version.py $JSON"
         env:
           JSON: ${{ toJSON(github.event.commits) }}
       - name: print
-        run: echo "python3 ./scripts/check_version.py ${{ steps.messages.outputs.arr }}"
+        run: echo "${{ steps.messages.outputs.arr }}"
       # - run: echo ${{  }}
       # - run: npm publish --access=public
       #   env:
