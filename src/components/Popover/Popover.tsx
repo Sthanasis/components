@@ -12,7 +12,7 @@ import { IBaseProps } from 'src/types/props';
 import Backdrop from '../Backdrop';
 import useWindowResize from 'src/utilities/hooks/useWindowResize';
 
-interface IPopoverProps extends IBaseProps {
+export interface IPopoverProps extends IBaseProps {
   onClose?: () => void | Promise<void>;
   anchorEl?: HTMLButtonElement | null;
   children: ReactNode;

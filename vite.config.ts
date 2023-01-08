@@ -1,26 +1,48 @@
 import { defineConfig } from 'vite';
-import dts from 'vite-plugin-dts';
+
 import react from '@vitejs/plugin-react';
 import path from 'path';
-import tsConfigPaths from 'vite-tsconfig-paths';
+
 import * as packageJson from './package.json';
+import typescript from '@rollup/plugin-typescript';
+import resolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
+import dts from 'vite-plugin-dts';
 
 export default defineConfig({
-  plugins: [react(), tsConfigPaths(), dts()],
+  base: '',
+  plugins: [
+    react(),
+    dts({
+      insertTypesEntry: true,
+      tsConfigFilePath: './tsconfig.json',
+    }),
+  ],
   resolve: {
-    alias: {
-      src: path.resolve(__dirname, './src'),
-    },
+    alias: [
+      {
+        find: /^src/,
+        replacement: `${path.resolve(process.cwd(), 'src')}/`,
+      },
+    ],
   },
   build: {
+    sourcemap: true,
     lib: {
       entry: path.resolve(__dirname, './src/index.ts'),
       name: 'mylib',
       formats: ['es', 'umd'],
-      fileName: (format) => `mylib.${format}.js`,
+      fileName: (format) => `index.${format}.js`,
     },
     rollupOptions: {
-      external: [...Object.keys(packageJson.peerDependencies)],
+      external: ['react', 'react-dom', 'styled-components'],
+      output: {
+        globals: {
+          react: 'React',
+          'react-dom': 'Reactdom',
+          'styled-components': 'Styled',
+        },
+      },
     },
   },
 });

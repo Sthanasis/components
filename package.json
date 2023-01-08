@@ -1,8 +1,11 @@
 {
-  "name": "mylib",
-  "version": "0.0.0",
-  "type": "module",
+  "name": "@sthanasis/components",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "version": "0.0.1",
   "description": "React Component Library",
+  "type": "module",
   "keywords": [
     "react",
     "library",
@@ -17,21 +20,16 @@
     "url": "https://github.com/sthanasis/components/issues"
   },
   "homepage": "https://github.com/sthanasis/components#readme",
-  "main": "./dist/mylib.umd.js",
-  "module": "./dist/mylib.es.js",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/mylib.es.js",
-      "require": "./dist/mylib.umd.js"
-    }
-  },
+  "main": "dist/index.umd.js",
+  "module": "dist/index.es.js",
+  "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],
   "scripts": {
     "test": "jest --coverage",
     "build": "vite build && tsc",
+    "rollup": "rollup -c",
     "preview": "vite preview",
     "lint": "eslint",
     "storybook": "start-storybook -p 6006",
@@ -74,16 +72,21 @@
     "vite-tsconfig-paths": "^4.0.3"
   },
   "peerDependencies": {
-    "react": "16.8.0 || >=17.x || >= 18.x",
-    "react-dom": "16.8.0 || >=17.x || >= 18.x"
+    "react": "^17.x || ^18.x",
+    "react-dom": "^17.x || ^18.x",
+    "styled-components": "^5.x",
+    "@fortawesome/fontawesome-svg-core": "^6.x",
+    "@fortawesome/free-regular-svg-icons": "^6.x",
+    "@fortawesome/free-solid-svg-icons": "^6.x",
+    "@fortawesome/react-fontawesome": "^0.x"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.2.1",
     "@fortawesome/free-regular-svg-icons": "^6.2.1",
     "@fortawesome/free-solid-svg-icons": "^6.2.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
-    "react": "16.8.0 || >=17.x || >= 18.x",
-    "react-dom": "16.8.0 || >=17.x || >= 18.x",
+    "react": "18.x",
+    "react-dom": "18.x",
     "styled-components": "^5.3.6"
   }
 }

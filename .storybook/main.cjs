@@ -19,9 +19,12 @@ module.exports = {
     return mergeConfig(config, {
       // Use the same "resolve" configuration as your app
       resolve: {
-        alias: {
-          src: path.resolve(__dirname, '../src'),
-        },
+        alias: [
+          {
+            find: /src/,
+            replacement: path.resolve(__dirname, '../src'),
+          },
+        ],
       },
       // Add dependencies to pre-optimization
       optimizeDeps: {

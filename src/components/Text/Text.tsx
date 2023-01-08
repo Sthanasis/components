@@ -12,7 +12,7 @@ export type TextTagType =
   | 'span';
 
 export type TextVariantType = 'primary' | 'secondary' | 'default';
-interface ITextProps extends IBaseProps {
+export interface ITextProps extends IBaseProps {
   children: React.ReactNode;
   tag?: TextTagType;
   variant?: TextVariantType;

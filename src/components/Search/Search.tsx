@@ -5,7 +5,7 @@ import { ThemeVariantType } from 'src/types/types';
 import TextField from '../TextField';
 import { TextfieldVariant } from '../TextField/TextField';
 
-interface ISearchProps extends IBaseProps {
+export interface ISearchProps extends IBaseProps {
   searchValue?: string;
   onSearch: (v: string) => void;
   placeholder?: string;

@@ -1,14 +1,1 @@
-export { default as Button } from './components/Button';
-export { default as Flexbox } from './components/Flexbox';
-export { default as Grid } from './components/Grid';
-export { default as Icon } from './components/Icon';
-export { default as Input } from './components/Input';
-export { default as Label } from './components/Label';
-export { default as MenuItem } from './components/MenuItem';
-export { default as Progress } from './components/Progress';
-export { default as Ripple } from './components/Ripple';
-export { default as Search } from './components/Search';
-export { default as Text } from './components/Text';
-export { default as TextField } from './components/TextField';
-export { default as Poopover } from './components/Popover';
-export { default as Backdrop } from './components/Backdrop';
+export * from './components';

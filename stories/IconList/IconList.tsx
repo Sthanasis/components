@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   IconDefinition,
   IconProp,
@@ -12,7 +12,7 @@ import * as regularIcons from '@fortawesome/free-regular-svg-icons';
 import Text from 'src/components/Text';
 import Search from 'src/components/Search';
 
-interface IIconListProps {
+export interface IIconListProps {
   iconType: 'solid' | 'regular';
   size?: SizeProp;
 }

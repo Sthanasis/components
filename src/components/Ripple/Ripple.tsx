@@ -43,7 +43,6 @@ const Ripple = ({
   });
 
   const addRipple = (event: MouseEvent<HTMLDivElement>) => {
-    if (event.button === 2) return;
     if (disabled) {
       return;
     }
