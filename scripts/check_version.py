@@ -6,7 +6,7 @@ messages = []
 for i in range(1, len(sys.argv)):
     if i > 0:
         arr.append(sys.argv[i])
-for i in (len(arr)):
+for i in range(len(arr)):
     if arr[i] == 'message:':
         index = i + 1
     if i == index: 
