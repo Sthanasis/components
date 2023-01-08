@@ -37,14 +37,14 @@ jobs:
           node-version: ${{ matrix.node-version }}
           registry-url: 'https://registry.npmjs.org'
       - name: Install Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v3
         with:
-          python-version: 3.9
+          python-version: 3.9.6
 
       - name: Messages check
         id: messages
         run: |
-          echo "arr=$(python3 scripts/check_version.py ${{ toJSON(github.event.commits) }})" >> $GITHUB_OUTPUT
+          echo "arr=$(python3 scripts/check_version.py "${{ toJSON(github.event.commits) }}")" >> $GITHUB_OUTPUT
       - name: print
         run: echo "${{ steps.messages.outputs.arr }}"
       # - run: echo ${{  }}
