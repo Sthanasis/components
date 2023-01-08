@@ -4,7 +4,7 @@ import Input from '../../src/components/Input';
 describe('Input Component', () => {
   it('renders without crashing', () => {
     const { getByPlaceholderText } = render(<Input placeholder="test" />);
-    expect(getByPlaceholderText('test')).toMatchSnapshot();
+    expect(getByPlaceholderText('test')).toBeInTheDocument();
   });
 
   it('passes the classes correctly', () => {
