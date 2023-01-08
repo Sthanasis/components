@@ -8,8 +8,8 @@ for i in range(1, len(sys.argv)):
         arr.append(sys.argv[i])
 for i in range(len(arr)):
     print(arr[i])
-    if arr[i] == 'message:':
-        index = i + 1
+    if arr[i] == 'message':
+        index = i + 2
     if i == index: 
         messages.append(arr[i])
 print(messages)
