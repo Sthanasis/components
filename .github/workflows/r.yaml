@@ -33,7 +33,10 @@ jobs:
         env:
           JSON: ${{ toJSON(github.event.commits) }}
       - name: Print
-        run: echo $(${{ steps.coverage.outputs.release }} != '')
+        run: [ -z "$RELEASE" ] && echo "Empty" || echo "Not empty"
+        env: 
+          RELEASE: ${{ steps.coverage.outputs.release }}
+        
       # - name: Release
       #   if: steps.coverage.outputs.status != ''
       #   run: |
