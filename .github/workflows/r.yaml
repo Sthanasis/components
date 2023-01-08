@@ -1,0 +1,37 @@
+name: Release
+
+on:
+  push:
+    branches: [feat/*]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.12.1]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.9
+
+      - name: Messages check
+        id: messages
+        run: |
+          obj=$(echo $JSON | tr '\n' ' ')
+          output=$(echo $(python3 ./scripts/check_version.py $obj))
+          echo "release=$output" >> $GITHUB_OUTPUT
+        env:
+          JSON: ${{ toJSON(github.event.commits) }}
+
+      - name: Release info
+        run: echo "${{ steps.coverage.outputs.release }}"
