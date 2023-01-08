@@ -44,6 +44,7 @@ jobs:
       - name: Messages check
         id: messages
         run: |
+          message=$(echo $JSON | tr '\n' ' ')
           echo "arr=$(python3 ./scripts/check_version.py $JSON)" >> $GITHUB_OUTPUT
         env:
           JSON: ${{ toJSON(github.event.commits) }}
