@@ -23,7 +23,7 @@ jobs:
   #     - name: Run tests
   #       run: npm run test
   release:
-    needs: test
+    # needs: test
     runs-on: ubuntu-latest
 
     strategy:
@@ -43,7 +43,9 @@ jobs:
 
       - name: Messages check
         id: messages
-        run: echo python3 scripts/check_version.py ${{ github.event.commits }}
+        run: echo ::set-output name=arr::$(python3 scripts/check_version.py ${{ github.event.commits }})
+      - name: print
+        run: echo ${{steps.messages.outputs.arr}}
       # - run: echo ${{  }}
       # - run: npm publish --access=public
       #   env:
