@@ -3,7 +3,7 @@ import json
 index = 0
 arr=[]
 for i in range(1, len(sys.argv)):
-    if i > 0:
+    if i == 0:
         continue
     if sys.argv[i] == 'message:':
         index = i
