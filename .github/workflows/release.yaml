@@ -44,9 +44,9 @@ jobs:
       - name: Messages check
         id: messages
         run: |
-          echo ::set-output name=arr::$(python3 scripts/check_version.py "${{ toJSON(github.event.commits) }}")
+          echo "arr=$(python3 scripts/check_version.py "${{ toJSON(github.event.commits) }}")" >> $GITHUB_OUTPUT
       - name: print
-        run: echo "${{steps.messages.outputs.arr}}"
+        run: echo "${{ steps.messages.outputs.arr }}"
       # - run: echo ${{  }}
       # - run: npm publish --access=public
       #   env:
