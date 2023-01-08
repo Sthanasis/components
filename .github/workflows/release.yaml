@@ -4,26 +4,26 @@ on:
   push:
 
 jobs:
-  # test:
-  #   runs-on: ubuntu-latest
-  #   strategy:
-  #     matrix:
-  #       node-version: [18.12.1]
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - name: Use Node.js ${{ matrix.node-version }}
-  #       uses: actions/setup-node@v3
-  #       with:
-  #         node-version: ${{ matrix.node-version }}
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.12.1]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
 
-  #     - name: Install Node dependencies
-  #       run: npm install
-  #     - name: eslint
-  #       run: npm run lint
-  #     - name: Run tests
-  #       run: npm run test
+      - name: Install Node dependencies
+        run: npm install
+      - name: eslint
+        run: npm run lint
+      - name: Run tests
+        run: npm run test
   release:
-    # needs: test
+    needs: test
     runs-on: ubuntu-latest
 
     strategy:
@@ -36,6 +36,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           registry-url: 'https://registry.npmjs.org'
+
       - name: Install Python
         uses: actions/setup-python@v3
         with:
@@ -49,9 +50,10 @@ jobs:
           echo "release=$output" >> $GITHUB_OUTPUT
         env:
           JSON: ${{ toJSON(github.event.commits) }}
-      - name: print
-        run: echo "${{ steps.messages.outputs.release }}"
-      # - run: npm version ${{ steps.messages.outputs.release }}
-      # - run: npm publish --access=public
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_REGISTRY_TOKEN }}
+
+      - name: Release
+        run: |
+          npm version ${{ steps.messages.outputs.release }}
+          npm publish --access=public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_REGISTRY_TOKEN }}
