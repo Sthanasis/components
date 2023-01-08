@@ -44,8 +44,8 @@ jobs:
       - name: Messages check
         id: messages
         run: |
-          echo ::set-output name=arr::$(python3 scripts/check_version.py ${{ github.event.commits }})
-          echo ${{github.event.commits[0]}}
+          echo ::set-output name=arr::$(python3 scripts/check_version.py $${{ github.event.commits }})
+          echo $${{github.event.commits[0]}}
       - name: print
         run: echo ${{steps.messages.outputs.arr}}
       # - run: echo ${{  }}
