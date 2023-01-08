@@ -14,4 +14,4 @@ for i in range(len(arr)):
         index = i + 2
     if i == index: 
         messages.append(arr[i])
-print(json_string)
+print(json.load(json_string))
