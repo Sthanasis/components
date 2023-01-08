@@ -33,5 +33,10 @@ jobs:
         env:
           JSON: ${{ toJSON(github.event.commits) }}
 
+      - name: No release info
+        if: steps.coverage.outputs.release == ''
+        run: echo no release
+
       - name: Release info
-        run: echo "${{ steps.coverage.outputs.release }}"
+        if: steps.coverage.outputs.release != ''
+        run: echo relase "${{ steps.coverage.outputs.release }}"
