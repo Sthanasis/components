@@ -4,7 +4,7 @@ index = 0
 
 json_string=''
 messages = []
-prefixes = ['fix', 'feat']
+prefixes = ['breaking', 'fix', 'feat']
 update = ''
 for i in range(1, len(sys.argv)):
     if i > 0:
@@ -19,8 +19,10 @@ for message in messages:
     if ":" in message:
         prefix = message.split(":")[0]
         if prefix in prefixes:
-            if prefix == 'fix' and update != 'major': 
+            if prefix == 'fix' and (update != 'major' or update != 'minor'): 
+                update = 'patch'
+            elif prefix == 'feat' and update != 'major':
                 update = 'minor'
-            else:
+            else: 
                 update = 'major'
 print(update)
