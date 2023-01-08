@@ -34,7 +34,7 @@ jobs:
           JSON: ${{ toJSON(github.event.commits) }}
 
       - name: Release
-        if: steps.coverage.outputs.status != ''
+        if: steps.coverage.outputs.release != ''
         run: |
           git config --global user.email ${{ secrets.EMAIL }}
           git config --global user.name ${{ secrets.NAME }}
