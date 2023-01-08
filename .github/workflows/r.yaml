@@ -34,9 +34,5 @@ jobs:
           JSON: ${{ toJSON(github.event.commits) }}
 
       - name: No release info
-        if: steps.coverage.outputs.release == ''
+        if: steps.coverage.outputs.release == 'minor' || steps.coverage.outputs.release == 'major'
         run: echo no release
-
-      - name: Release info
-        if: steps.coverage.outputs.release != ' '
-        run: echo relase "${{ steps.coverage.outputs.release }}"
