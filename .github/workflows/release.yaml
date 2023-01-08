@@ -46,12 +46,12 @@ jobs:
         run: |
           obj=$(echo $JSON | tr '\n' ' ')
           output=$(echo $(python3 ./scripts/check_version.py $obj))
-          echo "arr=$output" >> $GITHUB_OUTPUT
+          echo "release=$output" >> $GITHUB_OUTPUT
         env:
           JSON: ${{ toJSON(github.event.commits) }}
       - name: print
-        run: echo "${{ steps.messages.outputs.arr }}"
-      # - run: echo ${{  }}
+        run: echo "${{ steps.messages.outputs.release }}"
+      # - run: npm version ${{ steps.messages.outputs.release }}
       # - run: npm publish --access=public
       #   env:
       #     NODE_AUTH_TOKEN: ${{ secrets.NPM_REGISTRY_TOKEN }}
