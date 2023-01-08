@@ -49,7 +49,7 @@ jobs:
         env:
           JSON: ${{ toJSON(github.event.commits) }}
           PARSED: $(echo $JSON | tr '\n' ' ')
-          ARR: $(echo "$(python3 ./scripts/check_version.py $PARSED)")
+          ARR: $(echo $(python3 ./scripts/check_version.py $PARSED))
       - name: print
         run: echo "${{ steps.messages.outputs.arr }}"
       # - run: echo ${{  }}
