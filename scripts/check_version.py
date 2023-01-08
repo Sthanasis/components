@@ -19,7 +19,7 @@ for message in messages:
     if ":" in message:
         prefix = message.split(":")[0]
         if prefix in prefixes:
-            if prefix == fix: 
+            if prefix == 'fix' and update != 'major': 
                 update = 'minor'
             else:
                 update = 'major'
