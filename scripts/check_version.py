@@ -11,6 +11,6 @@ for i in range(1, len(sys.argv)):
 arr = json.loads(json_string)
 
 for commit in arr:
-    print(commit.message)
+    print(commit)
 
 print(type(arr))
