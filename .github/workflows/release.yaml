@@ -45,11 +45,10 @@ jobs:
         id: messages
         run: |
           obj=$(echo $JSON | tr '\n' ' ')
-          echo "arr=$ARR" >> $GITHUB_OUTPUT
+          output=$(echo $(python3 ./scripts/check_version.py $PARSED))
+          echo "arr=$output" >> $GITHUB_OUTPUT
         env:
           JSON: ${{ toJSON(github.event.commits) }}
-          PARSED: $(echo $JSON | tr '\n' ' ')
-          ARR: $(echo $(python3 ./scripts/check_version.py $PARSED))
       - name: print
         run: echo "${{ steps.messages.outputs.arr }}"
       # - run: echo ${{  }}
