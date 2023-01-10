@@ -12,7 +12,7 @@ def get_current_version():
     return version
 
 version = get_current_version()
-
+v = list(version)
 index = 0
 json_string=''
 messages = []
@@ -31,12 +31,11 @@ for message in messages:
     if ":" in message:
         prefix = message.split(":")[0]
         if prefix in prefixes:
-            v = list(version)
             if prefix == 'fix': 
-                v[3] = str(int(v[4]) +1)
+                v[4] = str(int(v[4]) +1)
             elif prefix == 'feat':
                 v[2] = str(int(v[2]) +1)
             else: 
                v[0] = str(int(v[0]) +1)
-            version = str().join(v)
+version = str().join(v)
 print(version)
