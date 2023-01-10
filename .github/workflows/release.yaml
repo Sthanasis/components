@@ -44,9 +44,10 @@ jobs:
 
       - name: Release
         if: steps.messages.outputs.release != ''
-        run: |
-          npm version ${{ steps.messages.outputs.release }}
-          git push
-          npm publish --access=public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_REGISTRY_TOKEN }}
+        run: echo "${{ steps.messages.outputs.release }}""
+        # run: |
+        #   npm version ${{ steps.messages.outputs.release }}
+        #   git push
+        #   npm publish --access=public
+        # env:
+        #   NODE_AUTH_TOKEN: ${{ secrets.NPM_REGISTRY_TOKEN }}
