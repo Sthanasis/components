@@ -33,13 +33,13 @@ for message in messages:
         if prefix in prefixes:
             if prefix == 'fix': 
                 left = version.split('.',2)[1]
-                update = int(left) + 1
+                update = str(int(left) + 1)
                 version = version.split('.')[0] + update
             elif prefix == 'feat':
                 middle = version.split('.')[1].split('.')[0]
-                update = int(middle) + 1
+                update = str(int(middle) + 1)
                 version = version.split('.')[0] + update + version.split('.',2)[1] 
             else: 
-                update = int(version.split('.')[0]) + 1
+                update = str(int(version.split('.')[0]) + 1)
                 version = update + version.split('.')[1].split('.')[0] + version.split('.',2)[1] 
 print(version)
