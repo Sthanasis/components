@@ -7,7 +7,6 @@ def get_current_version():
     json_file = open(path + "/package.json")
     pckg_json = json.load(json_file)
     version = pckg_json['version']
-    print(version)
     json_file.close()
     return version
 
