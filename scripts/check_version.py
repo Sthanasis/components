@@ -31,15 +31,12 @@ for message in messages:
     if ":" in message:
         prefix = message.split(":")[0]
         if prefix in prefixes:
+            v = list(version)
             if prefix == 'fix': 
-                left = version.split('.',2)[1]
-                update = str(int(left) + 1)
-                version = version.split('.')[0] + update
+                v[3] = str(int(v[4]) +1)
             elif prefix == 'feat':
-                middle = version.split('.')[1].split('.')[0]
-                update = str(int(middle) + 1)
-                version = version.split('.')[0] + update + version.split('.',2)[1] 
+                v[2] = str(int(v[2]) +1)
             else: 
-                update = str(int(version.split('.')[0]) + 1)
-                version = update + version.split('.')[1].split('.')[0] + version.split('.',2)[1] 
+               v[0] = str(int(v[0]) +1)
+            version = v.join()
 print(version)
