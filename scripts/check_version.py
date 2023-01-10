@@ -38,5 +38,5 @@ for message in messages:
                 v[2] = str(int(v[2]) +1)
             else: 
                v[0] = str(int(v[0]) +1)
-            version = v.join()
+            version = str().join(v)
 print(version)
