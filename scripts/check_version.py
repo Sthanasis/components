@@ -31,10 +31,10 @@ for message in messages:
     if ":" in message:
         prefix = message.split(":")[0]
         if prefix in prefixes:
-            if prefix == 'fix' and (update != 'major' or update != 'minor'): 
+            if prefix == 'fix': 
                 update = int(version.split('.')[2]) + 1
                 version = version.split('.')[0] + version.split('.')[1] + update
-            elif prefix == 'feat' and update != 'major':
+            elif prefix == 'feat':
                 update = int(version.split('.')[1]) + 1
                 version = version.split('.')[0] + update + version.split('.')[2] 
             else: 
