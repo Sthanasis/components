@@ -1,11 +1,22 @@
 import sys
+import os
 import json
-index = 0
 
+def get_current_version():
+    path = os.getcwd()
+    json_file = open(path + "/package.json")
+    pckg_json = json.load(json_file)
+    version = pckg_json['version']
+    json_file.close()
+    return version
+
+version = get_current_version()
+v = list(version)
+index = 0
 json_string=''
 messages = []
 prefixes = ['breaking', 'fix', 'feat']
-update = ''
+
 for i in range(1, len(sys.argv)):
     if i > 0:
         json_string = json_string + sys.argv[i]
@@ -19,10 +30,11 @@ for message in messages:
     if ":" in message:
         prefix = message.split(":")[0]
         if prefix in prefixes:
-            if prefix == 'fix' and (update != 'major' or update != 'minor'): 
-                update = 'patch'
-            elif prefix == 'feat' and update != 'major':
-                update = 'minor'
+            if prefix == 'fix': 
+                v[4] = str(int(v[4]) +1)
+            elif prefix == 'feat':
+                v[2] = str(int(v[2]) +1)
             else: 
-                update = 'major'
-print(update)
+               v[0] = str(int(v[0]) +1)
+version = str().join(v)
+print(version)
