@@ -3,20 +3,19 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
-    font-family: roboto;
+    font-family: 'roboto';
     src: url(${({ theme }: { theme: ThemeType }) =>
       theme.fontFace}) format('truetype');
-    font-weight: normal;
-    font-style: normal;
   }
   :root {
-    font-family: roboto;
+    font-family: 'roboto', sans-serif;
     color: ${({ theme }: { theme: ThemeType }) => theme.basicPalette.text};
   }
   body {
     margin: 0;
     box-sizing: border-box;
     padding: 0;
+    font-s roboto
   }
 `;
 

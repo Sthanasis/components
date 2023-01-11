@@ -21,10 +21,11 @@ export const ThemeProvider = ({
   children,
   theme = defaultTheme,
 }: IThemeProviderProps) => {
+  const currentTheme = { ...defaultTheme, theme };
   return (
-    <ThemeContext.Provider value={{ theme }}>
-      <StyledThemeProvider theme={theme}>{children}</StyledThemeProvider>
-      <GlobalStyle theme={theme} />
+    <ThemeContext.Provider value={{ theme: currentTheme }}>
+      <StyledThemeProvider theme={currentTheme}>{children}</StyledThemeProvider>
+      <GlobalStyle theme={currentTheme} />
     </ThemeContext.Provider>
   );
 };
