@@ -10,31 +10,40 @@ def get_current_version():
     json_file.close()
     return version
 
-version = get_current_version()
-v = list(version)
-index = 0
-json_string=''
-messages = []
-prefixes = ['breaking', 'fix', 'feat']
+def create_release_version(version):
+    # resolve version string to list
+    v = list(version)
+    json_string=''
+    messages = []
+    prefixes = ['breaking', 'fix', 'feat']
 
-for i in range(1, len(sys.argv)):
-    if i > 0:
-        json_string = json_string + sys.argv[i]
+    for i in range(1, len(sys.argv)):
+        if i > 0:
+            json_string = json_string + sys.argv[i]
 
-arr = json.loads(json_string)
+    # get the commit object
+    arr = json.loads(json_string)
+    # get every commit message 
+    for commit in arr:
+        messages.append(commit['message'])
+    # update the version based on every message prefix
+    for message in messages:
+        if ":" in message:
+            prefix = message.split(":")[0]
+            if prefix in prefixes:
+                if prefix == 'fix': 
+                    v[4] = str(int(v[4]) +1)
+                elif prefix == 'feat':
+                    v[2] = str(int(v[2]) +1)
+                else: 
+                    v[0] = str(int(v[0]) +1)
+                    
+    return str().join(v)
 
-for commit in arr:
-    messages.append(commit['message'])
 
-for message in messages:
-    if ":" in message:
-        prefix = message.split(":")[0]
-        if prefix in prefixes:
-            if prefix == 'fix': 
-                v[4] = str(int(v[4]) +1)
-            elif prefix == 'feat':
-                v[2] = str(int(v[2]) +1)
-            else: 
-               v[0] = str(int(v[0]) +1)
-version = str().join(v)
-print(version)
+package_version = get_current_version()
+version = create_release_version(package_version)
+if(package_version == version):
+    print('')
+else:
+    print(version)
