@@ -35,8 +35,11 @@ def create_release_version(version):
                     v[4] = str(int(v[4]) +1)
                 elif prefix == 'feat':
                     v[2] = str(int(v[2]) +1)
+                    v[4] = '0'
                 else: 
                     v[0] = str(int(v[0]) +1)
+                    v[2] = '0'
+                    v[4] = '0'
                     
     return str().join(v)
 
