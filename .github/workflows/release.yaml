@@ -43,11 +43,10 @@ jobs:
           JSON: ${{ toJSON(github.event.commits) }}
 
       - name: Release
-        run: echo ${{ github.ref }}
-        # if: steps.messages.outputs.release != ''
-        # run: |
-        #   npm version ${{ steps.messages.outputs.release }}
-        #   git push
-        #   npm publish --access=public
-        # env:
-        #   NODE_AUTH_TOKEN: ${{ secrets.TOKEN }}
+        if: steps.messages.outputs.release != ''
+        run: |
+          npm version ${{ steps.messages.outputs.release }}
+          git push 
+          npm publish --access=public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.TOKEN }}
