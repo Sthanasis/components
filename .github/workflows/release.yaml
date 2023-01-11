@@ -2,7 +2,7 @@ name: Release
 
 on:
   push:
-    branches: [main]
+    branches: [release]
 
 jobs:
   release:
@@ -26,7 +26,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          registry-url: 'https://registry.npmjs.org'
+          registry-url: 'https://npm.pkg.github.com'
 
       - name: Install Python
         uses: actions/setup-python@v3
@@ -43,11 +43,11 @@ jobs:
           JSON: ${{ toJSON(github.event.commits) }}
 
       - name: Release
-        if: steps.messages.outputs.release != ''
-        run: echo "${{ steps.messages.outputs.release }}"
+        run: echo ${{ github.ref }}
+        # if: steps.messages.outputs.release != ''
         # run: |
         #   npm version ${{ steps.messages.outputs.release }}
         #   git push
         #   npm publish --access=public
         # env:
-        #   NODE_AUTH_TOKEN: ${{ secrets.NPM_REGISTRY_TOKEN }}
+        #   NODE_AUTH_TOKEN: ${{ secrets.TOKEN }}
