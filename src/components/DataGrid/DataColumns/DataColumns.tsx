@@ -15,6 +15,7 @@ const DataColumns = ({ columns }: IDataColumnsProps): JSX.Element => {
     <StyledDataColumns>
       {columns.map((c) => (
         <DataCell
+          tag="th"
           key={c.field}
           field={c.field}
           value={c.name}

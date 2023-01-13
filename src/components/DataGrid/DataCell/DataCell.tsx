@@ -1,6 +1,6 @@
 import Text from 'src/components/Text';
 import { IBaseProps } from 'src/types/props';
-import { StyledDataCell } from './StyledDataCell';
+import { TH, TD } from './StyledDataCell';
 
 interface IDataCellProps extends IBaseProps {
   value: string | number | undefined | null;
@@ -8,20 +8,22 @@ interface IDataCellProps extends IBaseProps {
   withBorder?: boolean;
   width?: number | string;
   height?: number | string;
+  tag: 'td' | 'th';
 }
 
 const DataCell = ({
   value,
   field,
   withBorder = false,
-  width = 100,
-  height = 50,
+  width,
+  height,
+  tag,
   ...rest
 }: IDataCellProps) => {
   const content = value ?? '';
-
+  const Cmp = tag === 'td' ? TD : TH;
   return (
-    <StyledDataCell
+    <Cmp
       data-field={field}
       withBorder={withBorder}
       width={width}
@@ -29,7 +31,7 @@ const DataCell = ({
       {...rest}
     >
       <Text>{content}</Text>
-    </StyledDataCell>
+    </Cmp>
   );
 };
 

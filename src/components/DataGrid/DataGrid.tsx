@@ -1,6 +1,6 @@
 import DataColumns, { ColumnType } from './DataColumns/DataColumns';
 import DataRow, { RowType } from './DataRow/DataRow';
-import { StyledDataGrid } from './StyledDataGrid';
+import { Table, Tbody, Thead } from './StyledDataGrid';
 
 interface IDataGridProps {
   columns: ColumnType[];
@@ -9,12 +9,18 @@ interface IDataGridProps {
 
 const DataGrid = ({ columns, rows }: IDataGridProps): JSX.Element => {
   return (
-    <StyledDataGrid>
-      <DataColumns columns={columns} />
-      {rows.map((row) => (
-        <DataRow key={row.id} row={row} />
-      ))}
-    </StyledDataGrid>
+    <div style={{ display: 'flex' }}>
+      <Table>
+        <Thead>
+          <DataColumns columns={columns} />
+        </Thead>
+        <Tbody>
+          {rows.map((row) => (
+            <DataRow key={row.id} row={row} />
+          ))}
+        </Tbody>
+      </Table>
+    </div>
   );
 };
 

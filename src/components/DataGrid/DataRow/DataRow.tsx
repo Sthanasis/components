@@ -14,7 +14,12 @@ const DataRow = ({ row }: IDataRowProps) => {
   return (
     <StyledDataRow>
       {Object.keys(row).map((key) => (
-        <DataCell key={`${row.id}${key}`} field={key} value={row[key]} />
+        <DataCell
+          tag="td"
+          key={`${row.id}${key}`}
+          field={key}
+          value={row[key]}
+        />
       ))}
     </StyledDataRow>
   );

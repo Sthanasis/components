@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-export const StyledDataColumns = styled.div`
-  ${() => ({
-    display: 'flex',
-  })}
+export const StyledDataColumns = styled.tr`
+  ${() => ({})}
 `;
