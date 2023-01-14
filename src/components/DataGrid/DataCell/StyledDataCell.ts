@@ -12,8 +12,7 @@ export const TD = styled.td`
     maxWidth: width,
     height: height ?? 'auto',
     borderRight: withBorder ? '2px solid grey' : undefined,
-
-    alignItems: 'center',
+    textAlign: 'left',
     padding: 5,
   })}
 `;
@@ -23,8 +22,7 @@ export const TH = styled.th`
     maxWidth: width,
     height: height ?? 'auto',
     borderRight: withBorder ? '2px solid grey' : undefined,
-
-    alignItems: 'center',
+    textAlign: 'left',
     padding: 5,
   })}
 `;

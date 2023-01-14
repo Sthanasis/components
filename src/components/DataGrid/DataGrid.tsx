@@ -1,6 +1,6 @@
 import DataColumns, { ColumnType } from './DataColumns/DataColumns';
 import DataRow, { RowType } from './DataRow/DataRow';
-import { Table, Tbody, Thead } from './StyledDataGrid';
+import { Table, TableContainer, Tbody, Thead } from './StyledDataGrid';
 
 interface IDataGridProps {
   columns: ColumnType[];
@@ -9,7 +9,7 @@ interface IDataGridProps {
 
 const DataGrid = ({ columns, rows }: IDataGridProps): JSX.Element => {
   return (
-    <div style={{ display: 'flex' }}>
+    <TableContainer>
       <Table>
         <Thead>
           <DataColumns columns={columns} />
@@ -20,7 +20,7 @@ const DataGrid = ({ columns, rows }: IDataGridProps): JSX.Element => {
           ))}
         </Tbody>
       </Table>
-    </div>
+    </TableContainer>
   );
 };
 

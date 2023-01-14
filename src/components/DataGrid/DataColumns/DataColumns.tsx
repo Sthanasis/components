@@ -19,7 +19,6 @@ const DataColumns = ({ columns }: IDataColumnsProps): JSX.Element => {
           key={c.field}
           field={c.field}
           value={c.name}
-          withBorder
           height="auto"
         />
       ))}
