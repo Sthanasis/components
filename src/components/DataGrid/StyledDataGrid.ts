@@ -1,17 +1,25 @@
+import { CSSProperties } from 'react';
 import styled from 'styled-components';
 
 export const TableContainer = styled.div`
-  ${() => ({
+  ${({
+    width,
+    height,
+  }: {
+    width?: CSSProperties['width'];
+    height?: CSSProperties['height'];
+  }) => ({
     overflow: 'auto',
-    height: '100%',
+    height: height ?? '100%',
     border: '1px solid lightgray',
     borderRadius: '4px',
-    width: 'max-content',
+    width: width ?? 'auto',
   })}
 `;
 
 export const Table = styled.table`
   border-collapse: collapse;
+  width: 100%;
 `;
 export const Thead = styled.thead`
   position: sticky;

@@ -1,10 +1,6 @@
-import DataCell from '../DataCell';
+import HeaderCell from '../HeaderCell';
+import { ColumnType } from '../types';
 import { StyledDataColumns } from './StyledDataColumns';
-
-export type ColumnType = {
-  field: string;
-  name: string;
-};
 
 interface IDataColumnsProps {
   columns: ColumnType[];
@@ -14,8 +10,7 @@ const DataColumns = ({ columns }: IDataColumnsProps): JSX.Element => {
   return (
     <StyledDataColumns>
       {columns.map((c) => (
-        <DataCell
-          tag="th"
+        <HeaderCell
           key={c.field}
           field={c.field}
           value={c.name}

@@ -1,15 +1,16 @@
-import DataColumns, { ColumnType } from './DataColumns/DataColumns';
-import DataRow, { RowType } from './DataRow/DataRow';
+import DatagridProvider, {
+  IDatagridContext,
+  useDatagrid,
+} from 'src/context/datagrid';
+import DataColumns from './DataColumns/DataColumns';
+import DataRow from './DataRow/DataRow';
 import { Table, TableContainer, Tbody, Thead } from './StyledDataGrid';
 
-interface IDataGridProps {
-  columns: ColumnType[];
-  rows: RowType[];
-}
+const Grid = (): JSX.Element => {
+  const { columns, rows, height, width } = useDatagrid();
 
-const DataGrid = ({ columns, rows }: IDataGridProps): JSX.Element => {
   return (
-    <TableContainer>
+    <TableContainer height={height} width={width}>
       <Table>
         <Thead>
           <DataColumns columns={columns} />
@@ -21,6 +22,19 @@ const DataGrid = ({ columns, rows }: IDataGridProps): JSX.Element => {
         </Tbody>
       </Table>
     </TableContainer>
+  );
+};
+
+const DataGrid = ({ rows, columns, width, height }: IDatagridContext) => {
+  return (
+    <DatagridProvider
+      rows={rows}
+      columns={columns}
+      width={width}
+      height={height}
+    >
+      <Grid />
+    </DatagridProvider>
   );
 };
 
