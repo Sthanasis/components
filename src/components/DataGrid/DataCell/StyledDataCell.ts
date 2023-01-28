@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { IStyledDataCellProps } from '../types';
+import { IStyledDataCellProps } from '../utilities/types';
 
 export const TD = styled.td`
   ${({ withBorder, width, height }: IStyledDataCellProps) => ({

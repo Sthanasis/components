@@ -1,5 +1,5 @@
 import HeaderCell from '../HeaderCell';
-import { ColumnType } from '../types';
+import { ColumnType } from '../utilities/types';
 import { StyledDataColumns } from './StyledDataColumns';
 
 interface IDataColumnsProps {

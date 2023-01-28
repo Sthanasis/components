@@ -1,4 +1,7 @@
-import { RowType, SortDirectionType } from 'src/components/DataGrid/types';
+import {
+  RowType,
+  SortDirectionType,
+} from 'src/components/DataGrid/utilities/types';
 
 const compare = (a: string | number, b: string | number) => {
   if (a > b) {

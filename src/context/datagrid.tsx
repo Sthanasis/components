@@ -11,7 +11,7 @@ import {
   ColumnType,
   RowType,
   SortDirectionType,
-} from 'src/components/DataGrid/types';
+} from 'src/components/DataGrid/utilities/types';
 
 export interface IDatagridContext {
   columns: ColumnType[];
