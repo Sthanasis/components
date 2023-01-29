@@ -17,7 +17,7 @@ export interface IDatagridContext {
   columns: ColumnType[];
   rows: RowType[];
   width?: CSSProperties['width'];
-  height?: CSSProperties['height'];
+  height?: number;
   handleColumnSort?: (field: string, direction: SortDirectionType) => void;
   sortedBy?: string;
 }
