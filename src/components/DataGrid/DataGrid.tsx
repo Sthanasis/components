@@ -8,16 +8,20 @@ import DataRow from './DataRow/DataRow';
 import { Table, TableContainer, Tbody, Thead } from './StyledDataGrid';
 import { ROW_HEIGHT } from './utilities/constants';
 
+const renderAhead = 30;
 const Grid = (): JSX.Element => {
   const tableRef = useRef<HTMLDivElement>(null);
 
   const { columns, rows, height = 500, width } = useDatagrid();
   const [scrollTop, setScrollTop] = useState(0);
 
-  const start = Math.max(0, Math.floor(scrollTop / ROW_HEIGHT) - 20);
+  const start = Math.max(
+    0,
+    Math.floor(scrollTop / ROW_HEIGHT) - renderAhead / 2
+  );
   const visibleNodeCount = Math.min(
     rows.length - start,
-    Math.ceil(height / ROW_HEIGHT) + 1 * 20
+    Math.ceil(height / ROW_HEIGHT) + renderAhead
   );
   const offsetY = start * ROW_HEIGHT;
 

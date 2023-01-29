@@ -30,11 +30,10 @@ const orderBy = (
 self.onmessage = (e: MessageEvent<[RowType[], SortDirectionType, string]>) => {
   const [rows, direction, field] = e.data;
 
-  let sortedRows = rows;
   if (direction === 'default') {
-    postMessage(sortedRows);
+    postMessage(rows);
   } else {
-    sortedRows = rows.sort((currentRow, nextRow) => {
+    const sortedRows = rows.sort((currentRow, nextRow) => {
       if (currentRow[field] && nextRow[field]) {
         const currentField = currentRow[field];
         const nextField = nextRow[field];

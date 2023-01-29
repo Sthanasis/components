@@ -7,6 +7,7 @@ import {
   useMemo,
   useState,
 } from 'react';
+
 import {
   ColumnType,
   RowType,
@@ -35,13 +36,15 @@ interface IDatagridProviderProps extends IDatagridContext {
 
 export const DatagridProvider = ({
   children,
-  rows,
-  columns,
+  rows = [],
+  columns = [],
   width,
   height,
 }: IDatagridProviderProps) => {
   const [gridRows, setGridRows] = useState<RowType[]>(rows);
   const [sortedBy, setSortedBy] = useState<string>();
+  const [sorter, setSorter] = useState<Worker>();
+
   const columnObject: { [key: number]: ColumnType } = useMemo(() => {
     return columns.reduce((obj, c, i) => ({ ...obj, [i]: c }), {});
   }, [columns]);
@@ -54,10 +57,11 @@ export const DatagridProvider = ({
       )
     );
   }, [gridRows, columnObject]);
-  const sorter: Worker = useMemo(
-    () => new Worker(new URL('./sortWorker.ts', import.meta.url)),
-    []
-  );
+  useEffect(() => {
+    setSorter(
+      new Worker(new URL('../utilities/workers/sortWorker.ts', import.meta.url))
+    );
+  }, []);
 
   useEffect(() => {
     if (sorter)
@@ -65,7 +69,7 @@ export const DatagridProvider = ({
         setGridRows(e.data);
       };
     return () => {
-      sorter.onmessage = null;
+      if (sorter) sorter.terminate();
     };
   }, [sorter]);
 
@@ -74,7 +78,7 @@ export const DatagridProvider = ({
       setSortedBy(undefined);
     }
     if (window.Worker) {
-      sorter.postMessage([rows, direction, field]);
+      if (sorter) sorter.postMessage([rows, direction, field]);
     }
 
     setSortedBy(field);
