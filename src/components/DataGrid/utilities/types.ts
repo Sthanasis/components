@@ -10,7 +10,6 @@ export type ColumnType = {
 
 export type RowType = {
   [key: string | 'id']: string | number | undefined | null;
-  width?: number;
 };
 export interface IStyledDataCellProps {
   withBorder: boolean;
@@ -30,5 +29,6 @@ export interface IDataGridProps {
   columns?: ColumnType[];
   height?: number;
   width?: CSSProperties['width'];
+  bigDataset?: boolean;
 }
 export type SortDirectionType = 'asc' | 'desc' | 'default';

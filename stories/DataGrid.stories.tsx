@@ -1,10 +1,10 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { fakeData } from 'src/assets/data/dummyData';
+import { fakeData, smallDataset } from 'src/assets/data/dummyData';
 import { ThemeProvider } from 'src/context/theme';
 import { defaultTheme } from 'src/utilities/theme';
 import DataGrid from 'src/components/DataGrid';
 import { useEffect, useState } from 'react';
-import { RowType } from 'src/components/DataGrid/utilities/types';
+import { ColumnType, RowType } from 'src/components/DataGrid/utilities/types';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -15,17 +15,19 @@ export default {
 } as ComponentMeta<typeof DataGrid>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof DataGrid> = () => {
-  const columns = [
-    { field: 'id', name: 'id' },
-    { field: 'first_name', name: 'First Name' },
+const Template: ComponentStory<typeof DataGrid> = (args) => {
+  const columns: ColumnType[] = [
+    { field: 'id', name: 'id', width: 90 },
+    { field: 'first_name', name: 'First Name', width: 150 },
     {
       field: 'last_name',
       name: 'last name',
+      width: 150,
     },
     {
       field: 'email',
       name: 'email',
+      width: 200,
     },
     {
       field: 'gender',
@@ -34,6 +36,7 @@ const Template: ComponentStory<typeof DataGrid> = () => {
     {
       field: 'ip_address',
       name: 'ip',
+      width: 200,
     },
   ];
 
@@ -47,11 +50,16 @@ const Template: ComponentStory<typeof DataGrid> = () => {
     );
   }, []);
   useEffect(() => {
-    worker?.postMessage(fakeData);
-    if (worker)
-      worker.onmessage = (e: MessageEvent<RowType[]>) => {
-        setRows(e.data);
-      };
+    if (args.bigDataset) {
+      worker?.postMessage(fakeData);
+      if (worker)
+        worker.onmessage = (e: MessageEvent<RowType[]>) => {
+          setRows(e.data);
+        };
+    } else {
+      setRows(smallDataset);
+    }
+
     return () => {
       worker?.terminate();
     };
@@ -59,9 +67,17 @@ const Template: ComponentStory<typeof DataGrid> = () => {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <DataGrid columns={columns} rows={rows} />
+      <DataGrid columns={columns} rows={rows} {...args} />
     </ThemeProvider>
   );
 };
-
 export const Basic = Template.bind({});
+Basic.args = {
+  bigDataset: false,
+};
+
+export const VirtualTable = Template.bind({});
+
+VirtualTable.args = {
+  bigDataset: true,
+};

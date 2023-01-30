@@ -3,9 +3,9 @@ import { IStyledDataCellProps } from '../utilities/types';
 
 export const StyledDataCell = styled.div`
   ${({ width = 100, height }: IStyledDataCellProps) => ({
-    minWidth: `${width}px`,
-    maxWidth: `${width}px`,
-    width: `${width}px`,
+    minWidth: typeof width === 'string' ? width : `${width}px`,
+    maxWidth: typeof width === 'string' ? width : `${width}px`,
+    width: typeof width === 'string' ? width : `${width}px`,
     height: height ?? 'auto',
     textAlign: 'left',
     padding: 5,

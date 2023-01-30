@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import { useDatagrid } from 'src/context/datagrid';
 import DataRow from '../DataRow/DataRow';
-import { TableBody, TableContainer } from '../StyledDataGrid';
+import { VirtualBody, TableContainer } from '../StyledDataGrid';
 import { ROW_HEIGHT } from '../utilities/constants';
 
 const RENDER_AHEAD = 30;
@@ -33,7 +33,7 @@ const VirtualTable = (): JSX.Element => {
   };
   return (
     <TableContainer ref={tableRef} onScroll={handleScroll}>
-      <TableBody
+      <VirtualBody
         style={{
           height: totalItems * ROW_HEIGHT,
         }}
@@ -47,7 +47,7 @@ const VirtualTable = (): JSX.Element => {
             />
           ))}
         </div>
-      </TableBody>
+      </VirtualBody>
     </TableContainer>
   );
 };

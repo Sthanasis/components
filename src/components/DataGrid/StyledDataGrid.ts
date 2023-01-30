@@ -31,9 +31,14 @@ export const Table = styled.div`
   width: ${({ width }: ITableProps) => width};
 `;
 
-export const TableBody = styled.div`
+export const VirtualBody = styled.div`
   ${() => ({
     overflow: 'hidden',
     position: 'relative',
+  })}
+`;
+export const Content = styled.div`
+  ${() => ({
+    overflow: 'auto',
   })}
 `;

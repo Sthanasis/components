@@ -1,25 +1,25 @@
 import DatagridProvider, { useDatagrid } from 'src/context/datagrid';
-import DataColumns from './DataColumns/DataColumns';
+import DataColumns from './GridHeader/GridHeader';
 import DataRow from './DataRow/DataRow';
 
-import { Table } from './StyledDataGrid';
+import { Content, Table } from './StyledDataGrid';
 import { IDataGridProps } from './utilities/types';
 import VirtualTable from './VirtualTable';
 
 const DataRows = () => {
   const { rows } = useDatagrid();
   return (
-    <>
+    <Content>
       {rows.map((row, index) => (
         <DataRow key={row.id} row={row} noBorder={index + 1 === rows.length} />
       ))}
-    </>
+    </Content>
   );
 };
 
-const Grid = (): JSX.Element => {
-  const { rows, columns, height, width } = useDatagrid();
-  const content = rows.length <= 100 ? <DataRows /> : <VirtualTable />;
+const Grid = ({ bigDataset }: { bigDataset?: boolean }): JSX.Element => {
+  const { columns, height, width } = useDatagrid();
+  const content = bigDataset ? <VirtualTable /> : <DataRows />;
   return (
     <Table height={height} width={width}>
       <DataColumns columns={columns} />
@@ -28,9 +28,9 @@ const Grid = (): JSX.Element => {
   );
 };
 
-const DataGrid = ({ ...rest }: IDataGridProps) => (
+const DataGrid = ({ bigDataset, ...rest }: IDataGridProps) => (
   <DatagridProvider {...rest}>
-    <Grid />
+    <Grid bigDataset={bigDataset} />
   </DatagridProvider>
 );
 

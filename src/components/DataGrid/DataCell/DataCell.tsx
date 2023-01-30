@@ -11,6 +11,7 @@ const DataCell = ({
   ...rest
 }: ICellProps) => {
   const content = value ?? '';
+
   return (
     <StyledDataCell
       data-field={field}

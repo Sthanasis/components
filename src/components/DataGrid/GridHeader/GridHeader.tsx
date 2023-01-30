@@ -1,24 +1,25 @@
 import HeaderCell from '../HeaderCell';
 import { ColumnType } from '../utilities/types';
-import { StyledDataColumns } from './StyledDataColumns';
+import { StyledGridHeader } from './StyledGridHeader';
 
-interface IDataColumnsProps {
+interface IGridHeaderProps {
   columns: ColumnType[];
 }
 
-const DataColumns = ({ columns }: IDataColumnsProps): JSX.Element => {
+const GridHeader = ({ columns }: IGridHeaderProps): JSX.Element => {
   return (
-    <StyledDataColumns>
+    <StyledGridHeader>
       {columns.map((c) => (
         <HeaderCell
           key={c.field}
           field={c.field}
           value={c.name}
+          width={c.width}
           height="auto"
         />
       ))}
-    </StyledDataColumns>
+    </StyledGridHeader>
   );
 };
 
-export default DataColumns;
+export default GridHeader;
