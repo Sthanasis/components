@@ -17,8 +17,8 @@ const StyledSpan = styled.span`
   color: ${getTextColor};
   text-overflow: ellipsis;
   overflow: hidden;
-  whitespace: nowrap;
-  font-size: 18px;
+  white-space: nowrap;
+  font-size: 15px;
 `;
 const StyledParagraph = styled.p`
   color: ${getTextColor};

@@ -1,83 +1,37 @@
-import { useRef, useState } from 'react';
-import DatagridProvider, {
-  IDatagridContext,
-  useDatagrid,
-} from 'src/context/datagrid';
+import DatagridProvider, { useDatagrid } from 'src/context/datagrid';
 import DataColumns from './DataColumns/DataColumns';
 import DataRow from './DataRow/DataRow';
-import { Table, TableContainer, Tbody, Thead } from './StyledDataGrid';
-import { ROW_HEIGHT } from './utilities/constants';
 
-const renderAhead = 30;
+import { Table } from './StyledDataGrid';
+import { IDataGridProps } from './utilities/types';
+import VirtualTable from './VirtualTable';
+
+const DataRows = () => {
+  const { rows } = useDatagrid();
+  return (
+    <>
+      {rows.map((row, index) => (
+        <DataRow key={row.id} row={row} noBorder={index + 1 === rows.length} />
+      ))}
+    </>
+  );
+};
+
 const Grid = (): JSX.Element => {
-  const tableRef = useRef<HTMLDivElement>(null);
-
-  const { columns, rows, height = 500, width } = useDatagrid();
-  const [scrollTop, setScrollTop] = useState(0);
-
-  const start = Math.max(
-    0,
-    Math.floor(scrollTop / ROW_HEIGHT) - renderAhead / 2
-  );
-  const visibleNodeCount = Math.min(
-    rows.length - start,
-    Math.ceil(height / ROW_HEIGHT) + renderAhead
-  );
-  const offsetY = start * ROW_HEIGHT;
-
-  const handleScroll = () => {
-    requestAnimationFrame(() => {
-      if (tableRef.current) {
-        setScrollTop(tableRef.current?.scrollTop);
-      }
-    });
-  };
-
+  const { rows, columns, height, width } = useDatagrid();
+  const content = rows.length <= 100 ? <DataRows /> : <VirtualTable />;
   return (
-    <TableContainer
-      height={height}
-      width={width}
-      ref={tableRef}
-      onScroll={handleScroll}
-    >
-      <div
-        style={{
-          height: (rows.length + 2) * ROW_HEIGHT,
-          overflow: 'hidden',
-          position: 'relative',
-        }}
-      >
-        <div style={{ transform: `translateY(${offsetY}px)` }}>
-          <Table>
-            <Thead>
-              <DataColumns columns={columns} />
-            </Thead>
-            <Tbody>
-              {new Array(visibleNodeCount).fill(null).map((_, index) => (
-                <DataRow
-                  key={rows[start + index].id}
-                  row={rows[start + index]}
-                />
-              ))}
-            </Tbody>
-          </Table>
-        </div>
-      </div>
-    </TableContainer>
+    <Table height={height} width={width}>
+      <DataColumns columns={columns} />
+      {content}
+    </Table>
   );
 };
 
-const DataGrid = ({ rows, columns, width, height }: IDatagridContext) => {
-  return (
-    <DatagridProvider
-      rows={rows}
-      columns={columns}
-      width={width}
-      height={height}
-    >
-      <Grid />
-    </DatagridProvider>
-  );
-};
+const DataGrid = ({ ...rest }: IDataGridProps) => (
+  <DatagridProvider {...rest}>
+    <Grid />
+  </DatagridProvider>
+);
 
 export default DataGrid;

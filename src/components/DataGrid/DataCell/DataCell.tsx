@@ -1,6 +1,6 @@
 import Text from 'src/components/Text';
 import { ICellProps } from '../utilities/types';
-import { TD } from './StyledDataCell';
+import { StyledDataCell } from './StyledDataCell';
 
 const DataCell = ({
   value,
@@ -12,7 +12,7 @@ const DataCell = ({
 }: ICellProps) => {
   const content = value ?? '';
   return (
-    <TD
+    <StyledDataCell
       data-field={field}
       withBorder={withBorder}
       width={width}
@@ -20,7 +20,7 @@ const DataCell = ({
       {...rest}
     >
       <Text>{content}</Text>
-    </TD>
+    </StyledDataCell>
   );
 };
 

@@ -3,6 +3,8 @@ import { fakeData } from 'src/assets/data/dummyData';
 import { ThemeProvider } from 'src/context/theme';
 import { defaultTheme } from 'src/utilities/theme';
 import DataGrid from 'src/components/DataGrid';
+import { useEffect, useState } from 'react';
+import { RowType } from 'src/components/DataGrid/utilities/types';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -13,129 +15,8 @@ export default {
 } as ComponentMeta<typeof DataGrid>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof DataGrid> = (args) => (
-  <ThemeProvider theme={defaultTheme}>
-    <DataGrid {...args} />
-  </ThemeProvider>
-);
-function createMoreData() {
-  return [
-    ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-    // ...fakeData,
-  ].map((item, index) => ({ ...item, id: index + 1 }));
-}
-export const Basic = Template.bind({});
-Basic.args = {
-  rows: createMoreData(),
-  columns: [
+const Template: ComponentStory<typeof DataGrid> = () => {
+  const columns = [
     { field: 'id', name: 'id' },
     { field: 'first_name', name: 'First Name' },
     {
@@ -154,7 +35,33 @@ Basic.args = {
       field: 'ip_address',
       name: 'ip',
     },
-  ],
-  height: 500,
+  ];
+
+  const [rows, setRows] = useState<RowType[]>([]);
+  const [worker, setWorker] = useState<Worker>();
+  useEffect(() => {
+    setWorker(
+      new Worker(
+        new URL('../src/utilities/workers/dataWorker.ts', import.meta.url)
+      )
+    );
+  }, []);
+  useEffect(() => {
+    worker?.postMessage(fakeData);
+    if (worker)
+      worker.onmessage = (e: MessageEvent<RowType[]>) => {
+        setRows(e.data);
+      };
+    return () => {
+      worker?.terminate();
+    };
+  }, [worker]);
+
+  return (
+    <ThemeProvider theme={defaultTheme}>
+      <DataGrid columns={columns} rows={rows} />
+    </ThemeProvider>
+  );
 };
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
+
+export const Basic = Template.bind({});

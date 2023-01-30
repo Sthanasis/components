@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 import { IStyledDataCellProps } from '../utilities/types';
 
-export const TD = styled.td`
-  ${({ withBorder, width, height }: IStyledDataCellProps) => ({
-    minWidth: width,
-    maxWidth: width,
+export const StyledDataCell = styled.div`
+  ${({ width = 100, height }: IStyledDataCellProps) => ({
+    minWidth: `${width}px`,
+    maxWidth: `${width}px`,
+    width: `${width}px`,
     height: height ?? 'auto',
-    borderRight: withBorder ? '2px solid grey' : undefined,
     textAlign: 'left',
     padding: 5,
+    display: 'flex',
   })}
 `;

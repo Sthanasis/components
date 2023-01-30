@@ -10,36 +10,38 @@ import {
 
 import {
   ColumnType,
+  IDataGridProps,
   RowType,
   SortDirectionType,
 } from 'src/components/DataGrid/utilities/types';
 
-export interface IDatagridContext {
+interface IDatagridContext {
   columns: ColumnType[];
   rows: RowType[];
-  width?: CSSProperties['width'];
-  height?: number;
+  height: number;
+  width: CSSProperties['width'];
   handleColumnSort?: (field: string, direction: SortDirectionType) => void;
   sortedBy?: string;
+}
+interface IDatagridProviderProps extends IDataGridProps {
+  children: ReactNode;
 }
 
 const initialState: IDatagridContext = {
   rows: [],
   columns: [],
+  height: 500,
+  width: 'max-content',
 };
 
 const DatagridContext = createContext<IDatagridContext>(initialState);
-
-interface IDatagridProviderProps extends IDatagridContext {
-  children: ReactNode;
-}
 
 export const DatagridProvider = ({
   children,
   rows = [],
   columns = [],
-  width,
-  height,
+  width = initialState.width,
+  height = initialState.height,
 }: IDatagridProviderProps) => {
   const [gridRows, setGridRows] = useState<RowType[]>(rows);
   const [sortedBy, setSortedBy] = useState<string>();
@@ -48,15 +50,6 @@ export const DatagridProvider = ({
   const columnObject: { [key: number]: ColumnType } = useMemo(() => {
     return columns.reduce((obj, c, i) => ({ ...obj, [i]: c }), {});
   }, [columns]);
-  // the rows to render
-  const mappedRows: RowType[] = useMemo(() => {
-    return gridRows.map((r) =>
-      Object.values(r).reduce(
-        (obj, v, i) => ({ ...obj, [columnObject[i].field]: v }),
-        {}
-      )
-    );
-  }, [gridRows, columnObject]);
   useEffect(() => {
     setSorter(
       new Worker(new URL('../utilities/workers/sortWorker.ts', import.meta.url))
@@ -64,10 +57,25 @@ export const DatagridProvider = ({
   }, []);
 
   useEffect(() => {
+    // order each row property by column field
+    const mappedRows = rows.map((r) =>
+      Object.values(r).reduce(
+        (obj, v, i) => ({
+          ...obj,
+          [columnObject[i].field]: v,
+        }),
+        {}
+      )
+    );
+    setGridRows(mappedRows);
+  }, [columnObject]);
+
+  useEffect(() => {
     if (sorter)
       sorter.onmessage = function (e: MessageEvent<RowType[]>) {
         setGridRows(e.data);
       };
+
     return () => {
       if (sorter) sorter.terminate();
     };
@@ -80,14 +88,13 @@ export const DatagridProvider = ({
     if (window.Worker) {
       if (sorter) sorter.postMessage([rows, direction, field]);
     }
-
     setSortedBy(field);
   };
 
   return (
     <DatagridContext.Provider
       value={{
-        rows: mappedRows,
+        rows: gridRows,
         columns,
         width,
         height,

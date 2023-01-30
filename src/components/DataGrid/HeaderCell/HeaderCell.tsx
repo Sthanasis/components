@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import Text from 'src/components/Text';
 import { useDatagrid } from 'src/context/datagrid';
 import { ICellProps, SortDirectionType } from '../utilities/types';
-import { TH, THContainer } from './StyledHeaderCell';
+import { StyledHeaderCell, HeaderCellContainer } from './StyledHeaderCell';
 import {
   faSortAmountDown,
   faSortAmountUp,
@@ -61,7 +61,7 @@ const HeaderCell = ({
   }, [field, sortedBy]);
 
   return (
-    <TH
+    <StyledHeaderCell
       data-field={field}
       withBorder={withBorder}
       width={width}
@@ -69,11 +69,11 @@ const HeaderCell = ({
       {...rest}
       onClick={handleSorting}
     >
-      <THContainer>
+      <HeaderCellContainer>
         <Text>{content}</Text>
         {sortedBy === field && sortIcon && <Icon icon={sortIcon} />}
-      </THContainer>
-    </TH>
+      </HeaderCellContainer>
+    </StyledHeaderCell>
   );
 };
 

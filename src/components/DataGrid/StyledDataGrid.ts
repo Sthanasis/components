@@ -1,5 +1,12 @@
+import { ThemeType } from 'src/utilities/theme';
 import { CSSProperties } from 'react';
 import styled from 'styled-components';
+
+interface ITableProps {
+  height: number;
+  width: CSSProperties['width'];
+  theme: ThemeType;
+}
 
 export const TableContainer = styled.div`
   ${({
@@ -11,25 +18,22 @@ export const TableContainer = styled.div`
   }) => ({
     overflow: 'auto',
     height: height ?? '100%',
-    border: '1px solid lightgray',
-    borderRadius: '4px',
     width: width ?? 'auto',
   })}
 `;
 
-export const Table = styled.table`
-  border-collapse: collapse;
-  width: 100%;
+export const Table = styled.div`
+  display: flex;
+  flex-direction: column;
+  border: 1px solid ${({ theme }: ITableProps) => theme.basicPalette.lightgray};
+  border-radius: 4px;
+  height: ${({ height }: ITableProps) => height}px;
+  width: ${({ width }: ITableProps) => width};
 `;
-export const Thead = styled.thead`
-  position: sticky;
-  top: 0;
-  background-color: white;
-  box-shadow: 0px 2px 5px -2px rgba(0, 0, 0, 0.4);
-`;
-export const Tbody = styled.tbody`
+
+export const TableBody = styled.div`
   ${() => ({
-    overflow: 'auto',
-    maxHeight: '100px',
+    overflow: 'hidden',
+    position: 'relative',
   })}
 `;

@@ -1,22 +1,25 @@
 import styled from 'styled-components';
 import { IStyledDataCellProps } from '../utilities/types';
-export const TH = styled.th`
-  ${({ withBorder, width, height }: IStyledDataCellProps) => ({
-    minWidth: width,
-    maxWidth: width,
+export const StyledHeaderCell = styled.div`
+  ${({ withBorder, width = 100, height, theme }: IStyledDataCellProps) => ({
+    minWidth: `${width}px`,
+    maxWidth: `${width}px`,
+    width: `${width}px`,
     height: height ?? 'auto',
-    borderRight: withBorder ? '2px solid grey' : undefined,
+    borderRight: withBorder
+      ? `2px solid ${theme.basicPalette.lightgray}`
+      : undefined,
     textAlign: 'left',
     padding: '15px 5px',
     textTransform: 'capitalize',
-    cursor: 'pointer',
   })}
 `;
 
-export const THContainer = styled.div`
+export const HeaderCellContainer = styled.div`
   ${() => ({
     display: 'flex',
     height: '25px',
     alignItems: 'center',
+    cursor: 'pointer',
   })}
 `;
