@@ -20,6 +20,6 @@ export const HeaderCellContainer = styled.div`
     display: 'flex',
     height: '25px',
     alignItems: 'center',
-    cursor: 'pointer',
+    justifyContent: 'space-between',
   })}
 `;

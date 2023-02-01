@@ -1,5 +1,5 @@
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Text from 'src/components/Text';
 import { useDatagrid } from 'src/context/datagrid';
 import { ICellProps, SortDirectionType } from '../../utilities/types';
@@ -8,7 +8,7 @@ import {
   faSortAmountDown,
   faSortAmountUp,
 } from '@fortawesome/free-solid-svg-icons';
-import Icon from 'src/components/Icon';
+import Button from 'src/components/Button';
 
 type OrderMapType = {
   [key in SortDirectionType]: {
@@ -44,18 +44,32 @@ const HeaderCell = ({
   ...rest
 }: ICellProps) => {
   const [sortDir, setSortDir] = useState<SortDirectionType>('default');
+  const [sortIcon, setSortIcon] = useState<IconDefinition | null>(null);
   const content = value ?? '';
   const { handleColumnSort, sortedBy } = useDatagrid();
 
   const handleSorting = () => {
     const newSortDir = getNextSortOrder(sortDir).next;
+    const nextDirection = getNextSortOrder(sortDir).next;
+    const newIcon = getNextSortOrder(nextDirection).icon;
+    setSortIcon(newIcon);
     if (handleColumnSort) {
       handleColumnSort(field, newSortDir);
       setSortDir(newSortDir);
     }
   };
-  const sortIcon = getNextSortOrder(sortDir).icon;
 
+  const handleMouseOver = useCallback(() => {
+    if (sortDir === 'default') {
+      setSortIcon(faSortAmountUp);
+    }
+  }, [sortDir]);
+
+  const handleMouseLeave = useCallback(() => {
+    if (sortDir === 'default') {
+      setSortIcon(null);
+    }
+  }, [sortDir]);
   useEffect(() => {
     if (field !== sortedBy) if (sortDir !== 'default') setSortDir('default');
   }, [field, sortedBy]);
@@ -67,11 +81,12 @@ const HeaderCell = ({
       width={width}
       height={height}
       {...rest}
-      onClick={handleSorting}
+      onMouseOver={handleMouseOver}
+      onMouseLeave={handleMouseLeave}
     >
       <HeaderCellContainer>
         <Text>{content}</Text>
-        {sortedBy === field && sortIcon && <Icon icon={sortIcon} />}
+        {sortIcon && <Button icon={sortIcon} onClick={handleSorting} />}
       </HeaderCellContainer>
     </StyledHeaderCell>
   );

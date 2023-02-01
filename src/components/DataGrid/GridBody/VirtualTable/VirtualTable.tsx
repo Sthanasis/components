@@ -20,14 +20,13 @@ const VirtualTable = (): JSX.Element => {
     [scrollTop]
   );
 
-  const visibleNodeCount = useMemo(
-    () =>
-      Math.min(
-        rows.length - start,
-        Math.ceil(height / ROW_HEIGHT) + RENDER_AHEAD
-      ),
-    [start, rows]
-  );
+  const visibleNodesArray = useMemo(() => {
+    const count = Math.min(
+      rows.length - start,
+      Math.ceil(height / ROW_HEIGHT) + RENDER_AHEAD
+    );
+    return new Array(count).fill(null);
+  }, [start, rows]);
 
   const offsetY = start * ROW_HEIGHT;
 
@@ -52,7 +51,7 @@ const VirtualTable = (): JSX.Element => {
           }}
         >
           <div style={{ transform: `translate3d(0px,${offsetY}px,0px)` }}>
-            {new Array(visibleNodeCount).fill(null).map((_, index) => (
+            {visibleNodesArray.map((_, index) => (
               <DataRow
                 key={rows[start + index].id}
                 row={rows[start + index]}
