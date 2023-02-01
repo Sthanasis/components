@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { IStyledDataCellProps } from '../utilities/types';
+import { IStyledDataCellProps } from '../../utilities/types';
 export const StyledHeaderCell = styled.div`
   ${({ withBorder, width = 100, height, theme }: IStyledDataCellProps) => ({
     minWidth: `${width}px`,

@@ -1,28 +1,38 @@
+import { useRef, useState } from 'react';
 import DatagridProvider, { useDatagrid } from 'src/context/datagrid';
-import DataColumns from './GridHeader/GridHeader';
-import DataRow from './DataRow/DataRow';
-
-import { Content, Table } from './StyledDataGrid';
+import GridHeaderContainer from './GridHeader/GridHeaderContainer';
+import { Table, TableContainer } from './StyledDataGrid';
 import { IDataGridProps } from './utilities/types';
-import VirtualTable from './VirtualTable';
+import VirtualTable from './GridBody/VirtualTable';
+import RowList from './GridBody/RowList';
 
 const DataRows = () => {
-  const { rows } = useDatagrid();
+  const [scrollLeft, setScrollLeft] = useState<number>(0);
+  const tableRef = useRef<HTMLDivElement>(null);
+  const handleScroll = () => {
+    requestAnimationFrame(() => {
+      if (tableRef.current) {
+        const { scrollLeft } = tableRef.current;
+        const left = Math.floor(scrollLeft);
+        setScrollLeft(left);
+      }
+    });
+  };
   return (
-    <Content>
-      {rows.map((row, index) => (
-        <DataRow key={row.id} row={row} noBorder={index + 1 === rows.length} />
-      ))}
-    </Content>
+    <>
+      <GridHeaderContainer scrollLeft={scrollLeft} />
+      <TableContainer ref={tableRef} onScroll={handleScroll}>
+        <RowList />
+      </TableContainer>
+    </>
   );
 };
 
 const Grid = ({ bigDataset }: { bigDataset?: boolean }): JSX.Element => {
-  const { columns, height, width } = useDatagrid();
+  const { height, width } = useDatagrid();
   const content = bigDataset ? <VirtualTable /> : <DataRows />;
   return (
     <Table height={height} width={width}>
-      <DataColumns columns={columns} />
       {content}
     </Table>
   );

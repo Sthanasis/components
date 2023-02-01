@@ -1,12 +1,12 @@
-import HeaderCell from '../HeaderCell';
-import { ColumnType } from '../utilities/types';
+import { memo } from 'react';
+import { useDatagrid } from 'src/context/datagrid';
+import HeaderCell from './HeaderCell';
+
 import { StyledGridHeader } from './StyledGridHeader';
 
-interface IGridHeaderProps {
-  columns: ColumnType[];
-}
+const GridHeader = (): JSX.Element => {
+  const { columns } = useDatagrid();
 
-const GridHeader = ({ columns }: IGridHeaderProps): JSX.Element => {
   return (
     <StyledGridHeader>
       {columns.map((c) => (
@@ -22,4 +22,4 @@ const GridHeader = ({ columns }: IGridHeaderProps): JSX.Element => {
   );
 };
 
-export default GridHeader;
+export default memo(GridHeader);

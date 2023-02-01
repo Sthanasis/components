@@ -2,7 +2,7 @@ import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { useEffect, useState } from 'react';
 import Text from 'src/components/Text';
 import { useDatagrid } from 'src/context/datagrid';
-import { ICellProps, SortDirectionType } from '../utilities/types';
+import { ICellProps, SortDirectionType } from '../../utilities/types';
 import { StyledHeaderCell, HeaderCellContainer } from './StyledHeaderCell';
 import {
   faSortAmountDown,

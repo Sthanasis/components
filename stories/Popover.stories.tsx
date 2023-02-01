@@ -35,7 +35,7 @@ const Template: ComponentStory<typeof Popover> = () => {
           variant={'contained'}
           onClick={(e) => showPopover(e, 'right')}
         >
-          LEFT
+          RIGHT
         </Button>
         <Button
           style={{
@@ -53,12 +53,12 @@ const Template: ComponentStory<typeof Popover> = () => {
           variant={'contained'}
           onClick={(e) => showPopover(e, 'left')}
         >
-          RIGHT
+          LEFT
         </Button>
       </div>
 
       <Popover visible={visible} onClose={closePopover} anchorEl={anchorEl}>
-        <div>Popup with {position} position</div>
+        <div>Popup extending to the {position}</div>
       </Popover>
     </ThemeProvider>
   );

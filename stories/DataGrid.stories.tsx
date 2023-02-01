@@ -32,11 +32,12 @@ const Template: ComponentStory<typeof DataGrid> = (args) => {
     {
       field: 'gender',
       name: 'gender',
+      width: 300,
     },
     {
       field: 'ip_address',
       name: 'ip',
-      width: 200,
+      width: 300,
     },
   ];
 

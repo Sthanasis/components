@@ -28,17 +28,13 @@ export const Table = styled.div`
   border: 1px solid ${({ theme }: ITableProps) => theme.basicPalette.lightgray};
   border-radius: 4px;
   height: ${({ height }: ITableProps) => height}px;
-  width: ${({ width }: ITableProps) => width};
+  width: fit-content;
+  max-width: 100%;
+  overflow: hidden;
 `;
 
 export const VirtualBody = styled.div`
   ${() => ({
-    overflow: 'hidden',
     position: 'relative',
-  })}
-`;
-export const Content = styled.div`
-  ${() => ({
-    overflow: 'auto',
   })}
 `;
