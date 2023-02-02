@@ -16,6 +16,7 @@ export default {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof DataGrid> = (args) => {
+  const [loading, setLoading] = useState(false);
   const columns: ColumnType[] = [
     { field: 'id', name: 'id', width: 90 },
     { field: 'first_name', name: 'First Name', width: 150 },
@@ -52,9 +53,11 @@ const Template: ComponentStory<typeof DataGrid> = (args) => {
   useEffect(() => {
     if (args.bigDataset) {
       worker?.postMessage(fakeData);
+      setLoading(true);
       if (worker)
         worker.onmessage = (e: MessageEvent<RowType[]>) => {
           setRows(e.data);
+          setLoading(false);
         };
     } else {
       setRows(smallDataset);
@@ -67,7 +70,7 @@ const Template: ComponentStory<typeof DataGrid> = (args) => {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <DataGrid columns={columns} rows={rows} {...args} />
+      <DataGrid columns={columns} rows={rows} {...args} loading={loading} />
     </ThemeProvider>
   );
 };

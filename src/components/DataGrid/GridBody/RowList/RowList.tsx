@@ -2,8 +2,13 @@ import { memo } from 'react';
 import { useDatagrid } from 'src/context/datagrid';
 import DataRow from '../DataRow/DataRow';
 
+import GridSpinner from '../GridSpinner';
+
 const RowList = (): JSX.Element => {
-  const { rows } = useDatagrid();
+  const { rows, loading } = useDatagrid();
+  if (loading) {
+    return <GridSpinner />;
+  }
   return (
     <>
       {rows.map((row, index) => (

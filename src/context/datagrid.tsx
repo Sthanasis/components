@@ -8,7 +8,7 @@ import {
   useState,
 } from 'react';
 
-import {
+import type {
   ColumnType,
   IDataGridProps,
   RowType,
@@ -23,6 +23,7 @@ interface IDatagridContext {
   handleColumnSort?: (field: string, direction: SortDirectionType) => void;
   sortedBy?: string;
   properties?: { [key: number]: ColumnType };
+  loading?: boolean;
 }
 interface IDatagridProviderProps extends IDataGridProps {
   children: ReactNode;
@@ -43,6 +44,7 @@ export const DatagridProvider = ({
   columns = [],
   width = initialState.width,
   height = initialState.height,
+  ...rest
 }: IDatagridProviderProps) => {
   const [gridRows, setGridRows] = useState<RowType[]>(rows);
   const [sortedBy, setSortedBy] = useState<string>();
@@ -108,6 +110,7 @@ export const DatagridProvider = ({
         sortedBy,
         handleColumnSort,
         properties: columnObject,
+        ...rest,
       }}
     >
       {children}

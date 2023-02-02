@@ -18,8 +18,8 @@ export const StyledProgress = styled.div(
   ({ type = 'spinner', theme, color }: IProps) => {
     if (type === 'spinner') {
       return css`
-        height: ${theme.fontSize};
-        width: ${theme.fontSize};
+        height: calc(${theme.fontSize}*2);
+        width: calc(${theme.fontSize}*2);
         border: 0.25rem solid ${theme.palette[color].main}${opacityHexPrefix[50]};
         border-top: 0.25rem solid ${theme.palette[color].main};
         border-radius: 50%;

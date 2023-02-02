@@ -4,11 +4,12 @@ import DataRow from '../DataRow/DataRow';
 import { VirtualBody, TableContainer } from '../../StyledDataGrid';
 import { ROW_HEIGHT } from '../../utilities/constants';
 import GridHeaderContainer from '../../GridHeader/GridHeaderContainer';
+import GridSpinner from '../GridSpinner';
 
 const RENDER_AHEAD = 30;
 
 const VirtualTable = (): JSX.Element => {
-  const { rows, height } = useDatagrid();
+  const { rows, height, loading } = useDatagrid();
   const tableRef = useRef<HTMLDivElement>(null);
   const [scrollLeft, setScrollLeft] = useState<number>(0);
   const totalItems = rows.length;
@@ -45,21 +46,25 @@ const VirtualTable = (): JSX.Element => {
     <>
       <GridHeaderContainer scrollLeft={scrollLeft} />
       <TableContainer ref={tableRef} onScroll={handleScroll}>
-        <VirtualBody
-          style={{
-            height: totalItems * ROW_HEIGHT,
-          }}
-        >
-          <div style={{ transform: `translate3d(0px,${offsetY}px,0px)` }}>
-            {visibleNodesArray.map((_, index) => (
-              <DataRow
-                key={rows[start + index].id}
-                row={rows[start + index]}
-                noBorder={start + index + 1 === totalItems}
-              />
-            ))}
-          </div>
-        </VirtualBody>
+        {loading ? (
+          <GridSpinner />
+        ) : (
+          <VirtualBody
+            style={{
+              height: totalItems * ROW_HEIGHT,
+            }}
+          >
+            <div style={{ transform: `translate3d(0px,${offsetY}px,0px)` }}>
+              {visibleNodesArray.map((_, index) => (
+                <DataRow
+                  key={rows[start + index].id}
+                  row={rows[start + index]}
+                  noBorder={start + index + 1 === totalItems}
+                />
+              ))}
+            </div>
+          </VirtualBody>
+        )}
       </TableContainer>
     </>
   );
