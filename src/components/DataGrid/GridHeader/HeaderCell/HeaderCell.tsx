@@ -1,9 +1,13 @@
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Text from 'src/components/Text';
 import { useDatagrid } from 'src/context/datagrid';
 import { ICellProps, SortDirectionType } from '../../utilities/types';
-import { StyledHeaderCell, HeaderCellContainer } from './StyledHeaderCell';
+import {
+  StyledHeaderCell,
+  HeaderCellContainer,
+  HeaderActionsContainer,
+} from './StyledHeaderCell';
 import {
   faSortAmountDown,
   faSortAmountUp,
@@ -59,21 +63,32 @@ const HeaderCell = ({
     }
   };
 
-  const handleMouseOver = useCallback(() => {
+  const handleMouseEnter = () => {
     if (sortDir === 'default') {
       setSortIcon(faSortAmountUp);
     }
-  }, [sortDir]);
+  };
 
-  const handleMouseLeave = useCallback(() => {
+  const handleMouseLeave = () => {
     if (sortDir === 'default') {
       setSortIcon(null);
     }
-  }, [sortDir]);
+  };
   useEffect(() => {
-    if (field !== sortedBy) if (sortDir !== 'default') setSortDir('default');
+    if (field !== sortedBy)
+      if (sortDir !== 'default') {
+        setSortDir('default');
+        setSortIcon(null);
+      }
   }, [field, sortedBy]);
 
+  const hasLowerOpacity = sortIcon && sortDir === 'default';
+  let opacity = 0;
+  if (hasLowerOpacity) {
+    opacity = 0.4;
+  } else if (sortIcon && sortDir !== 'default') {
+    opacity = 1;
+  }
   return (
     <StyledHeaderCell
       data-field={field}
@@ -81,12 +96,14 @@ const HeaderCell = ({
       width={width}
       height={height}
       {...rest}
-      onMouseOver={handleMouseOver}
+      onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       <HeaderCellContainer>
         <Text>{content}</Text>
-        {sortIcon && <Button icon={sortIcon} onClick={handleSorting} />}
+        <HeaderActionsContainer opacity={opacity}>
+          {sortIcon && <Button icon={sortIcon} onClick={handleSorting} />}
+        </HeaderActionsContainer>
       </HeaderCellContainer>
     </StyledHeaderCell>
   );
