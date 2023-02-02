@@ -6,7 +6,7 @@ import { IDataGridProps } from './utilities/types';
 import VirtualTable from './GridBody/VirtualTable';
 import RowList from './GridBody/RowList';
 
-const DataRows = () => {
+const RegularTable = () => {
   const [scrollLeft, setScrollLeft] = useState<number>(0);
   const tableRef = useRef<HTMLDivElement>(null);
   const handleScroll = () => {
@@ -30,7 +30,7 @@ const DataRows = () => {
 
 const Grid = ({ bigDataset }: { bigDataset?: boolean }): JSX.Element => {
   const { height, width } = useDatagrid();
-  const content = bigDataset ? <VirtualTable /> : <DataRows />;
+  const content = bigDataset ? <VirtualTable /> : <RegularTable />;
   return (
     <Table height={height} width={width}>
       {content}
