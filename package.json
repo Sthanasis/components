@@ -32,7 +32,7 @@
     "rollup": "rollup -c",
     "preview": "vite preview",
     "lint": "eslint",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -p 6006 -h localhost",
     "build-storybook": "build-storybook"
   },
   "author": "sthanasis",
