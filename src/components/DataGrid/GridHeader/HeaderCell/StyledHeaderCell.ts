@@ -1,13 +1,19 @@
+import { IStyledHeaderCellProps } from './../../utilities/types';
 import { CSSProperties } from 'react';
 import styled from 'styled-components';
-import { IStyledDataCellProps } from '../../utilities/types';
 
 interface IHeaderActionsContainerProps {
   opacity: CSSProperties['opacity'];
 }
 
 export const StyledHeaderCell = styled.div`
-  ${({ withBorder, width = 100, height, theme }: IStyledDataCellProps) => ({
+  ${({
+    withBorder,
+    width = 100,
+    height,
+    theme,
+    grabed,
+  }: IStyledHeaderCellProps) => ({
     minWidth: `${width}px`,
     maxWidth: `${width}px`,
     width: `${width}px`,
@@ -18,6 +24,7 @@ export const StyledHeaderCell = styled.div`
     textAlign: 'left',
     padding: '15px 5px',
     textTransform: 'capitalize',
+    backgroundColor: grabed ? 'rgba(255,255,255,.9)' : undefined,
   })}
 `;
 

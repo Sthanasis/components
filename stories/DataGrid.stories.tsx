@@ -18,7 +18,7 @@ export default {
 const Template: ComponentStory<typeof DataGrid> = (args) => {
   const [loading, setLoading] = useState(false);
   const columns: ColumnType[] = [
-    { field: 'id', name: 'id', width: 90 },
+    { field: 'id', name: 'id', width: 100 },
     { field: 'first_name', name: 'First Name', width: 150 },
     {
       field: 'last_name',

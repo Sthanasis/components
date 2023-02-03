@@ -9,12 +9,13 @@ const GridHeader = (): JSX.Element => {
 
   return (
     <StyledGridHeader>
-      {columns.map((c) => (
+      {columns.map((c, i) => (
         <HeaderCell
           key={c.field}
           field={c.field}
           value={c.name}
           width={c.width}
+          index={i}
           height="auto"
         />
       ))}

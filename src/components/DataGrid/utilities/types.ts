@@ -17,12 +17,19 @@ export interface IStyledDataCellProps {
   height?: number | string;
   theme: ThemeType;
 }
+export interface IStyledHeaderCellProps extends IStyledDataCellProps {
+  grabed: boolean;
+}
+
 export interface ICellProps extends IBaseProps {
   value: string | number | undefined | null;
   field: string;
   withBorder?: boolean;
   width?: number | string;
   height?: number | string;
+}
+export interface IHeaderCellProps extends ICellProps {
+  index: number;
 }
 export interface IDataGridProps {
   rows?: RowType[];

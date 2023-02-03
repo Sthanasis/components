@@ -1,8 +1,8 @@
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import { useEffect, useState } from 'react';
+import { DragEvent, useEffect, useState } from 'react';
 import Text from 'src/components/Text';
 import { useDatagrid } from 'src/context/datagrid';
-import { ICellProps, SortDirectionType } from '../../utilities/types';
+import { IHeaderCellProps, SortDirectionType } from '../../utilities/types';
 import {
   StyledHeaderCell,
   HeaderCellContainer,
@@ -45,22 +45,27 @@ const HeaderCell = ({
   withBorder = false,
   width,
   height,
+  index,
   ...rest
-}: ICellProps) => {
+}: IHeaderCellProps) => {
   const [sortDir, setSortDir] = useState<SortDirectionType>('default');
   const [sortIcon, setSortIcon] = useState<IconDefinition | null>(null);
-  const content = value ?? '';
-  const { handleColumnSort, sortedBy } = useDatagrid();
+  const [grabed, setGrabed] = useState(false);
+
+  const {
+    sortedBy,
+    handleColumnSort,
+    handleHeaderColumnGrab,
+    handleHeaderColumnDrop,
+  } = useDatagrid();
 
   const handleSorting = () => {
     const newSortDir = getNextSortOrder(sortDir).next;
     const nextDirection = getNextSortOrder(sortDir).next;
     const newIcon = getNextSortOrder(nextDirection).icon;
     setSortIcon(newIcon);
-    if (handleColumnSort) {
-      handleColumnSort(field, newSortDir);
-      setSortDir(newSortDir);
-    }
+    handleColumnSort(field, newSortDir);
+    setSortDir(newSortDir);
   };
 
   const handleMouseEnter = () => {
@@ -74,6 +79,21 @@ const HeaderCell = ({
       setSortIcon(null);
     }
   };
+
+  const handleGrab = (e: DragEvent<HTMLDivElement>) => {
+    setGrabed(true);
+    handleHeaderColumnGrab(e, index);
+  };
+
+  const handleDragOver = (e: DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+  };
+
+  const handleDrop = (e: DragEvent<HTMLDivElement>) => {
+    handleHeaderColumnDrop(e, index);
+    setGrabed(false);
+  };
+
   useEffect(() => {
     if (field !== sortedBy)
       if (sortDir !== 'default') {
@@ -83,6 +103,7 @@ const HeaderCell = ({
   }, [field, sortedBy]);
 
   const hasLowerOpacity = sortIcon && sortDir === 'default';
+  const content = value ?? '';
   let opacity = 0;
   if (hasLowerOpacity) {
     opacity = 0.4;
@@ -95,9 +116,14 @@ const HeaderCell = ({
       withBorder={withBorder}
       width={width}
       height={height}
-      {...rest}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onDragStart={handleGrab}
+      onDragOver={handleDragOver}
+      onDrop={handleDrop}
+      grabed={grabed}
+      {...rest}
+      draggable
     >
       <HeaderCellContainer>
         <Text>{content}</Text>
