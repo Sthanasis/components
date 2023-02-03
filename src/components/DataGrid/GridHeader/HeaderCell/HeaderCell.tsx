@@ -122,8 +122,8 @@ const HeaderCell = ({
       onDragOver={handleDragOver}
       onDrop={handleDrop}
       grabed={grabed}
-      {...rest}
       draggable
+      {...rest}
     >
       <HeaderCellContainer>
         <Text>{content}</Text>

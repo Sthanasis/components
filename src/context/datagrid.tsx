@@ -50,6 +50,10 @@ const initialState: IDatagridContext = {
 
 const DatagridContext = createContext<IDatagridContext>(initialState);
 
+const createColumnMap = (columns: ColumnType[]) => {
+  return columns.reduce((obj, c, i) => ({ ...obj, [i]: c }), {});
+};
+
 export const DatagridProvider = ({
   children,
   rows = [],
@@ -63,6 +67,11 @@ export const DatagridProvider = ({
   const [columnObject, setColumnObject] =
     useState<{ [key: number]: ColumnType }>();
   const [sorter, setSorter] = useState<Worker>();
+
+  const columnsToRender = useMemo(
+    () => (columnObject ? Object.values(columnObject) : []),
+    [columnObject]
+  );
 
   const handleColumnSort = (field: string, direction: SortDirectionType) => {
     if (direction === 'default') {
@@ -82,11 +91,10 @@ export const DatagridProvider = ({
     const draggedIndex = +e.dataTransfer.getData('index');
     if (columnObject) {
       if (pos !== draggedIndex) {
-        const newColumnMap = {
-          ...columnObject,
-          [pos]: columnObject[draggedIndex],
-          [draggedIndex]: columnObject[pos],
-        };
+        const newColumns = [...columnsToRender];
+        const [draggedColumn] = newColumns.splice(draggedIndex, 1);
+        newColumns.splice(pos, 0, draggedColumn);
+        const newColumnMap = createColumnMap(newColumns);
         setColumnObject(newColumnMap);
       }
     }
@@ -105,10 +113,7 @@ export const DatagridProvider = ({
      * This helps to sort each row property according to the columns
      * and to extract the width of each cell.
      */
-    const newColumnMap = columns.reduce(
-      (obj, c, i) => ({ ...obj, [i]: c }),
-      {}
-    );
+    const newColumnMap = createColumnMap(columns);
     setColumnObject(newColumnMap);
   }, [columns]);
 
@@ -142,11 +147,6 @@ export const DatagridProvider = ({
       if (sorter) sorter.terminate();
     };
   }, [sorter]);
-
-  const columnsToRender = useMemo(
-    () => (columnObject ? Object.values(columnObject) : []),
-    [columnObject]
-  );
 
   return (
     <DatagridContext.Provider
