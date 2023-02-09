@@ -51,7 +51,7 @@ const Template: ComponentStory<typeof DataGrid> = (args) => {
     );
   }, []);
   useEffect(() => {
-    if (args.bigDataset) {
+    if (args.virtual) {
       worker?.postMessage(fakeData);
       setLoading(true);
       if (worker)
@@ -76,11 +76,11 @@ const Template: ComponentStory<typeof DataGrid> = (args) => {
 };
 export const Basic = Template.bind({});
 Basic.args = {
-  bigDataset: false,
+  virtual: false,
 };
 
 export const VirtualTable = Template.bind({});
 
 VirtualTable.args = {
-  bigDataset: true,
+  virtual: true,
 };

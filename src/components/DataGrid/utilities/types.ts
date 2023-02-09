@@ -36,7 +36,7 @@ export interface IDataGridProps {
   columns?: ColumnType[];
   height?: number;
   width?: CSSProperties['width'];
-  bigDataset?: boolean;
+  virtual?: boolean;
   loading?: boolean;
 }
 export type SortDirectionType = 'asc' | 'desc' | 'default';

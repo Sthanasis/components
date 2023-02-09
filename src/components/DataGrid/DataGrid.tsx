@@ -28,9 +28,9 @@ const RegularTable = () => {
   );
 };
 
-const Grid = ({ bigDataset }: { bigDataset?: boolean }): JSX.Element => {
+const Grid = ({ virtual }: { virtual?: boolean }): JSX.Element => {
   const { height, width } = useDatagrid();
-  const content = bigDataset ? <VirtualTable /> : <RegularTable />;
+  const content = virtual ? <VirtualTable /> : <RegularTable />;
   return (
     <Table height={height} width={width}>
       {content}
@@ -38,9 +38,9 @@ const Grid = ({ bigDataset }: { bigDataset?: boolean }): JSX.Element => {
   );
 };
 
-const DataGrid = ({ bigDataset, ...rest }: IDataGridProps) => (
+const DataGrid = ({ virtual, ...rest }: IDataGridProps) => (
   <DatagridProvider {...rest}>
-    <Grid bigDataset={bigDataset} />
+    <Grid virtual={virtual} />
   </DatagridProvider>
 );
 
