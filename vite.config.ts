@@ -2,11 +2,6 @@ import { defineConfig } from 'vite';
 
 import react from '@vitejs/plugin-react';
 import path from 'path';
-
-import * as packageJson from './package.json';
-import typescript from '@rollup/plugin-typescript';
-import resolve from '@rollup/plugin-node-resolve';
-import commonjs from '@rollup/plugin-commonjs';
 import dts from 'vite-plugin-dts';
 
 export default defineConfig({
