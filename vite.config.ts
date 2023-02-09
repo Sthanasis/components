@@ -5,7 +5,6 @@ import path from 'path';
 import dts from 'vite-plugin-dts';
 
 export default defineConfig({
-  base: '',
   plugins: [
     react(),
     dts({
@@ -39,5 +38,6 @@ export default defineConfig({
         },
       },
     },
+    target: 'esnext',
   },
 });

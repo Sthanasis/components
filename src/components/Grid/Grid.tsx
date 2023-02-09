@@ -1,5 +1,5 @@
 import { CSSProperties } from 'react';
-import { IBaseProps } from '../../types/props';
+import { IBaseProps } from 'src/types/props';
 
 interface IGridProps extends IBaseProps {
   children: React.ReactNode;

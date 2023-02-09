@@ -1,4 +1,4 @@
-import { IBaseProps } from '../../types/props';
+import { IBaseProps } from 'src/types/props';
 import { getStyledText } from './StyledText';
 
 export type TextTagType =
