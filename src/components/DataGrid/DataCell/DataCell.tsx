@@ -1,5 +1,5 @@
 import Text from 'src/components/Text';
-import { ICellProps } from '../utilities/types';
+import { ICellProps } from 'src/types';
 import { StyledDataCell } from './StyledDataCell';
 
 const DataCell = ({

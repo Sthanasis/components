@@ -9,13 +9,15 @@ import {
   useRef,
   useState,
 } from 'react';
+import { mapRowsByColumn } from 'src/components/DataGrid/utilities/methods';
 
 import type {
   ColumnType,
   IDataGridProps,
   RowType,
   SortDirectionType,
-  IMessageEventData,
+  ISortMessageEventData,
+  ColumnObjectType,
 } from 'src/types';
 
 type DragCallback = (e: DragEvent<HTMLDivElement>, pos: number) => void;
@@ -30,7 +32,7 @@ interface IDatagridContext extends IDatagridContextMethods {
   height: number;
   width: CSSProperties['width'];
   sortedBy?: string;
-  options?: { [key: number]: ColumnType };
+  options?: ColumnObjectType;
   loading?: boolean;
 }
 
@@ -71,8 +73,7 @@ export const DatagridProvider = ({
    * according to the columns. Works as a faster way to access each cell property
    * since we don't have to loop over the columns again
    */
-  const [columnObject, setColumnObject] =
-    useState<{ [key: number]: ColumnType }>();
+  const [columnObject, setColumnObject] = useState<ColumnObjectType>();
   const [sorter, setSorter] = useState<Worker>();
   // this list keeps track of the order of the rows before sorting.
   const originalRowsOrder = useRef<RowType[]>([]);
@@ -83,7 +84,7 @@ export const DatagridProvider = ({
   );
 
   const handleColumnSort = (field: string, direction: SortDirectionType) => {
-    const sortData: IMessageEventData = {
+    const sortData: ISortMessageEventData = {
       rows: gridRows || [],
       direction,
       field,
@@ -93,7 +94,8 @@ export const DatagridProvider = ({
     }
     if (direction === 'default') {
       setSortedBy(undefined);
-      sortData.rows = originalRowsOrder.current;
+      sortData.rows = [...originalRowsOrder.current];
+      if (columnObject) sortData.columnObject = columnObject;
       originalRowsOrder.current = [];
     }
     if (window.Worker) {
@@ -145,15 +147,7 @@ export const DatagridProvider = ({
     let rowsArray = rows;
     if (gridRows.length > 0) rowsArray = gridRows;
     if (columnObject) {
-      const mappedRows = rowsArray.map((r) =>
-        Object.values(r).reduce(
-          (obj, _v, i) => ({
-            ...obj,
-            [columnObject[i].field]: r[columnObject[i].field],
-          }),
-          {}
-        )
-      );
+      const mappedRows = mapRowsByColumn(rowsArray, columnObject);
       setGridRows(mappedRows);
     }
   }, [columnObject]);

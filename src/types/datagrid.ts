@@ -44,8 +44,10 @@ export interface IDataGridProps {
   loading?: boolean;
 }
 export type ColumnObjectType = { [key: number]: ColumnType };
-export interface IMessageEventData {
+
+export interface ISortMessageEventData {
   rows: RowType[];
   direction: SortDirectionType;
   field: string;
+  columnObject?: ColumnObjectType;
 }

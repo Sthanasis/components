@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { IStyledDataCellProps } from '../utilities/types';
+import { IStyledDataCellProps } from 'src/types';
 
 export const StyledDataCell = styled.div`
   ${({ width = 100, withBorder, theme }: IStyledDataCellProps) => ({
