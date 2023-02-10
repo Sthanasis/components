@@ -1,4 +1,4 @@
-import { IStyledHeaderCellProps } from './../../utilities/types';
+import { IStyledHeaderCellProps } from 'src/types';
 import { CSSProperties } from 'react';
 import styled from 'styled-components';
 

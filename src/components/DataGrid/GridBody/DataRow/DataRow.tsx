@@ -1,7 +1,6 @@
 import { StyledDataRow } from './StyledDataRow';
 import DataCell from '../../DataCell';
-import { RowType } from '../../utilities/types';
-import { IBaseProps } from 'src/types/props';
+import { RowType, IBaseProps } from 'src/types';
 import { useDatagrid } from 'src/context/datagrid';
 
 interface IDataRowProps extends IBaseProps {
@@ -10,7 +9,7 @@ interface IDataRowProps extends IBaseProps {
 }
 
 const DataRow = ({ row, noBorder, ...props }: IDataRowProps) => {
-  const { properties } = useDatagrid();
+  const { options } = useDatagrid();
   return (
     <StyledDataRow {...props}>
       {Object.keys(row).map((key, i) => (
@@ -18,7 +17,7 @@ const DataRow = ({ row, noBorder, ...props }: IDataRowProps) => {
           key={key}
           field={key}
           value={row[key]}
-          width={properties && properties[i].width}
+          width={options && options[i].width}
           withBorder={!noBorder}
         />
       ))}

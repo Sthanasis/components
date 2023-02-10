@@ -1,4 +1,4 @@
-import { ThemeType } from './../../../utilities/theme';
+import { ThemeType } from 'src/utilities/theme';
 import styled from 'styled-components';
 
 export const StyledGridHeader = styled.div`

@@ -1,11 +1,15 @@
 import { CSSProperties } from 'react';
-import { IBaseProps } from 'src/types/props';
+import { IBaseProps } from 'src/types';
 import { ThemeType } from 'src/utilities/theme';
+
+export type SortDirectionType = 'asc' | 'desc' | 'default';
 
 export type ColumnType = {
   field: string | 'id';
   name: string;
   width?: number;
+  hideColumn?: boolean;
+  orderBy?: SortDirectionType;
 };
 
 export type RowType = {
@@ -39,4 +43,9 @@ export interface IDataGridProps {
   virtual?: boolean;
   loading?: boolean;
 }
-export type SortDirectionType = 'asc' | 'desc' | 'default';
+export type ColumnObjectType = { [key: number]: ColumnType };
+export interface IMessageEventData {
+  rows: RowType[];
+  direction: SortDirectionType;
+  field: string;
+}

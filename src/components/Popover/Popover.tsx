@@ -8,7 +8,7 @@ import {
   useState,
 } from 'react';
 import { StyledPopover } from './StyledPopover';
-import { IBaseProps } from 'src/types/props';
+import { IBaseProps } from 'src/types';
 import Backdrop from '../Backdrop';
 import useWindowResize from 'src/utilities/hooks/useWindowResize';
 

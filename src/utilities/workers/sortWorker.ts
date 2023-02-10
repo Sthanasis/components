@@ -1,7 +1,5 @@
-import {
-  RowType,
-  SortDirectionType,
-} from 'src/components/DataGrid/utilities/types';
+import { SortDirectionType } from 'src/components/DataGrid/utilities/types';
+import { IMessageEventData } from 'src/types/types';
 
 const compare = (a: string | number, b: string | number) => {
   if (a > b) {
@@ -27,9 +25,8 @@ const orderBy = (
   return 0;
 };
 
-self.onmessage = (e: MessageEvent<[RowType[], SortDirectionType, string]>) => {
-  const [rows, direction, field] = e.data;
-
+self.onmessage = (e: MessageEvent<IMessageEventData>) => {
+  const { rows, direction, field } = e.data;
   if (direction === 'default') {
     postMessage(rows);
   } else {

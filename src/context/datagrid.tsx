@@ -6,6 +6,7 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from 'react';
 
@@ -14,7 +15,8 @@ import type {
   IDataGridProps,
   RowType,
   SortDirectionType,
-} from 'src/components/DataGrid/utilities/types';
+  IMessageEventData,
+} from 'src/types';
 
 type DragCallback = (e: DragEvent<HTMLDivElement>, pos: number) => void;
 interface IDatagridContextMethods {
@@ -28,7 +30,7 @@ interface IDatagridContext extends IDatagridContextMethods {
   height: number;
   width: CSSProperties['width'];
   sortedBy?: string;
-  properties?: { [key: number]: ColumnType };
+  options?: { [key: number]: ColumnType };
   loading?: boolean;
 }
 
@@ -62,11 +64,18 @@ export const DatagridProvider = ({
   height = initialState.height,
   ...rest
 }: IDatagridProviderProps) => {
-  const [gridRows, setGridRows] = useState<RowType[]>(rows);
+  const [gridRows, setGridRows] = useState<RowType[]>([]);
   const [sortedBy, setSortedBy] = useState<string>();
+  /**
+   * This object helps in sorting each row property
+   * according to the columns. Works as a faster way to access each cell property
+   * since we don't have to loop over the columns again
+   */
   const [columnObject, setColumnObject] =
     useState<{ [key: number]: ColumnType }>();
   const [sorter, setSorter] = useState<Worker>();
+  // this list keeps track of the order of the rows before sorting.
+  const originalRowsOrder = useRef<RowType[]>([]);
 
   const columnsToRender = useMemo(
     () => (columnObject ? Object.values(columnObject) : []),
@@ -74,11 +83,21 @@ export const DatagridProvider = ({
   );
 
   const handleColumnSort = (field: string, direction: SortDirectionType) => {
+    const sortData: IMessageEventData = {
+      rows: gridRows || [],
+      direction,
+      field,
+    };
+    if (direction !== 'default' && originalRowsOrder.current.length === 0) {
+      originalRowsOrder.current = [...gridRows];
+    }
     if (direction === 'default') {
       setSortedBy(undefined);
+      sortData.rows = originalRowsOrder.current;
+      originalRowsOrder.current = [];
     }
     if (window.Worker) {
-      if (sorter) sorter.postMessage([rows, direction, field]);
+      if (sorter) sorter.postMessage(sortData);
     }
     setSortedBy(field);
   };
@@ -110,8 +129,8 @@ export const DatagridProvider = ({
     /**
      * The column object with index as keys
      * Example {0: {field: 'id', name: 'id', width: 100}}
-     * This helps to sort each row property according to the columns
-     * and to extract the width of each cell.
+     * This helps in sorting each row property according to the columns
+     * and extracts the width of each cell.
      */
     const newColumnMap = createColumnMap(columns);
     setColumnObject(newColumnMap);
@@ -121,10 +140,12 @@ export const DatagridProvider = ({
     /**
      * Map the rows based on the columnObject Map.
      * this will trigger each time a header is changing
-     * so each row will update the properties accordingly
+     * so each row will update the options accordingly
      */
+    let rowsArray = rows;
+    if (gridRows.length > 0) rowsArray = gridRows;
     if (columnObject) {
-      const mappedRows = rows.map((r) =>
+      const mappedRows = rowsArray.map((r) =>
         Object.values(r).reduce(
           (obj, _v, i) => ({
             ...obj,
@@ -152,14 +173,14 @@ export const DatagridProvider = ({
     <DatagridContext.Provider
       value={{
         rows: gridRows,
-        columns: columnsToRender ?? [],
+        columns: columnsToRender,
         width,
         height,
         sortedBy,
         handleColumnSort,
         handleHeaderColumnGrab,
         handleHeaderColumnDrop,
-        properties: columnObject,
+        options: columnObject,
         ...rest,
       }}
     >
