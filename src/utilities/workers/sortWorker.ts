@@ -42,12 +42,13 @@ const mapRowsByColumn = (rows: RowType[], columns: ColumnObjectType) => {
 };
 
 self.onmessage = (e: MessageEvent<ISortMessageEventData>) => {
-  const { rows, direction, field, columnObject } = e.data;
+  const { rows, direction, field, columnObject, pagination } = e.data;
+  let sortedRows: RowType[] = [];
   if (direction === 'default' && columnObject) {
     const originalRows = mapRowsByColumn(rows, columnObject);
-    postMessage(originalRows);
+    sortedRows = originalRows;
   } else {
-    const sortedRows = rows.sort((currentRow, nextRow) => {
+    sortedRows = rows.sort((currentRow, nextRow) => {
       if (currentRow[field] && nextRow[field]) {
         const currentField = currentRow[field];
         const nextField = nextRow[field];
@@ -64,6 +65,13 @@ self.onmessage = (e: MessageEvent<ISortMessageEventData>) => {
       }
       return 0;
     });
-    postMessage(sortedRows);
   }
+  if (pagination) {
+    const { page, pageSize, total } = pagination;
+    const startIndicator = pageSize * page;
+    let endIndicator = pageSize * (page + 1);
+    endIndicator = total < endIndicator ? total : endIndicator;
+    sortedRows = sortedRows.slice(startIndicator, endIndicator);
+  }
+  postMessage(sortedRows);
 };

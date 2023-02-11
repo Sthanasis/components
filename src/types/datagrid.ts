@@ -35,19 +35,34 @@ export interface ICellProps extends IBaseProps {
 export interface IHeaderCellProps extends ICellProps {
   index: number;
 }
-export interface IDataGridProps {
-  rows?: RowType[];
-  columns?: ColumnType[];
-  height?: number;
-  width?: CSSProperties['width'];
-  virtual?: boolean;
-  loading?: boolean;
-}
-export type ColumnObjectType = { [key: number]: ColumnType };
 
+export type ColumnObjectType = { [key: number]: ColumnType };
+export interface IPaginationOptions {
+  page: number;
+  total: number;
+  pageSize: number;
+  rowsPerPageOptions: number[];
+  onPageChange?: (arg: number) => void;
+  onRowsPerPageChange?: (arg: number) => void;
+}
 export interface ISortMessageEventData {
   rows: RowType[];
   direction: SortDirectionType;
   field: string;
   columnObject?: ColumnObjectType;
+  pagination?: {
+    page: IPaginationOptions['page'];
+    pageSize: IPaginationOptions['pageSize'];
+    total: IPaginationOptions['total'];
+  };
+}
+
+export interface IDataGridProps {
+  rows: RowType[];
+  columns: ColumnType[];
+  height?: number;
+  width?: CSSProperties['width'];
+  virtual?: boolean;
+  loading?: boolean;
+  pagination?: IPaginationOptions;
 }

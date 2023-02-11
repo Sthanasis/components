@@ -9,16 +9,13 @@ interface ITableProps {
 }
 
 export const TableContainer = styled.div`
-  ${({
-    width,
-    height,
-  }: {
-    width?: CSSProperties['width'];
-    height?: CSSProperties['height'];
-  }) => ({
+  ${({ theme, pagination }: { theme: ThemeType; pagination: boolean }) => ({
     overflow: 'auto',
-    height: height ?? '100%',
-    width: width ?? 'auto',
+    height: '100%',
+    width: 'auto',
+    borderBottom: pagination
+      ? `1px solid ${theme.basicPalette.lightgray}`
+      : undefined,
   })}
 `;
 

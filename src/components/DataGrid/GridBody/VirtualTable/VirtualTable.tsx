@@ -45,7 +45,7 @@ const VirtualTable = (): JSX.Element => {
   return (
     <>
       <GridHeaderContainer scrollLeft={scrollLeft} />
-      <TableContainer ref={tableRef} onScroll={handleScroll}>
+      <TableContainer ref={tableRef} onScroll={handleScroll} pagination={false}>
         {loading ? (
           <GridSpinner />
         ) : (

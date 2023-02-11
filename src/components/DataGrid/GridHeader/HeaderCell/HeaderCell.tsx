@@ -54,6 +54,7 @@ const HeaderCell = ({
 
   const {
     sortedBy,
+    loading,
     handleColumnSort,
     handleHeaderColumnGrab,
     handleHeaderColumnDrop,
@@ -128,7 +129,13 @@ const HeaderCell = ({
       <HeaderCellContainer>
         <Text>{content}</Text>
         <HeaderActionsContainer opacity={opacity}>
-          {sortIcon && <Button icon={sortIcon} onClick={handleSorting} />}
+          {sortIcon && (
+            <Button
+              icon={sortIcon}
+              onClick={handleSorting}
+              disabled={loading}
+            />
+          )}
         </HeaderActionsContainer>
       </HeaderCellContainer>
     </StyledHeaderCell>

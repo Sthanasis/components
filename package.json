@@ -30,7 +30,7 @@
     "test": "jest --coverage",
     "build": "vite build && tsc",
     "preview": "vite preview",
-    "lint": "eslint",
+    "lint": "eslint src",
     "storybook": "start-storybook -p 6006 -h localhost",
     "build-storybook": "build-storybook"
   },

@@ -4,7 +4,7 @@ import { ThemeProvider } from 'src/context/theme';
 import { defaultTheme } from 'src/utilities/theme';
 import DataGrid from 'src/components/DataGrid';
 import { useEffect, useState } from 'react';
-import { ColumnType, RowType } from 'src/components/DataGrid/utilities/types';
+import { ColumnType, IPaginationOptions, RowType } from 'src/types';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -43,6 +43,24 @@ const Template: ComponentStory<typeof DataGrid> = (args) => {
 
   const [rows, setRows] = useState<RowType[]>([]);
   const [worker, setWorker] = useState<Worker>();
+  const [page, setPage] = useState(0);
+  const [pageSize, setPageSize] = useState(10);
+  const pageSizeOptions = [5, 10, 25, 50, 100];
+
+  const pagination: IPaginationOptions = {
+    page,
+    pageSize,
+    total: args.rows?.length || 0,
+    rowsPerPageOptions: pageSizeOptions,
+    onPageChange(arg) {
+      setPage(arg);
+    },
+    onRowsPerPageChange(arg) {
+      setPage(0);
+      setPageSize(arg);
+    },
+  };
+
   useEffect(() => {
     setWorker(
       new Worker(
@@ -50,6 +68,7 @@ const Template: ComponentStory<typeof DataGrid> = (args) => {
       )
     );
   }, []);
+
   useEffect(() => {
     if (args.virtual) {
       worker?.postMessage(fakeData);
@@ -60,7 +79,7 @@ const Template: ComponentStory<typeof DataGrid> = (args) => {
           setLoading(false);
         };
     } else {
-      setRows(smallDataset);
+      setRows(args.rows);
     }
 
     return () => {
@@ -70,13 +89,20 @@ const Template: ComponentStory<typeof DataGrid> = (args) => {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <DataGrid columns={columns} rows={rows} {...args} loading={loading} />
+      <DataGrid
+        {...args}
+        columns={columns}
+        loading={loading}
+        rows={rows}
+        pagination={args.virtual ? undefined : pagination}
+      />
     </ThemeProvider>
   );
 };
 export const Basic = Template.bind({});
 Basic.args = {
   virtual: false,
+  rows: smallDataset,
 };
 
 export const VirtualTable = Template.bind({});

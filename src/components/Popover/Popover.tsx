@@ -32,7 +32,7 @@ const getPositionX = (
     case 'right':
       return anchor.right - popup.width;
     default:
-      return anchor.left - popup.width / 4;
+      return anchor.x - popup.width + anchor.width;
   }
 };
 
@@ -86,7 +86,7 @@ const Popover = ({
     }
   };
 
-  const handleClose = (e?: MouseEvent<HTMLDivElement>) => {
+  const handleBackdropClick = (e?: MouseEvent<HTMLDivElement>) => {
     if (e) {
       if (popoverRef.current?.contains(e.target as Node)) return;
     }
@@ -101,7 +101,8 @@ const Popover = ({
   }, [show]);
 
   useEffect(() => {
-    if (visible) setShow(true); // this avoids flickering on render
+    if (visible) setShow(true);
+    else setShow(false);
   }, [visible]);
 
   useLayoutEffect(() => {
@@ -110,7 +111,7 @@ const Popover = ({
 
   if (show)
     return createPortal(
-      <Backdrop onClose={handleClose}>
+      <Backdrop onClose={handleBackdropClick}>
         <StyledPopover
           {...rest}
           x={coords?.x}

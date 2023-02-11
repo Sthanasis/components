@@ -19,6 +19,7 @@ export interface IButtonProps extends IBaseProps {
   iconStart?: IconProp;
   iconEnd?: IconProp;
   icon?: IconProp;
+  rounded?: boolean;
 }
 
 const Button = ({

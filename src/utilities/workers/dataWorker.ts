@@ -1,4 +1,4 @@
-import { RowType } from 'src/components/DataGrid/utilities/types';
+import { RowType } from 'src/types';
 
 const createMoreData = (fakeData: RowType[]) => {
   return [

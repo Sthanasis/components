@@ -6,9 +6,9 @@ import {
   useContext,
   useEffect,
   useMemo,
-  useRef,
   useState,
 } from 'react';
+import { IPaginationOptions } from 'src/types';
 import { mapRowsByColumn } from 'src/components/DataGrid/utilities/methods';
 
 import type {
@@ -34,6 +34,7 @@ interface IDatagridContext extends IDatagridContextMethods {
   sortedBy?: string;
   options?: ColumnObjectType;
   loading?: boolean;
+  pagination?: IPaginationOptions;
 }
 
 interface IDatagridProviderProps extends IDataGridProps {
@@ -64,9 +65,10 @@ export const DatagridProvider = ({
   columns = [],
   width = initialState.width,
   height = initialState.height,
-  ...rest
+  pagination,
+  ...props
 }: IDatagridProviderProps) => {
-  const [gridRows, setGridRows] = useState<RowType[]>([]);
+  const [gridRows, setGridRows] = useState<RowType[]>();
   const [sortedBy, setSortedBy] = useState<string>();
   /**
    * This object helps in sorting each row property
@@ -76,7 +78,10 @@ export const DatagridProvider = ({
   const [columnObject, setColumnObject] = useState<ColumnObjectType>();
   const [sorter, setSorter] = useState<Worker>();
   // this list keeps track of the order of the rows before sorting.
-  const originalRowsOrder = useRef<RowType[]>([]);
+  const originalRowsOrder = useMemo(() => {
+    if (columnObject) return mapRowsByColumn(rows, columnObject);
+    return undefined;
+  }, [rows, columnObject]);
 
   const columnsToRender = useMemo(
     () => (columnObject ? Object.values(columnObject) : []),
@@ -84,24 +89,25 @@ export const DatagridProvider = ({
   );
 
   const handleColumnSort = (field: string, direction: SortDirectionType) => {
-    const sortData: ISortMessageEventData = {
-      rows: gridRows || [],
-      direction,
-      field,
-    };
-    if (direction !== 'default' && originalRowsOrder.current.length === 0) {
-      originalRowsOrder.current = [...gridRows];
+    if (originalRowsOrder) {
+      const sortData: ISortMessageEventData = {
+        rows: originalRowsOrder,
+        direction,
+        field,
+      };
+      if (pagination) {
+        const { page, pageSize, total } = pagination;
+        sortData.pagination = { page, pageSize, total };
+      }
+      if (direction === 'default') {
+        setSortedBy(undefined);
+        if (columnObject) sortData.columnObject = columnObject;
+      }
+      if (window.Worker) {
+        if (sorter) sorter.postMessage(sortData);
+      }
+      setSortedBy(field);
     }
-    if (direction === 'default') {
-      setSortedBy(undefined);
-      sortData.rows = [...originalRowsOrder.current];
-      if (columnObject) sortData.columnObject = columnObject;
-      originalRowsOrder.current = [];
-    }
-    if (window.Worker) {
-      if (sorter) sorter.postMessage(sortData);
-    }
-    setSortedBy(field);
   };
 
   const handleHeaderColumnGrab: DragCallback = (e, pos) => {
@@ -135,22 +141,24 @@ export const DatagridProvider = ({
      * and extracts the width of each cell.
      */
     const newColumnMap = createColumnMap(columns);
+    const mappedRows = mapRowsByColumn(rows, newColumnMap);
+    setGridRows(mappedRows);
     setColumnObject(newColumnMap);
-  }, [columns]);
+  }, [columns, rows]);
 
   useEffect(() => {
-    /**
-     * Map the rows based on the columnObject Map.
-     * this will trigger each time a header is changing
-     * so each row will update the options accordingly
-     */
-    let rowsArray = rows;
-    if (gridRows.length > 0) rowsArray = gridRows;
-    if (columnObject) {
-      const mappedRows = mapRowsByColumn(rowsArray, columnObject);
+    let r = originalRowsOrder;
+    if (gridRows && gridRows.length > 0) r = gridRows;
+    if (columnObject && r) {
+      /**
+       * Map the rows based on the columnObject Map.
+       * this will trigger each time a header is changing
+       * so each row will update the options accordingly
+       */
+      const mappedRows = mapRowsByColumn(r, columnObject);
       setGridRows(mappedRows);
     }
-  }, [columnObject]);
+  }, [columnObject, originalRowsOrder]);
 
   useEffect(() => {
     if (sorter)
@@ -163,10 +171,20 @@ export const DatagridProvider = ({
     };
   }, [sorter]);
 
+  useEffect(() => {
+    if (pagination) {
+      const { page, pageSize, total } = pagination;
+      const startIndex = page * pageSize;
+      let endIndex = (page + 1) * pageSize;
+      endIndex = total < endIndex ? total : endIndex;
+      setGridRows(originalRowsOrder?.slice(startIndex, endIndex));
+    }
+  }, [pagination, originalRowsOrder]);
+
   return (
     <DatagridContext.Provider
       value={{
-        rows: gridRows,
+        rows: gridRows || [],
         columns: columnsToRender,
         width,
         height,
@@ -175,7 +193,8 @@ export const DatagridProvider = ({
         handleHeaderColumnGrab,
         handleHeaderColumnDrop,
         options: columnObject,
-        ...rest,
+        pagination: pagination,
+        ...props,
       }}
     >
       {children}
