@@ -1,20 +1,52 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Button from 'src/components/Button';
-import Popover from 'src/components/Popover';
+import MenuItem from 'src/components/MenuItem';
+import PopoverMenu from 'src/components/PopoverMenu';
 import { useDatagrid } from 'src/context/datagrid';
-import { StyledGridControls } from './GridControls.styled';
+import { Density } from 'src/types';
+import { DensityImage, StyledGridControls } from './GridControls.styled';
 
-const GridControls = (): JSX.Element => {
-  const { handleDensityChange } = useDatagrid();
+const DensityControls = ({ closePopover }: { closePopover: () => void }) => {
+  const { handleDensityChange, density } = useDatagrid();
+  const changeDensity = (d: Density) => {
+    handleDensityChange(d);
+    closePopover();
+  };
+
   return (
-    <StyledGridControls>
-      <Popover>
-        <Button icon={} onClick={handleDensityChange} />
-        <Button icon={} onClick={handleDensityChange} />
-        <Button icon={} onClick={handleDensityChange} />
-      </Popover>
-    </StyledGridControls>
+    <>
+      <MenuItem
+        value={Density.sm}
+        selected={density === Density.sm}
+        onClick={() => changeDensity(Density.sm)}
+      >
+        <DensityImage>Compact</DensityImage>
+      </MenuItem>
+      <MenuItem
+        value={Density.md}
+        selected={density === Density.md}
+        onClick={() => changeDensity(Density.md)}
+      >
+        Standard
+      </MenuItem>
+      <MenuItem
+        value={Density.lg}
+        selected={density === Density.lg}
+        onClick={() => changeDensity(Density.lg)}
+      >
+        Comfortable
+      </MenuItem>
+    </>
   );
 };
+
+const GridControls = (): JSX.Element => (
+  <StyledGridControls>
+    <PopoverMenu
+      label="DENSITY"
+      content={({ closePopover }) => (
+        <DensityControls closePopover={closePopover} />
+      )}
+    />
+  </StyledGridControls>
+);
 
 export default GridControls;

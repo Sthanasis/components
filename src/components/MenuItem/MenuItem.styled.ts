@@ -11,7 +11,7 @@ export const StyledMenuItem = styled.div`
   ${({ selected, theme }: IStyledMenuItemProps) => ({
     display: 'flex',
     backgroundColor: selected ? theme?.basicPalette.lightgray : 'transparent',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     padding: theme?.padding,
     cursor: 'pointer',
   })};

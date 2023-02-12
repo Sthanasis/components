@@ -1,5 +1,4 @@
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
-import { MouseEvent, useCallback } from 'react';
 import Box from 'src/components/Box';
 import Button from 'src/components/Button';
 
@@ -22,13 +21,8 @@ const RowsPerPage = ({
   rowsPerPage: number;
   onRowsPerPageChange: (arg: number) => void;
 }) => {
-  const { anchorEl, setAnchorEl, visible } = useAnchoreElement(null);
-
-  const showPopover = (e: MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(e.currentTarget);
-  };
-
-  const closePopover = useCallback(() => setAnchorEl(null), []);
+  const { anchorEl, visible, showPopover, closePopover } =
+    useAnchoreElement(null);
 
   const handleRowsPerPageChange = (p: number) => {
     onRowsPerPageChange(p);

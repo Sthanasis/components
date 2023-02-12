@@ -13,7 +13,7 @@ import Backdrop from '../Backdrop';
 import useWindowResize from 'src/utilities/hooks/useWindowResize';
 
 export interface IPopoverProps extends IBaseProps {
-  onClose?: () => void | Promise<void>;
+  onClose: () => void;
   anchorEl?: HTMLButtonElement | null;
   children: ReactNode;
   visible: boolean;
@@ -93,7 +93,7 @@ const Popover = ({
     setCoords(null);
     document.body.style.overflow = '';
     setShow(false);
-    if (onClose) onClose();
+    onClose();
   };
 
   useEffect(() => {
