@@ -44,6 +44,7 @@ const mapRowsByColumn = (rows: RowType[], columns: ColumnObjectType) => {
 self.onmessage = (e: MessageEvent<ISortMessageEventData>) => {
   const { rows, direction, field, columnObject, pagination } = e.data;
   let sortedRows: RowType[] = [];
+  let dataRows: RowType[] = [];
   if (direction === 'default' && columnObject) {
     const originalRows = mapRowsByColumn(rows, columnObject);
     sortedRows = originalRows;
@@ -66,12 +67,13 @@ self.onmessage = (e: MessageEvent<ISortMessageEventData>) => {
       return 0;
     });
   }
+
   if (pagination) {
     const { page, pageSize, total } = pagination;
     const startIndicator = pageSize * page;
     let endIndicator = pageSize * (page + 1);
     endIndicator = total < endIndicator ? total : endIndicator;
-    sortedRows = sortedRows.slice(startIndicator, endIndicator);
+    dataRows = sortedRows.slice(startIndicator, endIndicator);
   }
-  postMessage(sortedRows);
+  postMessage({ data: dataRows, original: sortedRows });
 };

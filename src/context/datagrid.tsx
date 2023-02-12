@@ -9,7 +9,6 @@ import {
   useState,
 } from 'react';
 import { IPaginationOptions } from 'src/types';
-import { mapRowsByColumn } from 'src/components/DataGrid/utilities/methods';
 
 import type {
   ColumnType,
@@ -62,7 +61,7 @@ const createColumnMap = (columns: ColumnType[]) => {
 export const DatagridProvider = ({
   children,
   rows = [],
-  columns = [],
+  columns,
   width = initialState.width,
   height = initialState.height,
   pagination,
@@ -71,17 +70,20 @@ export const DatagridProvider = ({
   const [gridRows, setGridRows] = useState<RowType[]>();
   const [sortedBy, setSortedBy] = useState<string>();
   /**
+   * The column object with index as keys
+   * Example {0: {field: 'id', name: 'id', width: 100}}
+   * This helps in sorting each row property according to the columns
+   * and extracts the width of each cell.
+   * ======
    * This object helps in sorting each row property
    * according to the columns. Works as a faster way to access each cell property
-   * since we don't have to loop over the columns again
+   * since we don't have to loop over the columns again.
+   * Render the rows based on this object
    */
   const [columnObject, setColumnObject] = useState<ColumnObjectType>();
   const [sorter, setSorter] = useState<Worker>();
-  // this list keeps track of the order of the rows before sorting.
-  const originalRowsOrder = useMemo(() => {
-    if (columnObject) return mapRowsByColumn(rows, columnObject);
-    return undefined;
-  }, [rows, columnObject]);
+
+  const [originalRows, setOriginalRows] = useState<RowType[]>();
 
   const columnsToRender = useMemo(
     () => (columnObject ? Object.values(columnObject) : []),
@@ -89,9 +91,9 @@ export const DatagridProvider = ({
   );
 
   const handleColumnSort = (field: string, direction: SortDirectionType) => {
-    if (originalRowsOrder) {
+    if (originalRows) {
       const sortData: ISortMessageEventData = {
-        rows: originalRowsOrder,
+        rows: originalRows,
         direction,
         field,
       };
@@ -102,6 +104,7 @@ export const DatagridProvider = ({
       if (direction === 'default') {
         setSortedBy(undefined);
         if (columnObject) sortData.columnObject = columnObject;
+        sortData.rows = rows;
       }
       if (window.Worker) {
         if (sorter) sorter.postMessage(sortData);
@@ -134,36 +137,12 @@ export const DatagridProvider = ({
   }, []);
 
   useEffect(() => {
-    /**
-     * The column object with index as keys
-     * Example {0: {field: 'id', name: 'id', width: 100}}
-     * This helps in sorting each row property according to the columns
-     * and extracts the width of each cell.
-     */
-    const newColumnMap = createColumnMap(columns);
-    const mappedRows = mapRowsByColumn(rows, newColumnMap);
-    setGridRows(mappedRows);
-    setColumnObject(newColumnMap);
-  }, [columns, rows]);
-
-  useEffect(() => {
-    let r = originalRowsOrder;
-    if (gridRows && gridRows.length > 0) r = gridRows;
-    if (columnObject && r) {
-      /**
-       * Map the rows based on the columnObject Map.
-       * this will trigger each time a header is changing
-       * so each row will update the options accordingly
-       */
-      const mappedRows = mapRowsByColumn(r, columnObject);
-      setGridRows(mappedRows);
-    }
-  }, [columnObject, originalRowsOrder]);
-
-  useEffect(() => {
     if (sorter)
-      sorter.onmessage = function (e: MessageEvent<RowType[]>) {
-        setGridRows(e.data);
+      sorter.onmessage = function (
+        e: MessageEvent<{ data: RowType[]; original?: RowType[] }>
+      ) {
+        setGridRows(e.data.data);
+        setOriginalRows(e.data.original);
       };
 
     return () => {
@@ -171,20 +150,29 @@ export const DatagridProvider = ({
     };
   }, [sorter]);
 
+  useEffect(() => setOriginalRows(rows), [rows]);
+
+  useEffect(() => {
+    const newColumnMap = createColumnMap(columns);
+    setColumnObject(newColumnMap);
+  }, [columns]);
+
   useEffect(() => {
     if (pagination) {
       const { page, pageSize, total } = pagination;
       const startIndex = page * pageSize;
       let endIndex = (page + 1) * pageSize;
       endIndex = total < endIndex ? total : endIndex;
-      setGridRows(originalRowsOrder?.slice(startIndex, endIndex));
+      setGridRows(originalRows?.slice(startIndex, endIndex));
+    } else {
+      setGridRows(originalRows);
     }
-  }, [pagination, originalRowsOrder]);
+  }, [originalRows, pagination]);
 
   return (
     <DatagridContext.Provider
       value={{
-        rows: gridRows || [],
+        rows: gridRows || rows,
         columns: columnsToRender,
         width,
         height,
@@ -193,7 +181,7 @@ export const DatagridProvider = ({
         handleHeaderColumnGrab,
         handleHeaderColumnDrop,
         options: columnObject,
-        pagination: pagination,
+        pagination,
         ...props,
       }}
     >
