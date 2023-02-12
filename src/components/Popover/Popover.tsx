@@ -61,7 +61,6 @@ const Popover = ({
 
   const anchorToElement = () => {
     if (anchorEl && popoverRef.current) {
-      document.body.style.overflow = 'hidden';
       const anchorRect = anchorEl.getBoundingClientRect();
       let positionX: XPositionType = 'default';
       let positionY: YPositionType = 'top';
@@ -91,7 +90,6 @@ const Popover = ({
       if (popoverRef.current?.contains(e.target as Node)) return;
     }
     setCoords(null);
-    document.body.style.overflow = '';
     setShow(false);
     onClose();
   };
@@ -101,8 +99,13 @@ const Popover = ({
   }, [show]);
 
   useEffect(() => {
-    if (visible) setShow(true);
-    else setShow(false);
+    if (visible) {
+      setShow(true);
+      document.body.style.overflow = 'hidden';
+    } else {
+      setShow(false);
+      document.body.style.overflow = 'auto';
+    }
   }, [visible]);
 
   useLayoutEffect(() => {
