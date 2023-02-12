@@ -35,7 +35,17 @@ export interface ICellProps extends IBaseProps {
 export interface IHeaderCellProps extends ICellProps {
   index: number;
 }
-
+/**
+ * The column object with index as keys
+ * Example {0: {field: 'id', name: 'id', width: 100}}
+ * This helps in sorting each row property according to the columns
+ * and extracts the width of each cell.
+ * ======
+ * This object helps in sorting each row property
+ * according to the columns. Works as a faster way to access each cell property
+ * since we don't have to loop over the columns again.
+ * Render the rows based on this object
+ */
 export type ColumnObjectType = { [key: number]: ColumnType };
 export interface IPaginationOptions {
   page: number;
@@ -65,4 +75,10 @@ export interface IDataGridProps {
   virtual?: boolean;
   loading?: boolean;
   pagination?: IPaginationOptions;
+}
+
+export enum Density {
+  sm = 30,
+  md = 45,
+  lg = 60,
 }

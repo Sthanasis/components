@@ -2,7 +2,6 @@ import type {
   SortDirectionType,
   ISortMessageEventData,
   RowType,
-  ColumnObjectType,
 } from 'src/types';
 
 const compare = (a: string | number, b: string | number) => {
@@ -29,25 +28,12 @@ const orderBy = (
   return 0;
 };
 
-const mapRowsByColumn = (rows: RowType[], columns: ColumnObjectType) => {
-  return rows.map((r) =>
-    Object.values(r).reduce(
-      (obj, _v, i) => ({
-        ...obj,
-        [columns[i].field]: r[columns[i].field],
-      }),
-      {}
-    )
-  );
-};
-
 self.onmessage = (e: MessageEvent<ISortMessageEventData>) => {
-  const { rows, direction, field, columnObject, pagination } = e.data;
+  const { rows, direction, field, pagination } = e.data;
   let sortedRows: RowType[] = [];
   let dataRows: RowType[] = [];
-  if (direction === 'default' && columnObject) {
-    const originalRows = mapRowsByColumn(rows, columnObject);
-    sortedRows = originalRows;
+  if (direction === 'default') {
+    sortedRows = rows;
   } else {
     sortedRows = rows.sort((currentRow, nextRow) => {
       if (currentRow[field] && nextRow[field]) {

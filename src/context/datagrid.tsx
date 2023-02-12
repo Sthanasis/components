@@ -5,10 +5,9 @@ import {
   ReactNode,
   useContext,
   useEffect,
-  useMemo,
   useState,
 } from 'react';
-import { IPaginationOptions } from 'src/types';
+import { Density, IPaginationOptions } from 'src/types';
 
 import type {
   ColumnType,
@@ -18,18 +17,22 @@ import type {
   ISortMessageEventData,
   ColumnObjectType,
 } from 'src/types';
+import { useColumns, useRows } from 'src/utilities/hooks/datagrid/hooks';
+import { createColumnMap } from 'src/components/DataGrid/utilities/methods';
 
 type DragCallback = (e: DragEvent<HTMLDivElement>, pos: number) => void;
 interface IDatagridContextMethods {
   handleColumnSort: (field: string, direction: SortDirectionType) => void;
   handleHeaderColumnGrab: DragCallback;
   handleHeaderColumnDrop: DragCallback;
+  handleDensityChange: (arg: Density) => void;
 }
 interface IDatagridContext extends IDatagridContextMethods {
   columns: ColumnType[];
   rows: RowType[];
   height: number;
   width: CSSProperties['width'];
+  density: Density;
   sortedBy?: string;
   options?: ColumnObjectType;
   loading?: boolean;
@@ -47,16 +50,14 @@ const initialState: IDatagridContext = {
   columns: [],
   height: 500,
   width: '100%',
+  density: Density.md,
   handleColumnSort: voidFn,
   handleHeaderColumnGrab: voidFn,
   handleHeaderColumnDrop: voidFn,
+  handleDensityChange: voidFn,
 };
 
 const DatagridContext = createContext<IDatagridContext>(initialState);
-
-const createColumnMap = (columns: ColumnType[]) => {
-  return columns.reduce((obj, c, i) => ({ ...obj, [i]: c }), {});
-};
 
 export const DatagridProvider = ({
   children,
@@ -67,28 +68,22 @@ export const DatagridProvider = ({
   pagination,
   ...props
 }: IDatagridProviderProps) => {
-  const [gridRows, setGridRows] = useState<RowType[]>();
+  const { gridRows, originalRows, setGridRows, setOriginalRows } = useRows(
+    rows,
+    pagination
+  );
+
+  const { columnObject, columnsToRender, setColumnObject } =
+    useColumns(columns);
+
   const [sortedBy, setSortedBy] = useState<string>();
-  /**
-   * The column object with index as keys
-   * Example {0: {field: 'id', name: 'id', width: 100}}
-   * This helps in sorting each row property according to the columns
-   * and extracts the width of each cell.
-   * ======
-   * This object helps in sorting each row property
-   * according to the columns. Works as a faster way to access each cell property
-   * since we don't have to loop over the columns again.
-   * Render the rows based on this object
-   */
-  const [columnObject, setColumnObject] = useState<ColumnObjectType>();
+  const [density, setDensity] = useState(initialState.density);
+
   const [sorter, setSorter] = useState<Worker>();
 
-  const [originalRows, setOriginalRows] = useState<RowType[]>();
-
-  const columnsToRender = useMemo(
-    () => (columnObject ? Object.values(columnObject) : []),
-    [columnObject]
-  );
+  const handleDensityChange = (d: Density) => {
+    setDensity(d);
+  };
 
   const handleColumnSort = (field: string, direction: SortDirectionType) => {
     if (originalRows) {
@@ -150,25 +145,6 @@ export const DatagridProvider = ({
     };
   }, [sorter]);
 
-  useEffect(() => setOriginalRows(rows), [rows]);
-
-  useEffect(() => {
-    const newColumnMap = createColumnMap(columns);
-    setColumnObject(newColumnMap);
-  }, [columns]);
-
-  useEffect(() => {
-    if (pagination) {
-      const { page, pageSize, total } = pagination;
-      const startIndex = page * pageSize;
-      let endIndex = (page + 1) * pageSize;
-      endIndex = total < endIndex ? total : endIndex;
-      setGridRows(originalRows?.slice(startIndex, endIndex));
-    } else {
-      setGridRows(originalRows);
-    }
-  }, [originalRows, pagination]);
-
   return (
     <DatagridContext.Provider
       value={{
@@ -177,11 +153,13 @@ export const DatagridProvider = ({
         width,
         height,
         sortedBy,
+        options: columnObject,
+        pagination,
         handleColumnSort,
         handleHeaderColumnGrab,
         handleHeaderColumnDrop,
-        options: columnObject,
-        pagination,
+        density,
+        handleDensityChange,
         ...props,
       }}
     >
@@ -191,4 +169,5 @@ export const DatagridProvider = ({
 };
 
 export const useDatagrid = () => useContext(DatagridContext);
+
 export default DatagridProvider;

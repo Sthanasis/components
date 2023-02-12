@@ -2,14 +2,12 @@ import { useMemo, useRef, useState } from 'react';
 import { useDatagrid } from 'src/context/datagrid';
 import DataRow from '../DataRow/DataRow';
 import { VirtualBody, TableContainer } from '../../StyledDataGrid';
-import { ROW_HEIGHT } from '../../utilities/constants';
+import { RENDER_AHEAD } from '../../utilities/constants';
 import GridHeaderContainer from '../../GridHeader/GridHeaderContainer';
 import GridSpinner from '../GridSpinner';
 
-const RENDER_AHEAD = 10;
-
 const VirtualTable = (): JSX.Element => {
-  const { rows, height, loading } = useDatagrid();
+  const { rows, height, loading, density } = useDatagrid();
   const tableRef = useRef<HTMLDivElement>(null);
   const [scrollLeft, setScrollLeft] = useState<number>(0);
   const totalItems = rows.length;
@@ -17,20 +15,20 @@ const VirtualTable = (): JSX.Element => {
   const [scrollTop, setScrollTop] = useState(0);
 
   const start = useMemo(
-    () => Math.max(0, Math.floor(scrollTop / ROW_HEIGHT) - RENDER_AHEAD / 2),
+    () => Math.max(0, Math.floor(scrollTop / density) - RENDER_AHEAD / 2),
     [scrollTop]
   );
 
   const visibleNodesArray = useMemo(() => {
     const count = Math.min(
       rows.length - start,
-      Math.ceil(height / ROW_HEIGHT) + RENDER_AHEAD
+      Math.ceil(height / density) + RENDER_AHEAD
     );
 
     return new Array(count > 0 ? count : 0).fill(null);
   }, [start, rows]);
 
-  const offsetY = start * ROW_HEIGHT;
+  const offsetY = start * density;
 
   const handleScroll = () => {
     requestAnimationFrame(() => {
@@ -52,7 +50,7 @@ const VirtualTable = (): JSX.Element => {
         ) : (
           <VirtualBody
             style={{
-              height: totalItems * ROW_HEIGHT,
+              height: totalItems * density,
             }}
           >
             <div style={{ transform: `translate3d(0px,${offsetY}px,0px)` }}>

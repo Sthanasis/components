@@ -1,9 +1,9 @@
+import { Density } from 'src/types';
 import styled from 'styled-components';
-import { ROW_HEIGHT } from '../../utilities/constants';
 
 export const StyledDataRow = styled.div`
-  ${() => ({
-    height: ROW_HEIGHT,
+  ${({ height }: { height: Density }) => ({
+    height: height,
     display: 'flex',
     alignItems: 'center',
   })}
