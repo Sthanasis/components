@@ -6,7 +6,7 @@ import { ROW_HEIGHT } from '../../utilities/constants';
 import GridHeaderContainer from '../../GridHeader/GridHeaderContainer';
 import GridSpinner from '../GridSpinner';
 
-const RENDER_AHEAD = 30;
+const RENDER_AHEAD = 10;
 
 const VirtualTable = (): JSX.Element => {
   const { rows, height, loading } = useDatagrid();
@@ -26,7 +26,8 @@ const VirtualTable = (): JSX.Element => {
       rows.length - start,
       Math.ceil(height / ROW_HEIGHT) + RENDER_AHEAD
     );
-    return new Array(count).fill(null);
+
+    return new Array(count > 0 ? count : 0).fill(null);
   }, [start, rows]);
 
   const offsetY = start * ROW_HEIGHT;
