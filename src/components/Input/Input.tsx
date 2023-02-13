@@ -1,4 +1,4 @@
-import { IBaseProps, InputElementType } from 'src/types/props';
+import { IBaseProps, InputElementType } from 'src/types';
 import { StyledInput } from './StyledInput';
 export interface IInputProps extends IBaseProps {
   type?: InputElementType;

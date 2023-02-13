@@ -8,15 +8,16 @@ import {
   useState,
 } from 'react';
 import { StyledPopover } from './StyledPopover';
-import { IBaseProps } from 'src/types/props';
+import { IBaseProps } from 'src/types';
 import Backdrop from '../Backdrop';
 import useWindowResize from 'src/utilities/hooks/useWindowResize';
 
 export interface IPopoverProps extends IBaseProps {
-  onClose?: () => void | Promise<void>;
+  onClose: () => void;
   anchorEl?: HTMLButtonElement | null;
   children: ReactNode;
   visible: boolean;
+  handleClick?: (e: MouseEvent<HTMLDivElement>) => void;
 }
 
 type XPositionType = 'right' | 'left' | 'default';
@@ -32,7 +33,7 @@ const getPositionX = (
     case 'right':
       return anchor.right - popup.width;
     default:
-      return anchor.left - popup.width / 4;
+      return anchor.x - popup.width + anchor.width;
   }
 };
 
@@ -51,6 +52,7 @@ const Popover = ({
   children,
   anchorEl,
   visible,
+  handleClick,
   ...rest
 }: IPopoverProps): JSX.Element | null => {
   const popoverRef = useRef<HTMLDivElement>(null);
@@ -61,7 +63,6 @@ const Popover = ({
 
   const anchorToElement = () => {
     if (anchorEl && popoverRef.current) {
-      document.body.style.overflow = 'hidden';
       const anchorRect = anchorEl.getBoundingClientRect();
       let positionX: XPositionType = 'default';
       let positionY: YPositionType = 'top';
@@ -86,14 +87,13 @@ const Popover = ({
     }
   };
 
-  const handleClose = (e?: MouseEvent<HTMLDivElement>) => {
+  const handleBackdropClick = (e?: MouseEvent<HTMLDivElement>) => {
     if (e) {
       if (popoverRef.current?.contains(e.target as Node)) return;
     }
     setCoords(null);
-    document.body.style.overflow = '';
     setShow(false);
-    if (onClose) onClose();
+    onClose();
   };
 
   useEffect(() => {
@@ -101,7 +101,13 @@ const Popover = ({
   }, [show]);
 
   useEffect(() => {
-    if (visible) setShow(true); // this avoids flickering on render
+    if (visible) {
+      setShow(true);
+      document.body.style.overflow = 'hidden';
+    } else {
+      setShow(false);
+      document.body.style.overflow = 'auto';
+    }
   }, [visible]);
 
   useLayoutEffect(() => {
@@ -110,13 +116,14 @@ const Popover = ({
 
   if (show)
     return createPortal(
-      <Backdrop onClose={handleClose}>
+      <Backdrop onClose={handleBackdropClick}>
         <StyledPopover
           {...rest}
           x={coords?.x}
           y={coords?.y}
           visible={show}
           ref={popoverRef}
+          onClick={handleClick}
         >
           {children}
         </StyledPopover>

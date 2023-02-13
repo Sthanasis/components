@@ -3,7 +3,7 @@ import Popover from '../../src/components/Popover';
 
 const setup = () => {
   const utils = render(
-    <Popover aria-label="popover" visible={true}>
+    <Popover aria-label="popover" visible={true} onClose={jest.fn}>
       Test
     </Popover>
   );

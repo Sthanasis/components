@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import type { ThemeVariantType, ButtonType } from '../../types/types';
-import type { ThemeType } from '../../utilities/theme';
-import { opacityHexPrefix } from '../../utilities/opacityHexPrefix';
+import type { ThemeVariantType, ButtonType } from 'src/types/types';
+import type { ThemeType } from 'src/utilities/theme';
+import { opacityHexPrefix } from 'src/utilities/opacityHexPrefix';
 
 interface IStyledButtonProps {
   theme: ThemeType;
@@ -11,13 +11,20 @@ interface IStyledButtonProps {
   fullwidth: boolean;
   icon: boolean;
   contrast: boolean;
+  rounded?: boolean;
 }
 
 export const StyledButton = styled.button`
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   font-size: ${({ theme }: IStyledButtonProps) => theme.fontSize};
-  padding: ${({ theme, icon }: IStyledButtonProps) =>
-    icon ? '10px' : theme.padding};
+  padding: ${({ theme, icon }: IStyledButtonProps) => {
+    if (icon) return '10px';
+    return theme.padding;
+  }};
+  ${({ rounded }: IStyledButtonProps) => ({
+    maxWidth: rounded ? '33px' : undefined,
+    height: rounded ? '33px' : undefined,
+  })};
   overflow: hidden;
   cursor: pointer;
   display: flex;
@@ -29,8 +36,8 @@ export const StyledButton = styled.button`
   border: none;
   outline: none;
   background-color: transparent;
-  border-radius: ${({ theme, icon }: IStyledButtonProps) =>
-    icon ? '50%' : theme.borderRadius};
+  border-radius: ${({ theme, icon, rounded }: IStyledButtonProps) =>
+    icon || rounded ? '50%' : theme.borderRadius};
   ${({ theme, color, elevated, variant }: IStyledButtonProps) => {
     const mainColor = theme.palette[color].main;
     switch (variant) {

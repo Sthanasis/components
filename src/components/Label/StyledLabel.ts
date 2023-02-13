@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { ThemeType } from 'src/utilities/theme';
-import { slideTop } from '../../utilities/animations';
+import { slideTop } from 'src/utilities/animations';
 import { TextfieldVariant } from '../TextField/TextField';
 import { ThemeVariantType } from 'src/types/types';
 import { opacityHexPrefix } from 'src/utilities/opacityHexPrefix';

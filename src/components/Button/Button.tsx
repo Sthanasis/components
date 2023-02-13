@@ -1,7 +1,7 @@
 import { MouseEvent, ReactNode, memo } from 'react';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { useTheme } from 'styled-components';
-import { IBaseProps } from 'src/types/props';
+import { IBaseProps } from 'src/types';
 import type { ThemeVariantType, ButtonType } from 'src/types/types';
 import { StyledButton } from './StyledButton';
 import Ripple from '../Ripple';
@@ -19,6 +19,7 @@ export interface IButtonProps extends IBaseProps {
   iconStart?: IconProp;
   iconEnd?: IconProp;
   icon?: IconProp;
+  rounded?: boolean;
 }
 
 const Button = ({

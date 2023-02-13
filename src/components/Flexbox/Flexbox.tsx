@@ -1,6 +1,6 @@
 import { CSSProperties } from 'react';
 
-import { IBaseProps } from 'src/types/props';
+import { IBaseProps } from 'src/types';
 
 export type FlexAlignmentType =
   | 'center'

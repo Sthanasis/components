@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ripple } from '../../utilities/animations';
+import { ripple } from 'src/utilities/animations';
 
 interface IRipperContainerProps {
   color: string;

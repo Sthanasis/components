@@ -15,7 +15,10 @@ const getTextColor = ({ theme, variant }: IStyledTextProps) => {
 
 const StyledSpan = styled.span`
   color: ${getTextColor};
-  font-size: 18px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 15px;
 `;
 const StyledParagraph = styled.p`
   color: ${getTextColor};

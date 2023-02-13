@@ -1,6 +1,6 @@
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import React, { useState } from 'react';
-import { IBaseProps } from 'src/types/props';
+import { IBaseProps } from 'src/types';
 import { ThemeVariantType } from 'src/types/types';
 import TextField from '../TextField';
 import { TextfieldVariant } from '../TextField/TextField';
