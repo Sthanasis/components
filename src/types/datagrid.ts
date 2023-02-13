@@ -69,7 +69,7 @@ export interface ISortMessageEventData {
   };
 }
 
-export interface IDataGridProps {
+export interface IDataGridProps extends IBaseProps {
   rows: RowType[];
   columns: ColumnType[];
   height?: number;

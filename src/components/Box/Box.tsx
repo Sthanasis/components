@@ -6,8 +6,12 @@ interface IBoxProps extends IBaseProps {
   children: ReactNode;
 }
 
-const Box = ({ children, ...props }: IBoxProps): JSX.Element => {
-  return <StyledBox {...props}>{children}</StyledBox>;
+const Box = ({ children, style = {}, ...props }: IBoxProps): JSX.Element => {
+  return (
+    <StyledBox style={style} {...props}>
+      {children}
+    </StyledBox>
+  );
 };
 
 export default Box;

@@ -1,14 +1,14 @@
 import MenuItem from 'src/components/MenuItem';
 import PopoverMenu from 'src/components/PopoverMenu';
 import { useDatagrid } from 'src/context/datagrid';
-import { Density } from 'src/types';
+import { Density, IBaseProps } from 'src/types';
 import { DensityImage, StyledGridControls } from './GridControls.styled';
 
-const GridControls = (): JSX.Element => {
+const GridControls = (props: IBaseProps): JSX.Element => {
   const { density, handleDensityChange } = useDatagrid();
 
   return (
-    <StyledGridControls>
+    <StyledGridControls {...props}>
       <PopoverMenu label="DENSITY" onChange={(v) => handleDensityChange(+v)}>
         <MenuItem value={Density.sm} selected={density === Density.sm}>
           <DensityImage>Compact</DensityImage>

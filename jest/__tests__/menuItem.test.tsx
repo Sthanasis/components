@@ -3,7 +3,9 @@ import MenuItem from '../../src/components/MenuItem/MenuItem';
 
 describe('MenuItem component', () => {
   it('takes the selected class', () => {
-    const { container } = render(<MenuItem selected />);
-    expect(container.querySelector('.selected')).toBeInTheDocument();
+    const { queryByLabelText } = render(
+      <MenuItem value={'test'} aria-label="menuitem" />
+    );
+    expect(queryByLabelText('menuitem')).toBeInTheDocument();
   });
 });

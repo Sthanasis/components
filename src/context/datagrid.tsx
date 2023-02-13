@@ -19,6 +19,7 @@ import type {
 } from 'src/types';
 import { useColumns, useRows } from 'src/utilities/hooks/datagrid/hooks';
 import { createColumnMap } from 'src/components/DataGrid/utilities/methods';
+import { getSortWorker } from 'src/utilities/workers/getters';
 
 type DragCallback = (e: DragEvent<HTMLDivElement>, pos: number) => void;
 interface IDatagridContextMethods {
@@ -126,9 +127,8 @@ export const DatagridProvider = ({
   };
 
   useEffect(() => {
-    setSorter(
-      new Worker(new URL('../utilities/workers/sortWorker.ts', import.meta.url))
-    );
+    const worker = getSortWorker();
+    setSorter(worker as Worker);
   }, []);
 
   useEffect(() => {
