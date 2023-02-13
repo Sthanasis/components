@@ -41,6 +41,8 @@ jobs:
           echo "release=$output" >> $GITHUB_OUTPUT
         env:
           JSON: ${{ toJSON(github.event.commits) }}
+      - name: Build
+        run: npm run build
 
       - name: Release
         if: steps.messages.outputs.release != ''
