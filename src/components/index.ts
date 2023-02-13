@@ -13,5 +13,5 @@ export { default as TextField } from './TextField';
 export { default as Poopover } from './Popover';
 export { default as Backdrop } from './Backdrop';
 export { default as PopoverMenu } from './PopoverMenu';
-export { default as Datagrid } from './DataGrid';
+export { default as DataGrid } from './DataGrid';
 export { default as Box } from './Box';

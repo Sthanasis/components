@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { fakeData, smallDataset } from 'src/assets/data/dummyData';
 import { ThemeProvider } from 'src/context/theme';
 import { defaultTheme } from 'src/utilities/theme';
-import DataGrid from 'src/components/DataGrid';
+import { DataGrid } from 'src';
 import { useEffect, useState } from 'react';
 import { IPaginationOptions, RowType } from 'src/types';
 
@@ -62,9 +62,7 @@ const Template: ComponentStory<typeof DataGrid> = (args) => {
 
   useEffect(() => {
     setWorker(
-      new Worker(
-        new URL('../src/utilities/workers/dataWorker.ts', import.meta.url)
-      )
+      new Worker(new URL('../src/assets/data/dataWorker.ts', import.meta.url))
     );
   }, []);
 
