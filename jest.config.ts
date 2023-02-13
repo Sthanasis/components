@@ -6,8 +6,14 @@ const config: Config = {
   testEnvironment: 'jsdom',
   moduleNameMapper: {
     '\\.(ttf)$': '<rootDir>/jest/fileMocks.ts',
+    '.*getters': '<rootDir>/jest/sortWorker.mock.ts',
   },
-  collectCoverageFrom: ['src/**/*.{ts,tsx}', '!src/index.ts', '!src/assets/*'],
+  collectCoverageFrom: [
+    'src/**/*.{ts,tsx}',
+    '!src/index.ts',
+    '!src/assets/*',
+    '!src/utilities/workers/*',
+  ],
   setupFilesAfterEnv: ['<rootDir>/setupTests.ts'],
   moduleDirectories: ['node_modules', 'jest'],
   modulePaths: ['<rootDir>', 'src/*'],

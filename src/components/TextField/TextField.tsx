@@ -1,13 +1,13 @@
 import React, { useState, memo, useEffect } from 'react';
-import { useTheme } from 'styled-components';
-import Label from '../Label';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { useTheme } from 'styled-components';
 import Input from 'src/components/Input';
 import { IInputProps } from 'src/components/Input/Input';
 import { isEmpty } from 'src/utilities/utils';
-import { StyledTextField } from './StyledTextField';
-import Icon from '../Icon';
 import { ThemeVariantType } from 'src/types/types';
+import { StyledTextField } from './StyledTextField';
+import Label from '../Label';
+import Icon from '../Icon';
 
 export type TextfieldVariant = 'outlined' | 'filled';
 

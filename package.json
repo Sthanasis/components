@@ -28,11 +28,10 @@
   ],
   "scripts": {
     "test": "jest --coverage",
-    "build": "vite build && tsc",
-    "rollup": "rollup -c",
+    "build": "vite build && tsc --build ./tsconfig.node.json && CP ./package.json ./dist",
     "preview": "vite preview",
-    "lint": "eslint",
-    "storybook": "start-storybook -p 6006",
+    "lint": "eslint src",
+    "storybook": "start-storybook -p 6006 -h localhost",
     "build-storybook": "build-storybook"
   },
   "author": "sthanasis",
@@ -81,9 +80,9 @@
     "@fortawesome/react-fontawesome": "^0.x"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.2.1",
-    "@fortawesome/free-regular-svg-icons": "^6.2.1",
-    "@fortawesome/free-solid-svg-icons": "^6.2.1",
+    "@fortawesome/fontawesome-svg-core": "^6.3.0",
+    "@fortawesome/free-regular-svg-icons": "^6.3.0",
+    "@fortawesome/free-solid-svg-icons": "^6.3.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "react": "18.x",
     "react-dom": "18.x",

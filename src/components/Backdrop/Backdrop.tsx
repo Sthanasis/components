@@ -1,5 +1,5 @@
 import { ReactNode, KeyboardEvent } from 'react';
-import { IBaseProps } from 'src/types/props';
+import { IBaseProps } from 'src/types';
 import { StyledBackdrop } from './StyledBackdrop';
 
 interface IBackdropProps extends IBaseProps {

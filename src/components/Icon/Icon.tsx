@@ -1,6 +1,6 @@
 import { IconProp, SizeProp } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IBaseProps } from 'src/types/props';
+import { IBaseProps } from 'src/types';
 import { StyledIcon } from './StyledIcon';
 
 export type IconAlignType = 'start' | 'end' | 'middle';

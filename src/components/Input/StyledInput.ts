@@ -1,4 +1,4 @@
-import { IBaseProps } from 'src/types/props';
+import { IBaseProps } from 'src/types';
 import styled, { CSSObject } from 'styled-components';
 import { ThemeType } from 'src/utilities/theme';
 

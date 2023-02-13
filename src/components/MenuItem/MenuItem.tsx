@@ -1,25 +1,28 @@
-import Button from '../../components/Button';
-import { IButtonProps } from '../Button/Button';
-interface IMenuItemProps extends IButtonProps {
+import { ReactNode } from 'react';
+import { IBaseProps } from 'src/types';
+import { StyledMenuItem } from './MenuItem.styled';
+
+interface IMenuItemProps extends IBaseProps {
   selected?: boolean;
+  children?: ReactNode;
+  value: string | number;
 }
 
 const MenuItem = ({
   selected,
   children,
+  value,
+
   ...props
-}: IMenuItemProps): JSX.Element => {
-  const classList = ['menuItem'];
-  if (selected) {
-    classList.push('selected');
-  }
-  return (
-    <div className={classList.join(' ')}>
-      <Button variant="contained" elevated={false} {...props}>
-        {children}
-      </Button>
-    </div>
-  );
-};
+}: IMenuItemProps): JSX.Element => (
+  <StyledMenuItem
+    role="button"
+    value={value}
+    isselected={!!selected}
+    aria-label={props['aria-label']}
+  >
+    {children ?? value}
+  </StyledMenuItem>
+);
 
 export default MenuItem;

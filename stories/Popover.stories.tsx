@@ -4,6 +4,7 @@ import { ThemeProvider } from 'src/context/theme';
 import { defaultTheme } from 'src/utilities/theme';
 import Popover from 'src/components/Popover';
 import Button from 'src/components/Button';
+import useAnchoreElement from 'src/utilities/hooks/useAnchorElement';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -15,9 +16,8 @@ export default {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof Popover> = () => {
-  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+  const { anchorEl, setAnchorEl, visible } = useAnchoreElement(null);
   const [position, setPosition] = useState('middle');
-  const visible = Boolean(anchorEl);
 
   const showPopover = (e: MouseEvent<HTMLButtonElement>, position: string) => {
     setPosition(position);
@@ -35,7 +35,7 @@ const Template: ComponentStory<typeof Popover> = () => {
           variant={'contained'}
           onClick={(e) => showPopover(e, 'right')}
         >
-          LEFT
+          RIGHT
         </Button>
         <Button
           style={{
@@ -53,12 +53,12 @@ const Template: ComponentStory<typeof Popover> = () => {
           variant={'contained'}
           onClick={(e) => showPopover(e, 'left')}
         >
-          RIGHT
+          LEFT
         </Button>
       </div>
 
       <Popover visible={visible} onClose={closePopover} anchorEl={anchorEl}>
-        <div>Popup with {position} position</div>
+        <div>Popup extending to the {position}</div>
       </Popover>
     </ThemeProvider>
   );

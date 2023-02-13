@@ -2,10 +2,10 @@ import styled, { css } from 'styled-components';
 import {
   indeterminate_first,
   indeterminate_second,
-} from '../../utilities/animations';
+} from 'src/utilities/animations';
 import { ThemeType } from 'src/utilities/theme';
-import { opacityHexPrefix } from '../../utilities/opacityHexPrefix';
-import { spin } from '../../utilities/animations';
+import { opacityHexPrefix } from 'src/utilities/opacityHexPrefix';
+import { spin } from 'src/utilities/animations';
 import { ThemeVariantType } from 'src/types/types';
 
 interface IProps {
@@ -18,8 +18,8 @@ export const StyledProgress = styled.div(
   ({ type = 'spinner', theme, color }: IProps) => {
     if (type === 'spinner') {
       return css`
-        height: ${theme.fontSize};
-        width: ${theme.fontSize};
+        height: calc(${theme.fontSize}*2);
+        width: calc(${theme.fontSize}*2);
         border: 0.25rem solid ${theme.palette[color].main}${opacityHexPrefix[50]};
         border-top: 0.25rem solid ${theme.palette[color].main};
         border-radius: 50%;
