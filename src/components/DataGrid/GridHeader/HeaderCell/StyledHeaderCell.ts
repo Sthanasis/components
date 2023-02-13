@@ -54,6 +54,5 @@ export const HeaderActionsContainer = styled.div`
 `;
 export const StyledCellBorder = styled.div`
   content: '|';
-  cursor: col-resize;
-  resize: horizontal;
+  cursor: default;
 `;

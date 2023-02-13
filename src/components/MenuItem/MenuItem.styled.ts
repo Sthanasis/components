@@ -3,20 +3,20 @@ import { ThemeType } from 'src/utilities/theme';
 import styled from 'styled-components';
 
 interface IStyledMenuItemProps {
-  selected: boolean;
+  isselected: boolean;
   theme?: ThemeType;
 }
 
-export const StyledMenuItem = styled.div`
-  ${({ selected, theme }: IStyledMenuItemProps) => ({
+export const StyledMenuItem = styled.option`
+  ${({ isselected, theme }: IStyledMenuItemProps) => ({
     display: 'flex',
-    backgroundColor: selected ? theme?.basicPalette.lightgray : 'transparent',
+    backgroundColor: isselected ? theme?.basicPalette.lightgray : 'transparent',
     justifyContent: 'flex-start',
     padding: theme?.padding,
     cursor: 'pointer',
   })};
   &:hover {
-    background-color: ${({ theme, selected }) =>
-        !selected && theme?.basicPalette.lightgray}${opacityHexPrefix[50]};
+    background-color: ${({ theme, isselected }) =>
+        !isselected && theme?.basicPalette.lightgray}${opacityHexPrefix[50]};
   }
 `;

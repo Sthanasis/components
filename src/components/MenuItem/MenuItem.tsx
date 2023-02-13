@@ -6,21 +6,20 @@ interface IMenuItemProps extends IBaseProps {
   selected?: boolean;
   children?: ReactNode;
   value: string | number;
-  onClick: (arg: number | string) => void;
 }
 
 const MenuItem = ({
   selected,
   children,
   value,
-  onClick,
+
   ...props
 }: IMenuItemProps): JSX.Element => (
   <StyledMenuItem
     role="button"
-    selected={!!selected}
+    value={value}
+    isselected={!!selected}
     aria-label={props['aria-label']}
-    onClick={onClick.bind(this, value)}
   >
     {children ?? value}
   </StyledMenuItem>

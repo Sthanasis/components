@@ -17,6 +17,7 @@ export interface IPopoverProps extends IBaseProps {
   anchorEl?: HTMLButtonElement | null;
   children: ReactNode;
   visible: boolean;
+  handleClick?: (e: MouseEvent<HTMLDivElement>) => void;
 }
 
 type XPositionType = 'right' | 'left' | 'default';
@@ -51,6 +52,7 @@ const Popover = ({
   children,
   anchorEl,
   visible,
+  handleClick,
   ...rest
 }: IPopoverProps): JSX.Element | null => {
   const popoverRef = useRef<HTMLDivElement>(null);
@@ -121,6 +123,7 @@ const Popover = ({
           y={coords?.y}
           visible={show}
           ref={popoverRef}
+          onClick={handleClick}
         >
           {children}
         </StyledPopover>

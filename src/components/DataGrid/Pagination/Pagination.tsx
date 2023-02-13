@@ -3,11 +3,9 @@ import Box from 'src/components/Box';
 import Button from 'src/components/Button';
 
 import MenuItem from 'src/components/MenuItem';
-import Popover from 'src/components/Popover';
+import PopoverMenu from 'src/components/PopoverMenu';
 import Text from 'src/components/Text';
 import { useDatagrid } from 'src/context/datagrid';
-
-import useAnchoreElement from 'src/utilities/hooks/useAnchorElement';
 import { StyledPaginationContainer } from './Pagination.styled';
 
 const RowsPerPage = ({
@@ -21,30 +19,16 @@ const RowsPerPage = ({
   rowsPerPage: number;
   onRowsPerPageChange: (arg: number) => void;
 }) => {
-  const { anchorEl, visible, showPopover, closePopover } =
-    useAnchoreElement(null);
-
-  const handleRowsPerPageChange = (p: number) => {
-    onRowsPerPageChange(p);
-    closePopover();
-  };
-
   return (
-    <>
-      <Button rounded onClick={showPopover}>
-        {title}
-      </Button>
-      <Popover visible={visible} anchorEl={anchorEl} onClose={closePopover}>
-        {options.map((option) => (
-          <MenuItem
-            key={`pagePerOption${option}`}
-            value={option}
-            selected={option === rowsPerPage}
-            onClick={() => handleRowsPerPageChange(option)}
-          />
-        ))}
-      </Popover>
-    </>
+    <PopoverMenu label={title} onChange={(v) => onRowsPerPageChange(+v)}>
+      {options.map((option) => (
+        <MenuItem
+          key={`pagePerOption${option}`}
+          value={option}
+          selected={option === rowsPerPage}
+        />
+      ))}
+    </PopoverMenu>
   );
 };
 
