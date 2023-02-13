@@ -3,3 +3,4 @@
 /coverage
 .npmrc
 .DS_Store
+tsconfig.node.tsbuildinfo
