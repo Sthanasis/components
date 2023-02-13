@@ -5,8 +5,9 @@ import { useDatagrid } from 'src/context/datagrid';
 import { IHeaderCellProps, SortDirectionType } from 'src/types';
 import {
   StyledHeaderCell,
-  HeaderCellContainer,
   HeaderActionsContainer,
+  StyledHeaderCellContainer,
+  StyledCellBorder,
 } from './StyledHeaderCell';
 import {
   faSortAmountDown,
@@ -42,7 +43,6 @@ const getNextSortOrder = (direction: SortDirectionType) => {
 const HeaderCell = ({
   value,
   field,
-  withBorder = false,
   width,
   height,
   index,
@@ -111,22 +111,22 @@ const HeaderCell = ({
   } else if (sortIcon && sortDir !== 'default') {
     opacity = 1;
   }
+
   return (
-    <StyledHeaderCell
-      data-field={field}
-      withBorder={withBorder}
-      width={width}
-      height={height}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      onDragStart={handleGrab}
-      onDragOver={handleDragOver}
-      onDrop={handleDrop}
-      grabed={grabed}
-      draggable
-      {...rest}
-    >
-      <HeaderCellContainer>
+    <StyledHeaderCellContainer width={width} height={height}>
+      <StyledHeaderCell
+        data-field={field}
+        width={width}
+        height={height}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        onDragStart={handleGrab}
+        onDragOver={handleDragOver}
+        onDrop={handleDrop}
+        grabed={grabed}
+        draggable
+        {...rest}
+      >
         <Text>{content}</Text>
         <HeaderActionsContainer opacity={opacity}>
           {sortIcon && (
@@ -137,8 +137,9 @@ const HeaderCell = ({
             />
           )}
         </HeaderActionsContainer>
-      </HeaderCellContainer>
-    </StyledHeaderCell>
+      </StyledHeaderCell>
+      <StyledCellBorder>|</StyledCellBorder>
+    </StyledHeaderCellContainer>
   );
 };
 

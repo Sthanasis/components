@@ -15,13 +15,15 @@ export type ColumnType = {
 export type RowType = {
   [key: string | 'id']: string | number | undefined | null;
 };
-export interface IStyledDataCellProps {
-  withBorder: boolean;
+interface IStyledCellProps {
   width?: number | string;
   height?: number | string;
   theme: ThemeType;
 }
-export interface IStyledHeaderCellProps extends IStyledDataCellProps {
+export interface IStyledDataCellProps extends IStyledCellProps {
+  withBorder: boolean;
+}
+export interface IStyledHeaderCellProps extends IStyledCellProps {
   grabed: boolean;
 }
 

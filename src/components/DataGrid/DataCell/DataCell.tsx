@@ -5,7 +5,7 @@ import { StyledDataCell } from './StyledDataCell';
 const DataCell = ({
   value,
   field,
-  withBorder = false,
+  withBorder,
   width,
   height,
   ...rest
@@ -15,7 +15,7 @@ const DataCell = ({
   return (
     <StyledDataCell
       data-field={field}
-      withBorder={withBorder}
+      withBorder={!!withBorder}
       width={width}
       height={height}
       {...rest}
