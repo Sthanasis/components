@@ -2,13 +2,13 @@ import { memo } from 'react';
 import { useDatagrid } from 'src/context/datagrid';
 import HeaderCell from './HeaderCell';
 
-import { StyledGridHeader } from './StyledGridHeader';
+import { StyledHeaderList } from './StyledGridHeader';
 
-const GridHeader = (): JSX.Element => {
+const ColumnList = (): JSX.Element => {
   const { columns } = useDatagrid();
 
   return (
-    <StyledGridHeader>
+    <StyledHeaderList>
       {columns.map(
         (c, i) =>
           !c.hideColumn && (
@@ -22,8 +22,8 @@ const GridHeader = (): JSX.Element => {
             />
           )
       )}
-    </StyledGridHeader>
+    </StyledHeaderList>
   );
 };
 
-export default memo(GridHeader);
+export default memo(ColumnList);

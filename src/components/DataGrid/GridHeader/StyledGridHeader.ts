@@ -1,7 +1,7 @@
 import { ThemeType } from 'src/utilities/theme';
 import styled from 'styled-components';
 
-export const StyledGridHeader = styled.div`
+export const StyledHeaderList = styled.div`
   ${() => ({ display: 'flex' })}
 `;
 

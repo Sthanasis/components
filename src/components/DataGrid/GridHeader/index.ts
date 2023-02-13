@@ -1,1 +1,1 @@
-export { default } from './GridHeader';
+export { default } from './ColumnList';

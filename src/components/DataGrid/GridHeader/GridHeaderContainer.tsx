@@ -1,5 +1,5 @@
 import GridControls from './GridControls';
-import GridHeader from './GridHeader';
+import ColumnList from './ColumnList';
 import { StyledContainer } from './StyledGridHeader';
 
 const GridHeaderContainer = ({ scrollLeft }: { scrollLeft: number }) => (
@@ -10,7 +10,7 @@ const GridHeaderContainer = ({ scrollLeft }: { scrollLeft: number }) => (
         transform: `translate3d(-${scrollLeft}px,0px,0px)`,
       }}
     >
-      <GridHeader />
+      <ColumnList />
     </div>
   </StyledContainer>
 );
