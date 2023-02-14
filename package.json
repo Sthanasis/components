@@ -3,7 +3,7 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
   },
-  "version": "0.6.0",
+  "version": "0.6.2",
   "description": "React Component Library",
   "type": "module",
   "keywords": [
@@ -28,7 +28,7 @@
   ],
   "scripts": {
     "test": "jest --coverage",
-    "build": "vite build && tsc --build ./tsconfig.node.json && CP ./package.json ./dist",
+    "build": "vite build && tsc --build ./tsconfig.prod.json",
     "preview": "vite preview",
     "lint": "eslint src",
     "storybook": "start-storybook -p 6006 -h localhost",

@@ -16,7 +16,7 @@ const MenuItem = ({
   ...props
 }: IMenuItemProps): JSX.Element => (
   <StyledMenuItem
-    role="button"
+    role="option"
     value={value}
     isselected={!!selected}
     aria-label={props['aria-label']}
