@@ -114,6 +114,6 @@
     "typeRoots": ["node_modules/@types"],
     "types": ["node", "jest", "@testing-library/jest-dom"]
   },
-  "include": ["src", "stories", ".storybook", "jest", "./fonts.d.ts"],
+  "include": ["src", "stories", ".storybook", "jest", "src/fonts.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
