@@ -41,8 +41,13 @@ jobs:
           echo "release=$output" >> $GITHUB_OUTPUT
         env:
           JSON: ${{ toJSON(github.event.commits) }}
+
+      - name: Install Dependencies
+        run: 
       - name: Build
-        run: npm run build
+        run: | 
+        npm install
+        npm run build
 
       - name: Release
         if: steps.messages.outputs.release != ''
