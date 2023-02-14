@@ -9,7 +9,7 @@ export default defineConfig({
     react(),
     dts({
       insertTypesEntry: true,
-      tsConfigFilePath: './tsconfig.json',
+      tsConfigFilePath: './tsconfig.prod.json',
     }),
   ],
   resolve: {
