@@ -24,12 +24,7 @@ export default defineConfig({
     format: 'es',
   },
   build: {
-    lib: {
-      entry: path.resolve(__dirname, './src/index.ts'),
-      name: 'mylib',
-      formats: ['es', 'umd'],
-      fileName: (format) => `index.${format}.js`,
-    },
+    emptyOutDir: true,
     rollupOptions: {
       external: ['react', 'react-dom', 'styled-components'],
       output: {
@@ -38,6 +33,9 @@ export default defineConfig({
           'react-dom': 'Reactdom',
           'styled-components': 'Styled',
         },
+      },
+      input: {
+        index: path.resolve(__dirname, 'src/index.ts'),
       },
     },
     target: 'esnext',

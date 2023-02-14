@@ -21,7 +21,11 @@ export const ThemeProvider = ({
   children,
   theme = defaultTheme,
 }: IThemeProviderProps) => {
-  const currentTheme = { ...defaultTheme, theme };
+  const currentTheme = {
+    ...defaultTheme,
+    // overide default theme with provided theme
+    ...theme,
+  };
   return (
     <ThemeContext.Provider value={{ theme: currentTheme }}>
       <StyledThemeProvider theme={currentTheme}>{children}</StyledThemeProvider>
