@@ -24,7 +24,6 @@ export default defineConfig({
     format: 'es',
   },
   build: {
-    sourcemap: true,
     lib: {
       entry: path.resolve(__dirname, './src/index.ts'),
       name: 'mylib',
