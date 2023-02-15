@@ -83,7 +83,7 @@ const Template: ComponentStory<typeof DataGrid> = (args) => {
       worker?.terminate();
     };
   }, [worker]);
-  console.log(args);
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <DataGrid
