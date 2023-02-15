@@ -7,7 +7,8 @@ import GridHeaderContainer from '../../GridHeader/GridHeaderContainer';
 import GridSpinner from '../GridSpinner';
 
 const VirtualTable = (): JSX.Element => {
-  const { rows, height, loading, density } = useDatagrid();
+  const { rows, height, loading, density, densityOptions } = useDatagrid();
+  const rowHeight = densityOptions[density];
   const tableRef = useRef<HTMLDivElement>(null);
   const [scrollLeft, setScrollLeft] = useState<number>(0);
   const totalItems = rows.length;
@@ -15,20 +16,20 @@ const VirtualTable = (): JSX.Element => {
   const [scrollTop, setScrollTop] = useState(0);
 
   const start = useMemo(
-    () => Math.max(0, Math.floor(scrollTop / density) - RENDER_AHEAD / 2),
+    () => Math.max(0, Math.floor(scrollTop / rowHeight) - RENDER_AHEAD / 2),
     [scrollTop]
   );
 
   const visibleNodesArray = useMemo(() => {
     const count = Math.min(
       rows.length - start,
-      Math.ceil(height / density) + RENDER_AHEAD
+      Math.ceil(height / rowHeight) + RENDER_AHEAD
     );
 
     return new Array(count > 0 ? count : 0).fill(null);
   }, [start, rows]);
 
-  const offsetY = start * density;
+  const offsetY = start * rowHeight;
 
   const handleScroll = () => {
     requestAnimationFrame(() => {
@@ -50,7 +51,7 @@ const VirtualTable = (): JSX.Element => {
         ) : (
           <VirtualBody
             style={{
-              height: totalItems * density,
+              height: totalItems * rowHeight,
             }}
           >
             <div style={{ transform: `translate3d(0px,${offsetY}px,0px)` }}>

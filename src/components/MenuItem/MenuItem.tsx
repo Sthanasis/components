@@ -1,12 +1,5 @@
-import { ReactNode } from 'react';
-import { IBaseProps } from 'src/types';
+import { IMenuItemProps } from 'src/types';
 import { StyledMenuItem } from './MenuItem.styled';
-
-interface IMenuItemProps extends IBaseProps {
-  selected?: boolean;
-  children?: ReactNode;
-  value: string | number;
-}
 
 const MenuItem = ({
   selected,

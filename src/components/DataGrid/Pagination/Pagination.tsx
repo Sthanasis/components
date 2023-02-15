@@ -1,4 +1,9 @@
-import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import {
+  faAngleLeft,
+  faAngleRight,
+  faAnglesLeft,
+  faAnglesRight,
+} from '@fortawesome/free-solid-svg-icons';
 import Box from 'src/components/Box';
 import Button from 'src/components/Button';
 
@@ -54,6 +59,15 @@ const Pagination = (): JSX.Element => {
     }
   };
 
+  const handleGoToLastPage = () => {
+    const lastPageIndex = Math.ceil(total / pageSize);
+    handlePageChange(lastPageIndex - 1);
+  };
+
+  const handleGoToFirstPage = () => {
+    handlePageChange(0);
+  };
+
   const startIndicator = pageSize * page + 1;
   let endIndicator = pageSize * (page + 1);
   endIndicator = total < endIndicator ? total : endIndicator;
@@ -78,6 +92,12 @@ const Pagination = (): JSX.Element => {
         <Button
           rounded
           disabled={page === 0}
+          icon={faAnglesLeft}
+          onClick={handleGoToFirstPage}
+        />
+        <Button
+          rounded
+          disabled={page === 0}
           icon={faAngleLeft}
           onClick={() => handlePageChange(page - 1)}
         />
@@ -86,6 +106,12 @@ const Pagination = (): JSX.Element => {
           disabled={endIndicator === total}
           icon={faAngleRight}
           onClick={() => handlePageChange(page + 1)}
+        />
+        <Button
+          rounded
+          disabled={endIndicator === total}
+          icon={faAnglesRight}
+          onClick={handleGoToLastPage}
         />
       </Box>
     </StyledPaginationContainer>

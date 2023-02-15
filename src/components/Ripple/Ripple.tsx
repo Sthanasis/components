@@ -1,16 +1,8 @@
 import { useState, useLayoutEffect, MouseEvent } from 'react';
+import { IRippleProps } from 'src/types';
+import { RippleType } from 'src/types/types';
 import { RippleContainer } from './StyledRipple';
-interface IRippleProps {
-  duration?: number;
-  color?: string;
-  disabled?: boolean;
-}
 
-type RippleType = {
-  x: number;
-  y: number;
-  size: number;
-};
 const useDebouncedRippleCleanUp = (
   rippleCount: number,
   duration: number,

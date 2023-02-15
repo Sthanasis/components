@@ -7,7 +7,7 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { Density, IPaginationOptions } from 'src/types';
+import { IPaginationOptions } from 'src/types';
 
 import type {
   ColumnType,
@@ -20,20 +20,22 @@ import type {
 import { useColumns, useRows } from 'src/utilities/hooks/datagrid/hooks';
 import { createColumnMap } from 'src/components/DataGrid/utilities/methods';
 import { getSortWorker } from 'src/utilities/workers/getters';
+import { DensityMapType, DensityType } from 'src/types/types';
 
 type DragCallback = (e: DragEvent<HTMLDivElement>, pos: number) => void;
 interface IDatagridContextMethods {
   handleColumnSort: (field: string, direction: SortDirectionType) => void;
   handleHeaderColumnGrab: DragCallback;
   handleHeaderColumnDrop: DragCallback;
-  handleDensityChange: (arg: Density) => void;
+  handleDensityChange: (arg: DensityType) => void;
 }
 interface IDatagridContext extends IDatagridContextMethods {
   columns: ColumnType[];
   rows: RowType[];
   height: number;
   width: CSSProperties['width'];
-  density: Density;
+  density: DensityType;
+  densityOptions: DensityMapType;
   sortedBy?: string;
   options?: ColumnObjectType;
   loading?: boolean;
@@ -45,13 +47,18 @@ interface IDatagridProviderProps extends IDataGridProps {
 }
 
 const voidFn = () => ({});
-
+const densityMap: DensityMapType = {
+  sm: 30,
+  md: 45,
+  lg: 60,
+};
 const initialState: IDatagridContext = {
   rows: [],
   columns: [],
   height: 500,
   width: '100%',
-  density: Density.md,
+  density: 'md',
+  densityOptions: densityMap,
   handleColumnSort: voidFn,
   handleHeaderColumnGrab: voidFn,
   handleHeaderColumnDrop: voidFn,
@@ -67,6 +74,8 @@ export const DatagridProvider = ({
   width = initialState.width,
   height = initialState.height,
   pagination,
+  density: densityProp,
+  densityOptions,
   ...props
 }: IDatagridProviderProps) => {
   const { gridRows, originalRows, setGridRows, setOriginalRows } = useRows(
@@ -78,11 +87,11 @@ export const DatagridProvider = ({
     useColumns(columns);
 
   const [sortedBy, setSortedBy] = useState<string>();
-  const [density, setDensity] = useState(initialState.density);
+  const [density, setDensity] = useState(densityProp ?? initialState.density);
 
   const [sorter, setSorter] = useState<Worker>();
 
-  const handleDensityChange = (d: Density) => {
+  const handleDensityChange = (d: DensityType) => {
     setDensity(d);
   };
 
@@ -160,6 +169,7 @@ export const DatagridProvider = ({
         handleHeaderColumnDrop,
         density,
         handleDensityChange,
+        densityOptions: densityOptions ?? initialState.densityOptions,
         ...props,
       }}
     >

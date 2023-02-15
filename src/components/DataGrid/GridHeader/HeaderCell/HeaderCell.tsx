@@ -82,17 +82,18 @@ const HeaderCell = ({
   };
 
   const handleGrab = (e: DragEvent<HTMLDivElement>) => {
+    if (e.currentTarget.tagName === 'button') return;
     setGrabed(true);
     handleHeaderColumnGrab(e, index);
   };
 
   const handleDragOver = (e: DragEvent<HTMLDivElement>) => {
+    setGrabed(false);
     e.preventDefault();
   };
 
   const handleDrop = (e: DragEvent<HTMLDivElement>) => {
     handleHeaderColumnDrop(e, index);
-    setGrabed(false);
   };
 
   useEffect(() => {
@@ -113,20 +114,19 @@ const HeaderCell = ({
   }
 
   return (
-    <StyledHeaderCellContainer width={width} height={height}>
-      <StyledHeaderCell
-        data-field={field}
-        width={width}
-        height={height}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        onDragStart={handleGrab}
-        onDragOver={handleDragOver}
-        onDrop={handleDrop}
-        grabed={grabed}
-        draggable
-        {...rest}
-      >
+    <StyledHeaderCellContainer
+      width={width}
+      height={height}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onDragStart={handleGrab}
+      onDragOver={handleDragOver}
+      onDrop={handleDrop}
+      grabed={grabed}
+      draggable
+      {...rest}
+    >
+      <StyledHeaderCell data-field={field}>
         <Text>{content}</Text>
         <HeaderActionsContainer opacity={opacity}>
           {sortIcon && (

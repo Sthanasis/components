@@ -1,6 +1,7 @@
 import { CSSProperties } from 'react';
 import { IBaseProps } from 'src/types';
 import { ThemeType } from 'src/utilities/theme';
+import { DensityMapType, DensityType } from './types';
 
 export type SortDirectionType = 'asc' | 'desc' | 'default';
 
@@ -77,10 +78,6 @@ export interface IDataGridProps extends IBaseProps {
   virtual?: boolean;
   loading?: boolean;
   pagination?: IPaginationOptions;
-}
-
-export enum Density {
-  sm = 30,
-  md = 45,
-  lg = 60,
+  density?: DensityType;
+  densityOptions?: DensityMapType;
 }

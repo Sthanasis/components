@@ -1,17 +1,5 @@
-import { ThemeVariantType } from 'src/types/types';
-import { useTheme } from 'styled-components';
-import { TextfieldVariant } from '../TextField/TextField';
+import { ILabelProps } from 'src/types';
 import { StyledLabelContainer } from './StyledLabel';
-
-interface ILabelProps {
-  labelText?: string;
-  hasValue: boolean;
-  hasFocus: boolean;
-  hasError?: boolean;
-  variant?: TextfieldVariant;
-  color?: ThemeVariantType;
-  withIcon?: boolean;
-}
 
 const Label = ({
   labelText,
@@ -21,14 +9,12 @@ const Label = ({
   color = 'primary',
   ...rest
 }: ILabelProps) => {
-  const theme = useTheme();
   return labelText ? (
     <StyledLabelContainer
       withIcon={withIcon}
       hasError={hasError}
       variant={variant}
       color={color}
-      theme={theme}
       {...rest}
     >
       <label>{labelText}</label>

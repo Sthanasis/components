@@ -100,6 +100,12 @@ Basic.args = {
   virtual: false,
   rows: smallDataset,
   columns,
+  density: 'lg',
+  densityOptions: {
+    sm: 50,
+    md: 65,
+    lg: 80,
+  },
 };
 
 export const VirtualTable = Template.bind({});
@@ -107,4 +113,5 @@ export const VirtualTable = Template.bind({});
 VirtualTable.args = {
   virtual: true,
   columns,
+  density: 'md',
 };

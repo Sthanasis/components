@@ -1,6 +1,6 @@
+import { TextTagType, TextVariantType } from 'src/types/types';
 import { ThemeType } from 'src/utilities/theme';
 import styled from 'styled-components';
-import type { TextTagType, TextVariantType } from './Text';
 
 interface IStyledTextProps {
   theme: ThemeType;

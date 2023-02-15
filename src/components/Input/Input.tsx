@@ -1,17 +1,5 @@
-import { IBaseProps, InputElementType } from 'src/types';
+import { IInputProps } from 'src/types';
 import { StyledInput } from './StyledInput';
-export interface IInputProps extends IBaseProps {
-  type?: InputElementType;
-  placeholder?: string;
-  value?: string | number;
-  defaultValue?: string | number;
-  fullwidth?: boolean;
-  name?: string;
-  required?: boolean;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void | typeof jest;
-  onBlur?: (e: React.ChangeEvent<HTMLInputElement>) => void | typeof jest;
-  onFocus?: (e: React.ChangeEvent<HTMLInputElement>) => void | typeof jest;
-}
 
 const Input = ({
   type = 'text',

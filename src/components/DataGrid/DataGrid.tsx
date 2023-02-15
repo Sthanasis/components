@@ -28,6 +28,8 @@ const DataGrid = ({
   loading,
   pagination,
   width,
+  density,
+  densityOptions,
   ...rest
 }: IDataGridProps) => (
   <DatagridProvider
@@ -37,6 +39,8 @@ const DataGrid = ({
     loading={loading}
     pagination={pagination}
     width={width}
+    density={density}
+    densityOptions={densityOptions}
   >
     <TableGrid {...rest} />
   </DatagridProvider>

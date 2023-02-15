@@ -1,14 +1,9 @@
-import { ReactNode, MouseEvent } from 'react';
+import { MouseEvent } from 'react';
+import { IPopoverMenuProps } from 'src/types';
 import useAnchoreElement from 'src/utilities/hooks/useAnchorElement';
 import Button from '../Button';
 import Popover from '../Popover/Popover';
 import { StyledPopoverMenu } from './PopoverMenu.styled';
-
-interface IPopoverMenuProps {
-  label?: string;
-  children: ReactNode;
-  onChange?: (v: string) => void;
-}
 
 const PopoverMenu = ({
   label,
