@@ -1,5 +1,4 @@
 import React, { useState, memo, useEffect } from 'react';
-import { useTheme } from 'styled-components';
 import Input from 'src/components/Input';
 import { isEmpty } from 'src/utilities/utils';
 
@@ -31,7 +30,6 @@ const TextField = ({
   defaultValue,
   ...rest
 }: ITextFieldProps): JSX.Element => {
-  const theme = useTheme();
   const labelText = label || placeholder;
 
   const styles = { ...style };
@@ -82,7 +80,6 @@ const TextField = ({
       fullwidth={fullwidth}
       contrast={contrast}
       variant={variant}
-      theme={theme}
       hasError={hasError}
       color={color}
       hasFocus={hasFocus}

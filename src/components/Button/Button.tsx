@@ -1,5 +1,4 @@
 import { MouseEvent, ReactNode, memo } from 'react';
-import { useTheme } from 'styled-components';
 import { StyledButton } from './StyledButton';
 import Ripple from '../Ripple';
 import Icon from '../Icon';
@@ -21,8 +20,6 @@ const Button = ({
   style,
   ...rest
 }: IButtonProps): JSX.Element => {
-  const theme = useTheme();
-
   const click = (e: MouseEvent<HTMLButtonElement>) => {
     if (onClick) {
       onClick(e);
@@ -50,7 +47,6 @@ const Button = ({
       disabled={disabled}
       variant={variant}
       fullwidth={fullwidth}
-      theme={theme}
       contrast={contrast}
       color={color}
       icon={!!icon}

@@ -1,15 +1,12 @@
 import { IProgressProps } from 'src/types';
-import { useTheme } from 'styled-components';
 import { StyledProgress } from './StyledProgress';
 
 const Progress = ({
   type = 'spinner',
   color = 'primary',
 }: IProgressProps): JSX.Element => {
-  const theme = useTheme();
-
   return (
-    <StyledProgress aria-label={type} theme={theme} type={type} color={color}>
+    <StyledProgress aria-label={type} type={type} color={color}>
       {type === 'linear' && <div />}
     </StyledProgress>
   );

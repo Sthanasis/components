@@ -16,15 +16,15 @@ export default {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof Popover> = () => {
-  const { anchorEl, setAnchorEl, visible } = useAnchoreElement(null);
+  const { anchorEl, showPopover, closePopover, visible } =
+    useAnchoreElement(null);
   const [position, setPosition] = useState('middle');
 
-  const showPopover = (e: MouseEvent<HTMLButtonElement>, position: string) => {
+  const show = (e: MouseEvent<HTMLButtonElement>, position: string) => {
     setPosition(position);
-    setAnchorEl(e.currentTarget);
+    showPopover(e);
   };
 
-  const closePopover = () => setAnchorEl(null);
   return (
     <ThemeProvider theme={defaultTheme}>
       <div style={{ display: 'flex' }}>
@@ -33,7 +33,7 @@ const Template: ComponentStory<typeof Popover> = () => {
             marginRight: 'auto',
           }}
           variant={'contained'}
-          onClick={(e) => showPopover(e, 'right')}
+          onClick={(e) => show(e, 'right')}
         >
           RIGHT
         </Button>
@@ -42,7 +42,7 @@ const Template: ComponentStory<typeof Popover> = () => {
             margin: 'auto',
           }}
           variant={'contained'}
-          onClick={(e) => showPopover(e, 'middle')}
+          onClick={(e) => show(e, 'middle')}
         >
           MIDDLE
         </Button>
@@ -51,7 +51,7 @@ const Template: ComponentStory<typeof Popover> = () => {
             marginLeft: 'auto',
           }}
           variant={'contained'}
-          onClick={(e) => showPopover(e, 'left')}
+          onClick={(e) => show(e, 'left')}
         >
           LEFT
         </Button>
