@@ -41,7 +41,7 @@ export const StyledHeaderCell = styled.div`
     padding: '0px 5px',
     alignItems: 'center',
     textTransform: 'capitalize',
-    backgroundColor: grabed ? 'rgba(255,255,255,.9)' : undefined,
+    backgroundColor: grabed ? 'rgba(0,0,0,.1)' : undefined,
   })}
 `;
 

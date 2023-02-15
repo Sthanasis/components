@@ -87,12 +87,12 @@ const HeaderCell = ({
   };
 
   const handleDragOver = (e: DragEvent<HTMLDivElement>) => {
+    setGrabed(false);
     e.preventDefault();
   };
 
   const handleDrop = (e: DragEvent<HTMLDivElement>) => {
     handleHeaderColumnDrop(e, index);
-    setGrabed(false);
   };
 
   useEffect(() => {
