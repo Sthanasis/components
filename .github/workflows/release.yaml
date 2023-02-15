@@ -43,19 +43,21 @@ jobs:
           node-version: ${{ matrix.node-version }}
           registry-url: 'https://npm.pkg.github.com'
 
-      - name: Build
-        run: |
-          npm install
-          npm run build
-
       - name: Version
         if: steps.messages.outputs.release != ''
         run: |
           npm version ${{ steps.messages.outputs.release }}
           git checkout main
           git merge release
+          git push
         env:
           NODE_AUTH_TOKEN: ${{ secrets.TOKEN }}
+
+      - name: Build
+        if: steps.messages.outputs.release != ''
+        run: |
+          npm install
+          npm run build
 
       - name: Publish To github registry
         if: steps.messages.outputs.release != ''
