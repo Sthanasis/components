@@ -2,7 +2,7 @@ import { fadeIn } from 'src/utilities/animations';
 import { ThemeType } from 'src/utilities/theme';
 import styled from 'styled-components';
 
-export interface IStyledPopover {
+interface IStyledPopover {
   x?: number;
   y?: number;
   visible: boolean;

@@ -1,26 +1,9 @@
 import { MouseEvent, ReactNode, memo } from 'react';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { useTheme } from 'styled-components';
-import { IBaseProps } from 'src/types';
-import type { ThemeVariantType, ButtonType } from 'src/types/types';
 import { StyledButton } from './StyledButton';
 import Ripple from '../Ripple';
 import Icon from '../Icon';
-
-export interface IButtonProps extends IBaseProps {
-  children?: React.ReactNode | React.ReactNode[];
-  variant?: ButtonType;
-  color?: ThemeVariantType;
-  elevated?: boolean;
-  onClick?: (e: MouseEvent<HTMLButtonElement>) => void | Promise<void>;
-  fullwidth?: boolean;
-  contrast?: boolean;
-  disabled?: boolean;
-  iconStart?: IconProp;
-  iconEnd?: IconProp;
-  icon?: IconProp;
-  rounded?: boolean;
-}
+import { IButtonProps } from 'src/types';
 
 const Button = ({
   className,
