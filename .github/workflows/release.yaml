@@ -53,6 +53,8 @@ jobs:
         run: |
           npm version ${{ steps.messages.outputs.release }}
           git push origin main
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.TOKEN }}
 
       - name: Publish To github registry
         if: steps.messages.outputs.release != ''
