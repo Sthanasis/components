@@ -52,7 +52,7 @@ jobs:
         if: steps.messages.outputs.release != ''
         run: |
           npm version ${{ steps.messages.outputs.release }}
-          git push origin main
+          git merge release main
         env:
           NODE_AUTH_TOKEN: ${{ secrets.TOKEN }}
 
