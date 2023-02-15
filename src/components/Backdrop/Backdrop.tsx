@@ -1,12 +1,6 @@
-import { ReactNode, KeyboardEvent } from 'react';
-import { IBaseProps } from 'src/types';
+import { KeyboardEvent } from 'react';
+import { IBackdropProps } from 'src/types';
 import { StyledBackdrop } from './StyledBackdrop';
-
-interface IBackdropProps extends IBaseProps {
-  opacity?: string | number;
-  children?: ReactNode;
-  onClose: () => void | Promise<void>;
-}
 
 const Backdrop = ({
   opacity = 0,

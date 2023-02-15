@@ -1,25 +1,12 @@
 import React, { useState, memo, useEffect } from 'react';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { useTheme } from 'styled-components';
 import Input from 'src/components/Input';
-import { IInputProps } from 'src/components/Input/Input';
 import { isEmpty } from 'src/utilities/utils';
-import { ThemeVariantType } from 'src/types/types';
+
 import { StyledTextField } from './StyledTextField';
 import Label from '../Label';
 import Icon from '../Icon';
-
-export type TextfieldVariant = 'outlined' | 'filled';
-
-export interface ITextFieldProps extends IInputProps {
-  label?: string;
-  variant?: TextfieldVariant;
-  contrast?: boolean;
-  color?: ThemeVariantType;
-  validate?: (value: unknown) => boolean;
-  iconStart?: IconProp;
-  iconEnd?: IconProp;
-}
+import { ITextFieldProps } from 'src/types';
 
 const TextField = ({
   label,

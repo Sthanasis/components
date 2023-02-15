@@ -1,17 +1,7 @@
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import React, { useState } from 'react';
-import { IBaseProps } from 'src/types';
-import { ThemeVariantType } from 'src/types/types';
+import { ISearchProps } from 'src/types';
 import TextField from '../TextField';
-import { TextfieldVariant } from '../TextField/TextField';
-
-export interface ISearchProps extends IBaseProps {
-  searchValue?: string;
-  onSearch: (v: string) => void;
-  placeholder?: string;
-  variant?: TextfieldVariant;
-  color?: ThemeVariantType;
-}
 
 const Search = ({
   searchValue = '',

@@ -1,11 +1,7 @@
-import { ThemeVariantType } from 'src/types/types';
+import { IProgressProps } from 'src/types';
 import { useTheme } from 'styled-components';
 import { StyledProgress } from './StyledProgress';
 
-export interface IProgressProps {
-  type?: 'spinner' | 'linear';
-  color?: ThemeVariantType;
-}
 const Progress = ({
   type = 'spinner',
   color = 'primary',

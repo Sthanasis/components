@@ -1,24 +1,16 @@
 import { createPortal } from 'react-dom';
 import {
   MouseEvent,
-  ReactNode,
   useEffect,
   useLayoutEffect,
   useRef,
   useState,
 } from 'react';
 import { StyledPopover } from './StyledPopover';
-import { IBaseProps } from 'src/types';
+
 import Backdrop from '../Backdrop';
 import useWindowResize from 'src/utilities/hooks/useWindowResize';
-
-export interface IPopoverProps extends IBaseProps {
-  onClose: () => void;
-  anchorEl?: HTMLButtonElement | null;
-  children: ReactNode;
-  visible: boolean;
-  handleClick?: (e: MouseEvent<HTMLDivElement>) => void;
-}
+import { IPopoverProps } from 'src/types';
 
 type XPositionType = 'right' | 'left' | 'default';
 type YPositionType = 'top' | 'bottom';
