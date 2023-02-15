@@ -27,7 +27,7 @@ jobs:
         with:
           python-version: 3.9
 
-      - name: Messages check
+      - name: Get Release Version
         id: messages
         run: |
           obj=$(echo $JSON | tr '\n' ' ')
