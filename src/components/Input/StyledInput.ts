@@ -2,7 +2,7 @@ import { IBaseProps } from 'src/types';
 import styled, { CSSObject } from 'styled-components';
 import { ThemeType } from 'src/utilities/theme';
 
-export interface IInputStaticProps extends IBaseProps {
+interface IInputStaticProps extends IBaseProps {
   theme: ThemeType;
   fullwidth: boolean;
 }

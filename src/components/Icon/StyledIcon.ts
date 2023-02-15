@@ -1,5 +1,5 @@
+import { IconAlignType } from 'src/types/types';
 import styled from 'styled-components';
-import { IconAlignType } from './Icon';
 
 interface IStyledIconProps {
   align: IconAlignType;

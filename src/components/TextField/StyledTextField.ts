@@ -1,8 +1,7 @@
 import { opacityHexPrefix } from 'src/utilities/opacityHexPrefix';
 import { ThemeType } from 'src/utilities/theme';
-import { ThemeVariantType } from 'src/types/types';
+import { TextfieldVariant, ThemeVariantType } from 'src/types/types';
 import styled from 'styled-components';
-import { TextfieldVariant } from './TextField';
 
 interface IStyledTextFieldProps {
   variant: TextfieldVariant;
