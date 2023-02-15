@@ -27,3 +27,8 @@ export type InputElementType =
   | 'password'
   | 'submit';
 export type DensityType = 'sm' | 'md' | 'lg';
+export type DensityMapType = {
+  sm: number;
+  md: number;
+  lg: number;
+};

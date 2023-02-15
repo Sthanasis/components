@@ -7,7 +7,7 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { DensityMapType, IPaginationOptions } from 'src/types';
+import { IPaginationOptions } from 'src/types';
 
 import type {
   ColumnType,
@@ -20,7 +20,7 @@ import type {
 import { useColumns, useRows } from 'src/utilities/hooks/datagrid/hooks';
 import { createColumnMap } from 'src/components/DataGrid/utilities/methods';
 import { getSortWorker } from 'src/utilities/workers/getters';
-import { DensityType } from 'src/types/types';
+import { DensityMapType, DensityType } from 'src/types/types';
 
 type DragCallback = (e: DragEvent<HTMLDivElement>, pos: number) => void;
 interface IDatagridContextMethods {
@@ -35,16 +35,15 @@ interface IDatagridContext extends IDatagridContextMethods {
   height: number;
   width: CSSProperties['width'];
   density: DensityType;
+  densityOptions: DensityMapType;
   sortedBy?: string;
   options?: ColumnObjectType;
   loading?: boolean;
   pagination?: IPaginationOptions;
-  densityOptions: DensityMapType;
 }
 
 interface IDatagridProviderProps extends IDataGridProps {
   children: ReactNode;
-  densityOptions?: DensityMapType;
 }
 
 const voidFn = () => ({});

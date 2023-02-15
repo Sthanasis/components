@@ -1,7 +1,7 @@
 import { CSSProperties } from 'react';
 import { IBaseProps } from 'src/types';
 import { ThemeType } from 'src/utilities/theme';
-import { DensityType } from './types';
+import { DensityMapType, DensityType } from './types';
 
 export type SortDirectionType = 'asc' | 'desc' | 'default';
 
@@ -69,6 +69,7 @@ export interface ISortMessageEventData {
     total: IPaginationOptions['total'];
   };
 }
+
 export interface IDataGridProps extends IBaseProps {
   rows: RowType[];
   columns: ColumnType[];
@@ -78,10 +79,5 @@ export interface IDataGridProps extends IBaseProps {
   loading?: boolean;
   pagination?: IPaginationOptions;
   density?: DensityType;
+  densityOptions?: DensityMapType;
 }
-
-export type DensityMapType = {
-  sm: number;
-  md: number;
-  lg: number;
-};
