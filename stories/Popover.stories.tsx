@@ -5,6 +5,7 @@ import { defaultTheme } from 'src/utilities/theme';
 import Popover from 'src/components/Popover';
 import Button from 'src/components/Button';
 import useAnchoreElement from 'src/utilities/hooks/useAnchorElement';
+import { Box } from 'src';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -58,7 +59,7 @@ const Template: ComponentStory<typeof Popover> = () => {
       </div>
 
       <Popover visible={visible} onClose={closePopover} anchorEl={anchorEl}>
-        <div>Popup extending to the {position}</div>
+        <Box style={{ padding: 10 }}>Popup extending to the {position}</Box>
       </Popover>
     </ThemeProvider>
   );
