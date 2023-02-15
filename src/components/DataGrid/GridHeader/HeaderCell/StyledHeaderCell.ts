@@ -1,4 +1,3 @@
-import { IStyledHeaderCellProps } from 'src/types';
 import { CSSProperties } from 'react';
 import styled from 'styled-components';
 
@@ -8,9 +7,11 @@ interface IHeaderActionsContainerProps {
 export const StyledHeaderCellContainer = styled.div`
   ${({
     width = 100,
+    grabed,
   }: {
     width?: number | string;
     height: CSSProperties['height'];
+    grabed: boolean;
   }) => {
     let w = width;
     if (typeof w === 'number') {
@@ -25,13 +26,13 @@ export const StyledHeaderCellContainer = styled.div`
       justifyContent: 'space-between',
       padding: '0px 5px',
       textAlign: 'end',
-      resize: 'horizontal',
+      backgroundColor: grabed ? 'rgba(0,0,0,.1)' : undefined,
     };
   }}
 `;
 
 export const StyledHeaderCell = styled.div`
-  ${({ grabed }: IStyledHeaderCellProps) => ({
+  ${() => ({
     height: '50px',
     width: '100%',
     textAlign: 'left',
@@ -41,7 +42,6 @@ export const StyledHeaderCell = styled.div`
     padding: '0px 5px',
     alignItems: 'center',
     textTransform: 'capitalize',
-    backgroundColor: grabed ? 'rgba(0,0,0,.1)' : undefined,
   })}
 `;
 

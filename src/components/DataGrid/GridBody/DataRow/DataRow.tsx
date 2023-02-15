@@ -10,10 +10,10 @@ interface IDataRowProps extends IBaseProps {
 }
 
 const DataRow = ({ row, noBorder, ...props }: IDataRowProps) => {
-  const { options, density } = useDatagrid();
-
+  const { options, density, densityOptions } = useDatagrid();
+  const height = densityOptions[density];
   return (
-    <StyledDataRow height={density} {...props}>
+    <StyledDataRow height={height} {...props}>
       {options &&
         Object.keys(row).map((_, i) => {
           const { field, width } = options[i];

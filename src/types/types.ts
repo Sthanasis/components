@@ -26,3 +26,4 @@ export type InputElementType =
   | 'number'
   | 'password'
   | 'submit';
+export type DensityType = 'sm' | 'md' | 'lg';

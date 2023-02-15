@@ -25,7 +25,7 @@ const getPositionX = (
     case 'right':
       return anchor.right - popup.width;
     default:
-      return anchor.x - popup.width + anchor.width;
+      return anchor.left;
   }
 };
 

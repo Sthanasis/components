@@ -36,17 +36,9 @@ const Template: ComponentStory<typeof Popover> = () => {
           variant={'contained'}
           onClick={(e) => show(e, 'right')}
         >
-          RIGHT
+          click me
         </Button>
-        <Button
-          style={{
-            margin: 'auto',
-          }}
-          variant={'contained'}
-          onClick={(e) => show(e, 'middle')}
-        >
-          MIDDLE
-        </Button>
+
         <Button
           style={{
             marginLeft: 'auto',
@@ -54,7 +46,7 @@ const Template: ComponentStory<typeof Popover> = () => {
           variant={'contained'}
           onClick={(e) => show(e, 'left')}
         >
-          LEFT
+          click me
         </Button>
       </div>
 

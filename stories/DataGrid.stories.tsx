@@ -91,6 +91,7 @@ const Template: ComponentStory<typeof DataGrid> = (args) => {
         loading={loading}
         rows={rows}
         pagination={args.virtual ? undefined : pagination}
+        density="sm"
       />
     </ThemeProvider>
   );
