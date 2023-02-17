@@ -59,15 +59,15 @@ jobs:
           npm install
           npm run build
 
-      - name: Publish To github registry
-        if: steps.messages.outputs.release != ''
-        run: |
-          npm publish --access=public
-          rm -rf .nmprc
-          rm -rf node_modules
-          rm -rf package-lock.json
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.TOKEN }}
+      # - name: Publish To github registry
+      #   if: steps.messages.outputs.release != ''
+      #   run: |
+      #     npm publish --access=public
+      #     rm -rf .nmprc
+      #     rm -rf node_modules
+      #     rm -rf package-lock.json
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.TOKEN }}
 
       - name: Publish to npm registry
         if: steps.messages.outputs.release != ''
@@ -76,7 +76,6 @@ jobs:
           node-version: ${{ matrix.node-version }}
           registry-url: 'https://registry.npmjs.org'
       - run: |
-          npm install
           npm publish --access=public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_REGISTRY_TOKEN }}
