@@ -20,8 +20,8 @@
     "url": "https://github.com/sthanasis/components/issues"
   },
   "homepage": "https://github.com/sthanasis/components#readme",
-  "main": "dist/index.umd.js",
-  "module": "dist/index.es.js",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist"
