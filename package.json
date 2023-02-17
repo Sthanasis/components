@@ -1,5 +1,5 @@
 {
-  "name": "@sthanasis/components",
+  "name": "@sthanasis/react-components",
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
   },
