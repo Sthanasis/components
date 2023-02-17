@@ -46,18 +46,21 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.TOKEN }}
 
-      - name: Build
-        if: steps.messages.outputs.release != ''
-        run: |
-          npm install
-          npm run build
-
       - name: Setup .npmrc
         if: steps.messages.outputs.release != ''
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           registry-url: 'https://registry.npmjs.org'
-      - run: npm publish --access=public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_REGISTRY_TOKEN }}
+
+      - name: Build
+        if: steps.messages.outputs.release != ''
+        run: |
+          npm ci
+          npm run build
+
+      - name: Publish
+        if: steps.messages.outputs.release != ''
+        run: npm publish --access=public
