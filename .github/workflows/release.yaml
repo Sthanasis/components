@@ -64,6 +64,8 @@ jobs:
         run: |
           npm publish --access=public
           rm -rf .nmprc
+          rm -rf node_modules
+          rm -rf package-lock.json
         env:
           NODE_AUTH_TOKEN: ${{ secrets.TOKEN }}
 
@@ -73,6 +75,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           registry-url: 'https://registry.npmjs.org'
-      - run: npm publish
+      - run: |
+          npm install
+          npm publish --access=public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_REGISTRY_TOKEN }}
