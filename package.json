@@ -3,7 +3,7 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
   },
-  "version": "1.6.2",
+  "version": "1.6.3",
   "description": "React Component Library",
   "type": "module",
   "keywords": [
