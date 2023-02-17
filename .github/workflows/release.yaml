@@ -66,16 +66,12 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.TOKEN }}
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Publish to npm registry
         if: steps.messages.outputs.release != ''
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           registry-url: 'https://registry.npmjs.org'
-
-      - name: Publish To npm registry
-        if: steps.messages.outputs.release != ''
-        run: |
-          npm publish --access=public
+      - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_REGISTRY_TOKEN }}
