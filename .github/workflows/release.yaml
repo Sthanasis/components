@@ -36,12 +36,12 @@ jobs:
         env:
           JSON: ${{ toJSON(github.event.commits) }}
 
-      - name: Use Node.js ${{ matrix.node-version }}
-        if: steps.messages.outputs.release != ''
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-          registry-url: 'https://npm.pkg.github.com'
+      # - name: Use Node.js ${{ matrix.node-version }}
+      #   if: steps.messages.outputs.release != ''
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: ${{ matrix.node-version }}
+      #     registry-url: 'https://npm.pkg.github.com'
 
       - name: Version
         if: steps.messages.outputs.release != ''
@@ -76,6 +76,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
           registry-url: 'https://registry.npmjs.org'
       - run: |
+          npm ci
           npm publish --access=public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_REGISTRY_TOKEN }}
