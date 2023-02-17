@@ -63,6 +63,7 @@ jobs:
         if: steps.messages.outputs.release != ''
         run: |
           npm publish --access=public
+          rm -rf .nmprc
         env:
           NODE_AUTH_TOKEN: ${{ secrets.TOKEN }}
 
