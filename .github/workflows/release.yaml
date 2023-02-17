@@ -36,13 +36,6 @@ jobs:
         env:
           JSON: ${{ toJSON(github.event.commits) }}
 
-      # - name: Use Node.js ${{ matrix.node-version }}
-      #   if: steps.messages.outputs.release != ''
-      #   uses: actions/setup-node@v3
-      #   with:
-      #     node-version: ${{ matrix.node-version }}
-      #     registry-url: 'https://npm.pkg.github.com'
-
       - name: Version
         if: steps.messages.outputs.release != ''
         run: |
@@ -59,24 +52,12 @@ jobs:
           npm install
           npm run build
 
-      # - name: Publish To github registry
-      #   if: steps.messages.outputs.release != ''
-      #   run: |
-      #     npm publish --access=public
-      #     rm -rf .nmprc
-      #     rm -rf node_modules
-      #     rm -rf package-lock.json
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.TOKEN }}
-
-      - name: Publish to npm registry
+      - name: Setup .npmrc
         if: steps.messages.outputs.release != ''
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           registry-url: 'https://registry.npmjs.org'
-      - run: |
-          npm ci
-          npm publish --access=public
+      - run: npm publish --access=public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_REGISTRY_TOKEN }}
