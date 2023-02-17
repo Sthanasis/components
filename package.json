@@ -1,9 +1,9 @@
 {
-  "name": "@sthanasis/components",
+  "name": "@sthanasis/react-components",
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
   },
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "React Component Library",
   "type": "module",
   "keywords": [
