@@ -1,5 +1,6 @@
 /node_modules
 Dockerfile
+Dockerfile.prod
 .git
 .gitignore
 /coverage
