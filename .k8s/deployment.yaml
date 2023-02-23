@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: esupply-deployment
+  labels:
+    group: example
+spec:
+  selector:
+    matchLabels:
+      app: esupply
+      tier: fullstack
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: esupply
+        tier: fullstack
+    spec:
+      nodeSelector:
+        name: client
+      containers:
+        - name: esupply
+          image: $IMAGE
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+              name: server
+      imagePullSecrets:
+        - name: dockerhub-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: esupply-service
+  labels:
+    app: esupply
+    tier: frontend
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+      name: http
+    - port: 443
+      protocol: TCP
+      name: https
+  externalIPs:
+    - $IP
+  selector:
+    app: esupply
+  type: LoadBalancer

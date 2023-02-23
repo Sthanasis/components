@@ -1,4 +1,4 @@
-FROM node:16.18.1
+FROM node:16.18.1 as build
 
 WORKDIR /app
 
@@ -8,8 +8,6 @@ COPY . .
 RUN npm install
 RUN npm run build-storybook
 
-COPY ./storybook-static .
+FROM sthanasis/esupply:latest
 
-EXPOSE 8000
-
-CMD npm run serve
+COPY --from=build /app/storybook-static /app/storybook-static
