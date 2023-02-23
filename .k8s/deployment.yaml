@@ -48,6 +48,6 @@ spec:
     app: esupply
   type: LoadBalancer
 status:
-  loadBalance:
+  loadBalancer:
     ingress:
       - ip: $IP
