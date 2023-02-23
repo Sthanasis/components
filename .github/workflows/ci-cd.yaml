@@ -71,7 +71,7 @@ jobs:
       - uses: tale/kubectl-action@v1
         with:
           base64-kube-config: ${{ secrets.KUB_CONFIG }}
-      - run: kubectl apply -f=./.k8s/deploy-dev.yaml
+      - run: kubectl apply -f=./.k8s/deployment.yaml
 
       - name: Notify slack success
         if: success()
