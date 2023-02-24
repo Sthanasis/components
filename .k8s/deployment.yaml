@@ -44,10 +44,8 @@ spec:
     - port: 443
       protocol: TCP
       name: https
+  externalIPs:
+    - $IP
   selector:
     app: esupply
   type: LoadBalancer
-status:
-  loadBalancer:
-    ingress:
-      - ip: $IP
