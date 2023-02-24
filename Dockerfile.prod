@@ -3,9 +3,11 @@ FROM node:16.19.1 as build
 WORKDIR /app
 
 COPY package.json .
-COPY . .
 
 RUN npm install
+
+COPY . .
+
 RUN npm run build-storybook
 
 FROM sthanasis/esupply:latest
