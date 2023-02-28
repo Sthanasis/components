@@ -17,27 +17,26 @@ const VirtualTable = (): JSX.Element => {
 
   const start = useMemo(
     () => Math.max(0, Math.floor(scrollTop / rowHeight) - RENDER_AHEAD / 2),
-    [scrollTop]
+    [scrollTop, rowHeight]
   );
 
   const visibleNodesArray = useMemo(() => {
     const count = Math.min(
-      rows.length - start,
+      totalItems - start,
       Math.ceil(height / rowHeight) + RENDER_AHEAD
     );
 
     return new Array(count > 0 ? count : 0).fill(null);
-  }, [start, rows]);
+  }, [start, totalItems, height, rowHeight]);
 
   const offsetY = start * rowHeight;
 
   const handleScroll = () => {
     requestAnimationFrame(() => {
       if (tableRef.current) {
-        const { scrollLeft } = tableRef.current;
-        const left = Math.floor(scrollLeft);
-        setScrollLeft(left);
-        setScrollTop(tableRef.current?.scrollTop);
+        const { scrollLeft, scrollTop } = tableRef.current;
+        setScrollLeft(scrollLeft);
+        setScrollTop(scrollTop);
       }
     });
   };
@@ -54,7 +53,11 @@ const VirtualTable = (): JSX.Element => {
               height: totalItems * rowHeight,
             }}
           >
-            <div style={{ transform: `translate3d(0px,${offsetY}px,0px)` }}>
+            <div
+              style={{
+                transform: `translate3d(0px,${offsetY}px,0px)`,
+              }}
+            >
               {visibleNodesArray.map((_, index) => (
                 <DataRow
                   key={rows[start + index].id}

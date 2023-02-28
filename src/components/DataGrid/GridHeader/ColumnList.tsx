@@ -1,14 +1,14 @@
-import { memo } from 'react';
+import { CSSProperties, memo } from 'react';
 import { useDatagrid } from 'src/context/datagrid';
 import HeaderCell from './HeaderCell';
 
 import { StyledHeaderList } from './StyledGridHeader';
 
-const ColumnList = (): JSX.Element => {
+const ColumnList = ({ style }: { style: CSSProperties }): JSX.Element => {
   const { columns } = useDatagrid();
 
   return (
-    <StyledHeaderList>
+    <StyledHeaderList style={style}>
       {columns.map(
         (c, i) =>
           !c.hideColumn && (

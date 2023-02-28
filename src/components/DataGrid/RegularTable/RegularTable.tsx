@@ -12,9 +12,7 @@ const RegularTable = () => {
   const handleScroll = () => {
     requestAnimationFrame(() => {
       if (tableRef.current) {
-        const { scrollLeft } = tableRef.current;
-        const left = Math.floor(scrollLeft);
-        setScrollLeft(left);
+        setScrollLeft(Math.ceil(tableRef.current.scrollLeft));
       }
     });
   };
@@ -23,10 +21,11 @@ const RegularTable = () => {
       <GridHeaderContainer scrollLeft={scrollLeft} />
       <TableContainer
         ref={tableRef}
-        onScroll={handleScroll}
         pagination={!!pagination}
+        onScroll={handleScroll}
       >
         <RowList />
+        <div style={{ transform: `translateX(-${scrollLeft}px)` }}></div>
       </TableContainer>
     </>
   );

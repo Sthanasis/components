@@ -5,13 +5,12 @@ import { StyledContainer } from './StyledGridHeader';
 const GridHeaderContainer = ({ scrollLeft }: { scrollLeft: number }) => (
   <StyledContainer>
     <GridControls />
-    <div
+    <ColumnList
       style={{
-        transform: `translate3d(-${scrollLeft}px,0px,0px)`,
+        transform: `translateX(-${scrollLeft}px)`,
+        width: 'max-content',
       }}
-    >
-      <ColumnList />
-    </div>
+    />
   </StyledContainer>
 );
 
