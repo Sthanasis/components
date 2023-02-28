@@ -1,7 +1,7 @@
 import DatagridProvider, { useDatagrid } from 'src/context/datagrid';
 import { Table } from './StyledDataGrid';
 import { IBaseProps, IDataGridProps } from 'src/types';
-import VirtualTable from './GridBody/VirtualTable';
+import VirtualTable from './VirtualTable';
 import RegularTable from './RegularTable';
 import Pagination from './Pagination';
 

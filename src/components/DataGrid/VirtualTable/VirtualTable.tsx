@@ -1,10 +1,10 @@
 import { useMemo, useRef, useState } from 'react';
 import { useDatagrid } from 'src/context/datagrid';
-import DataRow from '../DataRow/DataRow';
-import { VirtualBody, TableContainer } from '../../StyledDataGrid';
-import { RENDER_AHEAD } from '../../utilities/constants';
-import GridHeaderContainer from '../../GridHeader/GridHeaderContainer';
-import GridSpinner from '../GridSpinner';
+import DataRow from '../GridBody/DataRow/DataRow';
+import { VirtualBody, TableContainer } from '../StyledDataGrid';
+import { RENDER_AHEAD } from '../utilities/constants';
+import GridHeaderContainer from '../GridHeader/GridHeaderContainer';
+import GridSpinner from '../GridBody/GridSpinner';
 
 const VirtualTable = (): JSX.Element => {
   const { rows, height, loading, density, densityOptions } = useDatagrid();
@@ -44,7 +44,7 @@ const VirtualTable = (): JSX.Element => {
   return (
     <>
       <GridHeaderContainer scrollLeft={scrollLeft} />
-      <TableContainer ref={tableRef} onScroll={handleScroll} pagination={false}>
+      <TableContainer ref={tableRef} pagination={false} onScroll={handleScroll}>
         {loading ? (
           <GridSpinner />
         ) : (
