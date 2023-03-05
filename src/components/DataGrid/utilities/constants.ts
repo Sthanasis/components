@@ -1,1 +1,1 @@
-export const RENDER_AHEAD = 10;
+export const RENDER_AHEAD = 30;

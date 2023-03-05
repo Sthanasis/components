@@ -1,5 +1,5 @@
 import DatagridProvider, { useDatagrid } from 'src/context/datagrid';
-import { Table } from './StyledDataGrid';
+import { Table } from './DataGrid.styled';
 import { IBaseProps, IDataGridProps } from 'src/types';
 import VirtualTable from './VirtualTable';
 import RegularTable from './RegularTable';

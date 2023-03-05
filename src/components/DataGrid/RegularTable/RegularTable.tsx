@@ -2,7 +2,7 @@ import { useState, useRef } from 'react';
 import { useDatagrid } from 'src/context/datagrid';
 import RowList from '../GridBody/RowList';
 import GridHeaderContainer from '../GridHeader/GridHeaderContainer';
-import { TableContainer } from '../StyledDataGrid';
+import { TableContainer } from '../DataGrid.styled';
 
 const RegularTable = () => {
   const [scrollLeft, setScrollLeft] = useState<number>(0);

@@ -1,7 +1,7 @@
 import { useMemo, useRef, useState } from 'react';
 import { useDatagrid } from 'src/context/datagrid';
 import DataRow from '../GridBody/DataRow/DataRow';
-import { VirtualBody, TableContainer } from '../StyledDataGrid';
+import { VirtualBody, TableContainer } from '../DataGrid.styled';
 import { RENDER_AHEAD } from '../utilities/constants';
 import GridHeaderContainer from '../GridHeader/GridHeaderContainer';
 import GridSpinner from '../GridBody/GridSpinner';
