@@ -1,4 +1,5 @@
 import { useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { IBaseProps } from 'src/types';
 import { VirtaulListContainer, VirtualListBody } from './VirtualList.styled';
 
 interface IRenderItemProps<T> {
@@ -6,7 +7,7 @@ interface IRenderItemProps<T> {
   rowIndex: number;
 }
 
-interface IVirtualListProps {
+interface IVirtualListProps extends IBaseProps {
   rowHeight: number;
   renderAhead: number;
   rows: any[];
