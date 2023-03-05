@@ -24,6 +24,7 @@ const VirtualList = ({
   rows,
   height,
   renderItem,
+  ...props
 }: IVirtualListProps): JSX.Element => {
   const listRef = useRef<HTMLDivElement | null>(null);
   const [scrollTop, setScrollTop] = useState(0);
@@ -55,7 +56,12 @@ const VirtualList = ({
     }
   };
   return (
-    <VirtaulListContainer ref={listRef} height={height} onScroll={handleScroll}>
+    <VirtaulListContainer
+      ref={listRef}
+      height={height}
+      onScroll={handleScroll}
+      {...props}
+    >
       <VirtualListBody style={{ height: containerHeight }}>
         <div
           style={{
